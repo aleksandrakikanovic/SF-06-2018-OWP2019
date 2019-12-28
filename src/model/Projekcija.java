@@ -11,20 +11,20 @@ public class Projekcija {
 	private Film film;
 	private ETipProjekcije tipProjekcije;
 	private Sala sala;
-	private Date datum;
-	private Date vreme;
+	private Date datumVreme;
+	//private Date vreme;
 	private double cenaKarte;
 	private Korisnik admin;
 	
-	public Projekcija(int id, Film film, ETipProjekcije tipProjekcije, Sala sala, Date datum, Date vreme,
+	public Projekcija(int id, Film film, ETipProjekcije tipProjekcije, Sala sala, Date datumVreme,
 			double cenaKarte, Korisnik admin) {
 		super();
 		this.id = id;
 		this.film = film;
 		this.tipProjekcije = tipProjekcije;
 		this.sala = sala;
-		this.datum = datum;
-		this.vreme = vreme;
+		this.datumVreme = datumVreme;
+		//this.vreme = vreme;
 		this.cenaKarte = cenaKarte;
 		this.admin = admin;
 	}
@@ -62,20 +62,13 @@ public class Projekcija {
 	}
 
 	public Date getDatum() {
-		return datum;
+		return datumVreme;
 	}
 
 	public void setDatum(Date datum) {
-		this.datum = datum;
+		this.datumVreme = datum;
 	}
 
-	public Date getVreme() {
-		return vreme;
-	}
-
-	public void setVreme(Date vreme) {
-		this.vreme = vreme;
-	}
 
 	public double getCenaKarte() {
 		return cenaKarte;

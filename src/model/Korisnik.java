@@ -4,18 +4,18 @@ import java.sql.Date;
 
 public class Korisnik {
 	
-	public enum ETipKorisnika{KORISNIK, ADMIN}
+	public enum Uloga{KORISNIK, ADMIN}
 	
 	private String korisnickoIme;
 	private String lozinka;
 	private Date datumRegistracije;
-	private ETipKorisnika tip;
-	public Korisnik(String korisnickoIme, String lozinka, Date datumRegistracije, ETipKorisnika tip) {
+	private Uloga uloga;
+	public Korisnik(String korisnickoIme, String lozinka, Date datumRegistracije, Uloga uloga) {
 		super();
 		this.korisnickoIme = korisnickoIme;
 		this.lozinka = lozinka;
 		this.datumRegistracije = datumRegistracije;
-		this.tip = tip.KORISNIK;
+		this.uloga = uloga.KORISNIK;
 	}
 	public String getKorisnickoIme() {
 		return korisnickoIme;
@@ -35,11 +35,11 @@ public class Korisnik {
 	public void setDatumRegistracije(Date datumRegistracije) {
 		this.datumRegistracije = datumRegistracije;
 	}
-	public ETipKorisnika getTip() {
-		return tip;
+	public Uloga getUloga() {
+		return uloga;
 	}
-	public void setTip(ETipKorisnika tip) {
-		this.tip = tip;
+	public void setTip(Uloga uloga) {
+		this.uloga = uloga;
 	}
 	
 	

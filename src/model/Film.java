@@ -3,6 +3,7 @@ package model;
 public class Film {
 	
 	private int id;
+	private String naziv;
 	private String reziser;
 	private String glumci;
 	private String zanr;
@@ -11,10 +12,11 @@ public class Film {
 	private String zemljaPorekla;
 	private int godinaProizvodnje;
 	private String opis;
-	public Film(int id, String reziser, String glumci, String zanr, int trajanje, String distributer,
+	public Film(int id, String naziv,String reziser, String glumci, String zanr, int trajanje, String distributer,
 			String zemljaPorekla, int godinaProizvodnje, String opis) {
 		super();
 		this.id = id;
+		this.naziv=naziv;
 		this.reziser = reziser;
 		this.glumci = glumci;
 		this.zanr = zanr;
@@ -24,14 +26,35 @@ public class Film {
 		this.godinaProizvodnje = godinaProizvodnje;
 		this.opis = opis;
 	}
+	public Film( String naziv,String reziser, String glumci, String zanr, int trajanje, String distributer,
+			String zemljaPorekla, int godinaProizvodnje, String opis) {
+		super();
+		this.naziv=naziv;
+		this.reziser = reziser;
+		this.glumci = glumci;
+		this.zanr = zanr;
+		this.trajanje = trajanje;
+		this.distributer = distributer;
+		this.zemljaPorekla = zemljaPorekla;
+		this.godinaProizvodnje = godinaProizvodnje;
+		this.opis = opis;
+	}
+
 	public int getId() {
 		return id;
 	}
 //	public void setId(int id) {
 //		this.id = id;
 //	}
+	
 	public String getReziser() {
 		return reziser;
+	}
+	public String getNaziv() {
+		return naziv;
+	}
+	public void setNaziv(String naziv) {
+		this.naziv = naziv;
 	}
 	public void setReziser(String reziser) {
 		this.reziser = reziser;
