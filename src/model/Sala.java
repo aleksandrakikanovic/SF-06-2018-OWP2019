@@ -9,6 +9,7 @@ public class Sala {
 	private int id;
 	private String naziv;
 	private ArrayList<ETipProjekcije> listaProjekcija;
+	//lista ili samo jedan tip
 	public Sala(int id, String naziv, ArrayList<ETipProjekcije> listaProjekcija) {
 		super();
 		this.id = id;

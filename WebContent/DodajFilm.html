@@ -1,26 +1,134 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Dodavanje filma</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dodaj novi film</title> 
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <script src="bootstrap/js/jquery-3.3.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="Style.css">
+    <!--  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SCMontserrat&display=swap" rel="stylesheet"> -->
 </head>
 <body>
-	<h4>Dodavanje filma</h4>
-	<form action="DodajFilmServlet" action="post">
-		<table>
-			<tr><td align="right">Naziv fima:</td><td><input type="text" name="naziv"/></td></tr>
-			<tr><td align="right">Reziser:</td><td><input type="text" name="reziser"/></td></tr>
-			<tr><td align="right">Glumci:</td><td><input type="text" name="glumci" /></td></tr>
-			<tr><td align="right">Zanr:</td><td><input type="text" name="zanr"/></td></tr>
-			<tr><td align="right">Trajanje filma:</td><td><input type="number" name="trajanje" /></td></tr>
-			<tr><td align="right">Distributer:</td><td><input type="text" name="distributer"/></td></tr>
-			<tr><td align="right">Godina proizvodnje:</td><td><input type="text" name="godinaProizvodnje"/></td></tr>
-			<tr><td align="right">Zemlja porekla:</td><td><input type="text" name="zemljaPorekla"/></td></tr>
-			<tr><td align="right">Opis:</td><td><input type="text"/></td></tr>
+    <div class="container-fluid">
+        <div class="page-header">
+            <img src="images/prisma.png"  alt="">
+        </div>
 
-			<tr><td/><td><input type="submit" value="Dodaj"></td></tr>
-		</table>
-	</form>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <h6>Ceo svet vrhunske kinematografije na jednom mestu</h6>
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Početna </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="DodajFilm.html">Dodaj film</a>
+                      </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="FIlmovi.html">Filmovi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Login.html">Prijava</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Registracija.html">Registracija</a>
+                    </li> 
+                </ul>
+
+                    <form class="form-inline active-cyan-4">
+                        <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Unesi ime filma" aria-label="Search">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                    </form> 
+            </div>
+        </nav>
+
+        <!-- <h3>Unesite podatke za novi film!</h3> -->
+        <form class="space">
+            <div class="form-row justify-content-md-center">
+              <div class="col-md-3 mb-3">
+                <label for="validationDefault01">Naziv filma</label>
+                <input type="text" class="form-control" id="nazivInput" placeholder="" value="" required>
+              </div>
+            </div>
+            <div class="form-row justify-content-md-center">
+              <div class="col-md-3 mb-3">
+                <label for="validationDefault02">Reziser</label>
+                <input type="text" class="form-control" id="reziserInput" placeholder="" value="" required>
+              </div>
+            </div>
+            <div class="form-row justify-content-md-center">
+                <div class="col-md-3 mb-3">
+                  <label for="validationDefault02">Glumci</label>
+                  <input type="text" class="form-control" id="glumciInput" placeholder="" value="" required>
+                </div>
+              </div>
+              <div class="form-row justify-content-md-center">
+                <div class="col-md-2 mb-3">
+                  <label for="validationDefault02">Zanr</label>
+                  <input type="text" class="form-control" id="zanrInput" placeholder="" value="" required>
+                </div>
+                <div class="col-md-1 mb-3">
+                    <label for="validationDefault02">Trajanje</label>
+                    <input type="text" class="form-control" id="trajanjeInput" placeholder="u minutima" value="" required>
+                </div>
+            </div>
+            <div class="form-row justify-content-md-center">
+                <div class="col-md-3 mb-3">
+                  <label for="validationDefault02">Distributer</label>
+                  <input type="text" class="form-control" id="distributerInput" placeholder="" value="" required>
+                </div>
+              </div>
+              <div class="form-row justify-content-md-center">
+                <div class="col-md-3 mb-3">
+                  <label for="validationDefault02">Zemlja porekla</label>
+                  <input type="text" class="form-control" id="zemljaPoreklaInput" placeholder="" value="" required>
+                </div>
+              </div>
+              <div class="form-row justify-content-md-center">
+                <div class="col-md-3 mb-3">
+                  <label for="validationDefault02">Godina proizvodnje</label>
+                  <input type="text" class="form-control" id="godinaProizvodnjeInput" placeholder="" value="" required>
+                </div>
+              </div>
+                <div class="form-row justify-content-md-center">
+                    <div class="col-md-3 mb-3">
+                      <label for="validationDefault02">Opis</label>
+                      <input type="text" class="form-control" id="opisInput" placeholder="" value="" required>
+                    </div>
+                  </div>    
+                <div class="form-row justify-content-md-center">
+                  <button class="btn btn-light" type="submit" id="dodajFilmButton">Dodaj film</button>
+                </div>
+    
+          </form>
+
+
+
+
+     
+
+        
+        <footer>
+            <p> Radno vreme bioskopa - Radni dan: 08h-22h. Subota i nedelja:10h-23h </p>
+            <p><a href="tel:+0900-111-1371">Call centar: +0900-111-1371 </a></p>    
+            <p><a href="mailto:prismabioskop@gmail.com">Email: prismabioskop@gmail.com</a></p>    
+            <p>Bulevar Cara Lazara 168, Novi Sad</p>     
+            <button type="button" class="btn btn-fb waves-effect waves-light"><i class="fab fa-facebook-f pr-1"></i> Facebook</button>
+            <button type="button" class="btn btn-ins waves-effect waves-light"><i class="fab fa-instagram pr-1"></i> Instagram</button>
+            <button type="button" class="btn btn-tw"><i class="fab fa-twitter"></i> Twitter</button>
+        </footer>
+
+    </div>
+<script src="js/DodajFilm.js"></script>
+    
 </body>
 </html>

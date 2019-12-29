@@ -15,7 +15,7 @@ public class Korisnik {
 		this.korisnickoIme = korisnickoIme;
 		this.lozinka = lozinka;
 		this.datumRegistracije = datumRegistracije;
-		this.uloga = uloga.KORISNIK;
+		this.uloga = uloga;
 	}
 	public String getKorisnickoIme() {
 		return korisnickoIme;

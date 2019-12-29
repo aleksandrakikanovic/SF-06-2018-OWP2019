@@ -1,7 +1,7 @@
 use bioskopPrizma
 
 CREATE TABLE Film(
-    id integer AUTO_INCREMENT primary key,
+    id integer primary key,
     naziv varchar(50),
     reziser varchar(50),
     glumci varchar(250),
@@ -13,7 +13,7 @@ CREATE TABLE Film(
     opis varchar(500) )
     
 CREATE TABLE Sala(
-    id integer AUTO_INCREMENT primary key,
+    id integer primary key,
     naziv varchar(30) not null,
     tipProjekcije varchar(20) not null,
       tipoviP varchar(12),
@@ -26,11 +26,11 @@ CREATE TABLE Sediste(
     FOREIGN KEY(salaId) REFERENCES Sala(id) ON DELETE RESTRICT )
 
 CREATE TABLE TipProjekcije(
-    id int AUTO_INCREMENT primary key,
+    id int primary key,
     tip varchar(8) NOT NULL DEFAULT 'dvaD' )
     
 CREATE TABLE Projekcija(
-    id int AUTO_INCREMENT primary key,
+    id int  primary key,
     filmId int not null, --id filma
     tipProjekcije varchar(15) not null,--tip 
     salaId int not null, --id sale
@@ -43,7 +43,7 @@ CREATE TABLE Projekcija(
 	    FOREIGN KEY(admin) REFERENCES Korisnik(korisnickoIme) ON DELETE RESTRICT  )
     
 CREATE TABLE Karta(
-    id int AUTO_INCREMENT primary key,
+    id int  primary key,
     projekcijaId int not null, --id projekcije
     idSediste int not null, --id sedista
     datumVremeProdaje smalldatetime not null,
@@ -58,6 +58,4 @@ CREATE TABLE Korisnik(
     lozinka varchar(50) not null,
     datumRegistracije date not null,
     uloga varchar(8) NOT NULL DEFAULT 'KORISNIK')
- insert into Korisnik values('123', '1245f', current_timestamp, 'KORISNIK')
-insert into Korisnik values('aleksandra', 'kikanovic123', current_timestamp, 'KORISNIK')
 

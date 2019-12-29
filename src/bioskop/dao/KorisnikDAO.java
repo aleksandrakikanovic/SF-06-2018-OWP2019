@@ -15,7 +15,7 @@ public class KorisnikDAO {
 	
 	public static Korisnik get(String korisnickoIme) throws Exception {
 		Connection conn = ConnectionManager.getConnection();
-		System.out.print(conn);
+		//System.out.print(conn); 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
@@ -33,9 +33,9 @@ public class KorisnikDAO {
 			return new Korisnik(korisnickoIme, lozinka, datumRegistracije, uloga);
 			}
 	} finally {
-		try {pstmt.close();} catch (Exception ex) {ex.printStackTrace();}
+		try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}
 		try {rset.close();} catch (Exception ex1) {ex1.printStackTrace();}
-		try {conn.close();} catch (Exception ex2) {ex2.printStackTrace();}
+		//try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();}
 	}
 
 		return null;
@@ -49,10 +49,10 @@ public class KorisnikDAO {
 	public static boolean add(Korisnik korisnik) throws Exception {
 		Connection conn = ConnectionManager.getConnection();
 		PreparedStatement pstmt = null;
+
 		try {
 			
-			String query = "insert into Korisnik (korisnickoIme, lozinka, datumRegistracije, uloga) values (?,?,?,?)";
-
+			String query = "insert into Korisnik (korisnickoIme, lozinka, datumRegistracije,uloga) values (?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(query);
 			int index = 1;
 			pstmt.setString(index++, korisnik.getKorisnickoIme());
@@ -68,13 +68,15 @@ public class KorisnikDAO {
 		}
 	}
 	
-
+	
 	public static boolean update(Korisnik korisnik) throws Exception {
 		return false;
 	}
 
 	public static boolean delete(String korisnickoIme) throws Exception {
 		Connection conn = ConnectionManager.getConnection();
+		//System.out.println(conn);
+
 		PreparedStatement pstmt = null;
 		try {
 			String query = "delete from Korisnik where korisnickoIme = ?";

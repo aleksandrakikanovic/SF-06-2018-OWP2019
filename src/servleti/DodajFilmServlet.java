@@ -41,10 +41,10 @@ public class DodajFilmServlet extends HttpServlet {
 			
 			Film film = new Film(naziv, reziser, glumci, zanr, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis);
 			FilmDAO.add(film);
-			response.sendRedirect("./Filmovi.html");
+			//response.sendRedirect("./Filmovi.html");
 			
 
-		} catch (Exception e) {
+		} catch (Exception e) { //poruka greske
 			e.printStackTrace();
 		}
 		

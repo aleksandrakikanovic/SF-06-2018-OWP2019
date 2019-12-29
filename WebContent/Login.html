@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Registracija</title> 
+    <title>Login</title> 
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <script src="bootstrap/js/jquery-3.3.1.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -34,15 +34,15 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="DodajFilm.html">Dodaj film</a>
-                    </li>
+                        </li>  
                     <li class="nav-item">
                     <a class="nav-link" href="FIlmovi.html">Filmovi</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Login.html">Prijava</a>
+                        <a class="nav-link" href="#">Prijava </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Registracija</a>
+                        <a class="nav-link" href="Registracija.html">Registracija </a>
                     </li> 
                 </ul>
                     <form class="form-inline active-cyan-4">
@@ -52,30 +52,26 @@
             </div>
         </nav>
         
-        <!-- <h3>Registruj se i postani clan naseg Prizma kluba!</h3> -->
+
+        <!--<h3>Uloguj se i rezervisi karte odmah!</h3> -->
+
         <form class="space">
             <div class="form-row justify-content-md-center">
               <div class="col-md-3 mb-3">
                 <label for="validationDefault01">Korisnicko ime</label>
-                <input type="text" class="form-control" id="korisnickoImeInput" placeholder="" value="" required>
+                <input type="text" class="form-control" id="korInput" placeholder="" value="" required>
               </div>
             </div>
             <div class="form-row justify-content-md-center">
               <div class="col-md-3 mb-3">
                 <label for="validationDefault02">Lozinka</label>
-                <input type="text" class="form-control" id="lozinkaInput" placeholder="" value="" required>
-              </div>
+                <input type="text" class="form-control" id="lozInput" placeholder="" value="" required>
+            </div>
             </div>
             <div class="form-row justify-content-md-center">
-                <div class="col-md-3 mb-3">
-                  <label for="validationDefault02">Ponovljena lozinka</label>
-                  <input type="text" class="form-control" id="ponovljenaLozinkaInput" placeholder="" value="" required>
-                </div>
-              </div>
-              <div class="form-row justify-content-md-center">
-                <button class="btn btn-light" type="submit" id="RegistrujButton">Registruj se</button>
+                <button class="btn btn-light" type="submit" id="loginButton">Login</button>
             </div>
-
+            
 
         </form>
 
@@ -91,7 +87,7 @@
         </footer>
 
     </div>
-    <script src="js/Registracija.js"></script>
+    <script src="js/Login.js"></script>
     
 </body>
 </html>

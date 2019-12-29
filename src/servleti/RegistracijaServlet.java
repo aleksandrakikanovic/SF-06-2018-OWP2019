@@ -2,8 +2,6 @@ package servleti;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.sql.Timestamp;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,19 +30,16 @@ public class RegistracijaServlet extends HttpServlet {
 			if(lozinka.equals("")) {
 				throw new Exception("Unesite lozinku!");
 			}
-			String ponoviLozinku = request.getParameter("ponoviLozinku");
-			if(!lozinka.equals(ponoviLozinku)) {
+			String ponovljenaLozinka = request.getParameter("ponovljenaLozinka");
+			if(!lozinka.equals(ponovljenaLozinka)) {
 				throw new Exception("Lozinke se ne podudaraju!");
 			}
-			Uloga uloga = Uloga.KORISNIK;
+			Uloga uloga = Uloga.KORISNIK; // default
 			Date datumRegistracije = new Date(System.currentTimeMillis());
 			Korisnik korisnik = new Korisnik(korisnickoIme, lozinka, datumRegistracije, uloga);
 			KorisnikDAO.add(korisnik);
-			response.sendRedirect("./Korisnici.html");
-		} catch (Exception e) { //poruka greske
+		} catch (Exception e) { //dodati poruku greske
 			e.printStackTrace();
 		}
-	
 	}
-
 }

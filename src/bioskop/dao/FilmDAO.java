@@ -16,6 +16,7 @@ public class FilmDAO {
 		String query = "select * from Film where id = ?";
 		pstmt = conn.prepareStatement(query);
 		int index=0;
+		int id1= Integer.parseInt(id);
 		pstmt.setString(index++, id);
 		rset = pstmt.executeQuery();
 
@@ -30,7 +31,7 @@ public class FilmDAO {
 			int godinaProizvodnje = rset.getInt(8);
 			String opis = rset.getString(9);
 
-			return new Film(naziv, reziser, glumci, zanr, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis);
+			return new Film(id1, naziv, reziser, glumci, zanr, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis);
 			}
 	} finally {
 		try {pstmt.close();} catch (Exception ex) {ex.printStackTrace();}
@@ -44,7 +45,6 @@ public class FilmDAO {
 	public static List<Film> getAll(int id) throws Exception {
 		return new ArrayList<>();
 	}
-
 	public static boolean add(Film film) throws Exception {
 		Connection conn = ConnectionManager.getConnection();
 		PreparedStatement pstmt = null;
@@ -84,7 +84,8 @@ public class FilmDAO {
 			String query = "delete from Film where id = ?";
 
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, id);
+			int index=1;
+			pstmt.setInt(index++, id);
 			System.out.println(pstmt);
 
 			return pstmt.executeUpdate() == 1;
