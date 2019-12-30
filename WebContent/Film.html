@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Filmovi</title> 
+    <title>Dodaj novi film</title> 
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <script src="bootstrap/js/jquery-3.3.1.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/DodajFilm.js"></script>
     <link rel="stylesheet" href="Style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Amatic+SCMontserrat&display=swap" rel="stylesheet">
@@ -31,16 +32,16 @@
                     <a class="nav-link" href="index.html">Početna </a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="FIlmovi.html">Filmovi </a>
-                    </li>
+                      <a class="nav-link" href="DodajFilm.html">Dodaj film</a>
+                      </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="#">Projekcije</a>
+                    <a class="nav-link" href="FIlmovi.html">Filmovi</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="Login.html">Prijava</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Registracija.html">Registracija </a>
+                        <a class="nav-link" href="Registracija.html">Registracija</a>
                     </li> 
                 </ul>
 
@@ -50,40 +51,41 @@
                     </form> 
             </div>
         </nav>
-        
-       <table class="table table-striped table-dark" id="moviesTable">
-  <thead>
-    <tr>
-      <th scope="col">Id</th>
-      <th scope="col">Naziv filma</th>
-      <th scope="col">Reziser</th>
-      <th scope="col">Glumci</th>
-      <th scope="col">Zanr</th>
-      <th scope="col">Trajanje</th>
-      <th scope="col">Distributer</th>
-      <th scope="col">Zemlja porekla</th>
-      <th scope="col">Godina proizvodnje</th>
-      <th scope="col">Opis</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-    <th scope="row"></th>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-   </tr>     
- <!-- jos redova za filmove -->
-  </tbody>
-</table>
-      
 
+        <table class="table table-striped table-dark" id="movieTable">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Naziv filma</th>
+                    <th scope="col">Reziser</th>
+                    <th scope="col">Glumci</th>
+                    <th scope="col">Zanr</th>
+                    <th scope="col">Trajanje</th>
+                    <th scope="col">Distributer</th>
+                    <th scope="col">Zemlja porekla</th>
+                    <th scope="col">Godina proizvodnje</th>
+                    <th scope="col">Opis</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                  <th scope="row">1</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                 </tr>     
+              
+                </tbody>
+              </table>
+     
+
+        
         <footer>
             <p> Radno vreme bioskopa - Radni dan: 08h-22h. Subota i nedelja:10h-23h </p>
             <p><a href="tel:+0900-111-1371">Call centar: +0900-111-1371 </a></p>    
