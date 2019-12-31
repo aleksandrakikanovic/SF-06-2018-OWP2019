@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Film;
 import model.Korisnik;
 import model.Korisnik.Uloga;
 import bioskop.dao.ConnectionManager;
@@ -41,9 +43,40 @@ public class KorisnikDAO {
 		return null;
 	}
 
-	public static List<Korisnik> getAll(String korisnickoIme) throws Exception {
-		return new ArrayList<>();
+	public static List<Korisnik> getAll(Korisnik korisnik) throws Exception {
+		List<Korisnik> korisnici = new ArrayList<>();
+		Connection conn = ConnectionManager.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			String query = "select * from Korisnik";
+			pstmt = conn.prepareStatement(query);
+			int index = 1;
+			String korisnickoIme = rset.getString(0);
+			String lozinka = rset.getString(1);
+			Date datumRegistracije = rset.getDate(2);
+			Uloga uloga = Uloga.valueOf(rset.getString(3));
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				index = 1;
+				String korIme = rset.getString(index++);
+				String loz = rset.getString(index++);
+				Uloga ulogaKorisnika = Uloga.valueOf(rset.getString(index++));
+				Date datumRegistracijeKorisnika = rset.getDate(index++);
+				Korisnik k = new Korisnik(korIme, loz, datumRegistracijeKorisnika, ulogaKorisnika);
+				korisnici.add(k);
+			}
+		} finally {
+			try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}
+			try {rset.close();} catch (Exception ex1) {ex1.printStackTrace();}
+			try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();} 
+		}
+		
+		return korisnici;
 	}
+
+
+	
 
 	
 	public static boolean add(Korisnik korisnik) throws Exception {
@@ -70,9 +103,24 @@ public class KorisnikDAO {
 	
 	
 	public static boolean update(Korisnik korisnik) throws Exception {
-		return false;
+		Connection conn = ConnectionManager.getConnection();
+
+		PreparedStatement pstmt = null;
+		try {
+			String query = "update korisnik set korisnickoIme = ?, lozinka = ?, WHERE korisnickoIme = ?";
+			pstmt = conn.prepareStatement(query);
+			int index = 1;
+			pstmt.setString(index++, korisnik.getKorisnickoIme());
+			pstmt.setString(index++, korisnik.getLozinka());
+			pstmt.setDate(index++, korisnik.getDatumRegistracije());
+			return pstmt.executeUpdate() == 1;
+		} finally {
+			try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}
+			try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();}
+		}
 	}
 
+	
 	public static boolean delete(String korisnickoIme) throws Exception {
 		Connection conn = ConnectionManager.getConnection();
 		//System.out.println(conn);
@@ -80,9 +128,9 @@ public class KorisnikDAO {
 		PreparedStatement pstmt = null;
 		try {
 			String query = "delete from Korisnik where korisnickoIme = ?";
-
+			int index=1;
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, korisnickoIme);
+			pstmt.setString(index++, korisnickoIme);
 
 			return pstmt.executeUpdate() == 1;
 		} finally {
