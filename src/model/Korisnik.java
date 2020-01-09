@@ -17,6 +17,13 @@ public class Korisnik {
 		this.datumRegistracije = datumRegistracije;
 		this.uloga = uloga;
 	}
+	public Korisnik(String korisnickoIme, String lozinka, Date datumRegistracije) {
+		super();
+		this.korisnickoIme = korisnickoIme;
+		this.lozinka = lozinka;
+		this.datumRegistracije = datumRegistracije;
+	}
+
 	public String getKorisnickoIme() {
 		return korisnickoIme;
 	}

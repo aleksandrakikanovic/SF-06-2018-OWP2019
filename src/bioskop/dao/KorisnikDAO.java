@@ -17,7 +17,6 @@ public class KorisnikDAO {
 	
 	public static Korisnik get(String korisnickoIme) throws Exception {
 		Connection conn = ConnectionManager.getConnection();
-		//System.out.print(conn); 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
@@ -43,28 +42,28 @@ public class KorisnikDAO {
 		return null;
 	}
 
-	public static List<Korisnik> getAll(Korisnik korisnik) throws Exception {
-		List<Korisnik> korisnici = new ArrayList<>();
+	public static List<Korisnik> getAll() throws Exception {
+		List<Korisnik> sviKorisnici = new ArrayList<>();
 		Connection conn = ConnectionManager.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
 			String query = "select * from Korisnik";
 			pstmt = conn.prepareStatement(query);
-			int index = 1;
-			String korisnickoIme = rset.getString(0);
-			String lozinka = rset.getString(1);
-			Date datumRegistracije = rset.getDate(2);
-			Uloga uloga = Uloga.valueOf(rset.getString(3));
 			rset = pstmt.executeQuery();
+			//int index = 1;
+			String korisnickoIme = rset.getString(1);
+			String lozinka = rset.getString(2);
+			Date datumRegistracije = rset.getDate(3);
+			Uloga uloga = Uloga.valueOf(rset.getString(4));
 			while (rset.next()) {
-				index = 1;
-				String korIme = rset.getString(index++);
-				String loz = rset.getString(index++);
-				Uloga ulogaKorisnika = Uloga.valueOf(rset.getString(index++));
-				Date datumRegistracijeKorisnika = rset.getDate(index++);
-				Korisnik k = new Korisnik(korIme, loz, datumRegistracijeKorisnika, ulogaKorisnika);
-				korisnici.add(k);
+				int index = 1;
+				 korisnickoIme = rset.getString(index++);
+				 lozinka = rset.getString(index++);
+				 uloga = Uloga.valueOf(rset.getString(index++));
+				 datumRegistracije = rset.getDate(index++);
+				Korisnik k = new Korisnik(korisnickoIme, lozinka, datumRegistracije, uloga);
+				sviKorisnici.add(k);
 			}
 		} finally {
 			try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}
@@ -72,11 +71,8 @@ public class KorisnikDAO {
 			try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();} 
 		}
 		
-		return korisnici;
+		return sviKorisnici;
 	}
-
-
-	
 
 	
 	public static boolean add(Korisnik korisnik) throws Exception {
@@ -92,7 +88,6 @@ public class KorisnikDAO {
 			pstmt.setString(index++, korisnik.getLozinka());
 			pstmt.setDate(index++, korisnik.getDatumRegistracije());
 			pstmt.setString(index++, korisnik.getUloga().toString());
-			System.out.println(pstmt);
 
 			return pstmt.executeUpdate() == 1;
 		} finally {

@@ -2,7 +2,7 @@ use bioskopPrizma
 
 CREATE TABLE Film(
     id integer primary key,
-    naziv varchar(50),
+    naziv varchar(50) not null,
     reziser varchar(50),
     glumci varchar(250),
     zanr varchar(50),
@@ -58,4 +58,5 @@ CREATE TABLE Korisnik(
     lozinka varchar(50) not null,
     datumRegistracije date not null,
     uloga varchar(8) NOT NULL DEFAULT 'KORISNIK')
-
+    
+insert into Korisnik values('aleksandra', 'a123', '2020-01-01', 'KORISNIK')

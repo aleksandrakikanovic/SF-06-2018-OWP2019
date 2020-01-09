@@ -34,9 +34,13 @@ public class RegistracijaServlet extends HttpServlet {
 			if(!lozinka.equals(ponovljenaLozinka)) {
 				throw new Exception("Lozinke se ne podudaraju!");
 			}
-			Uloga uloga = Uloga.KORISNIK; // default
-			Date datumRegistracije = new Date(System.currentTimeMillis());
-			Korisnik korisnik = new Korisnik(korisnickoIme, lozinka, datumRegistracije, uloga);
+			//Uloga uloga = Uloga.KORISNIK; // default
+			//System.out.println(uloga);
+			long millis=System.currentTimeMillis();  
+			Date datumRegistracije=new Date(millis); 
+			//System.out.println(datumRegistracije);
+			//Date datumRegistracije = new Date(System.currentTimeMillis()); 
+			Korisnik korisnik = new Korisnik(korisnickoIme, lozinka, datumRegistracije, Uloga.KORISNIK);
 			KorisnikDAO.add(korisnik);
 		} catch (Exception e) { //dodati poruku greske
 			e.printStackTrace();

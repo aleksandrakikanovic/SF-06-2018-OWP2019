@@ -17,19 +17,19 @@ public class FilmDAO {
 		pstmt = conn.prepareStatement(query);
 		int index=0;
 		int id1= Integer.parseInt(id);
-		pstmt.setString(index++, id);
+		pstmt.setInt(index++, id1);
 		rset = pstmt.executeQuery();
 
 		if (rset.next()) {
-			String naziv = rset.getString(1);
-			String reziser = rset.getString(2);
-			String glumci = rset.getString(3);
-			String zanr = rset.getString(4);
-			int trajanje = rset.getInt(5);
-			String distributer = rset.getString(6);
-			String zemljaPorekla = rset.getString(7);
-			int godinaProizvodnje = rset.getInt(8);
-			String opis = rset.getString(9);
+			String naziv = rset.getString(2);
+			String reziser = rset.getString(3);
+			String glumci = rset.getString(4);
+			String zanr = rset.getString(5);
+			int trajanje = rset.getInt(6);
+			String distributer = rset.getString(7);
+			String zemljaPorekla = rset.getString(8);
+			int godinaProizvodnje = rset.getInt(9);
+			String opis = rset.getString(10);
 
 			return new Film(id1, naziv, reziser, glumci, zanr, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis);
 			}
@@ -43,49 +43,49 @@ public class FilmDAO {
 	}
 
 	
-	public static List<Film> getAllZaAdmina(Film film) throws Exception {
-		List<Film> filmovi = new ArrayList<>();
+	public static List<Film> getAllZaAdmina() throws Exception {
+		List<Film> sviFilmovi = new ArrayList<>();
 		Connection conn = ConnectionManager.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
 			String query = "select * from Film";
 			pstmt = conn.prepareStatement(query);
-			int index = 1;
-			int id = rset.getInt(0);
-			String naziv = rset.getString(1);
-			String reziser = rset.getString(2);
-			String glumci = rset.getString(3);
-			String zanr = rset.getString(4);
-			int trajanje = rset.getInt(5);
-			String distributer = rset.getString(6);
-			String zemljaPorekla = rset.getString(7);
-			int godinaProizvodnje = rset.getInt(8);
-			String opis = rset.getString(9);
 			rset = pstmt.executeQuery();
+			//System.out.println(pstmt);
+			int id = rset.getInt(1);
+			String naziv = rset.getString(2);
+			String reziser = rset.getString(3);
+			String glumci = rset.getString(4);
+			String zanr = rset.getString(5);
+			int trajanje = rset.getInt(6);
+			String distributer = rset.getString(7);
+			String zemljaPorekla = rset.getString(8);
+			int godinaProizvodnje = rset.getInt(9);
+			String opis = rset.getString(10);
 			while (rset.next()) {
-				index = 1;
-				int idFilma = rset.getInt(index++);
-				String nazivFilma = rset.getString(index++);
-				String reziserFilma = rset.getString(index++);
-				String glumciFilma = rset.getString(index++);
-				String zanrFilma = rset.getString(index++);
-				int trajanjeFilma = rset.getInt(index++);
-				String distributerFilma = rset.getString(index++);
-				String zemljaPoreklaFilma = rset.getString(index++);
-				int godinaProizvodnjeFilma = rset.getInt(index++);
-				String opisFilma = rset.getString(index++);
-				Film f = new Film(idFilma, nazivFilma, reziserFilma, glumciFilma, zanrFilma, trajanjeFilma,
-						distributerFilma, zemljaPoreklaFilma, godinaProizvodnjeFilma, opisFilma);
-				filmovi.add(f);
+				int index = 1;
+				id = rset.getInt(index++);
+				 naziv = rset.getString(index++);
+				 reziser = rset.getString(index++);
+				 glumci = rset.getString(index++);
+				 zanr = rset.getString(index++);
+				 trajanje = rset.getInt(index++);
+				 distributer = rset.getString(index++);
+				 zemljaPorekla = rset.getString(index++);
+				 godinaProizvodnje = rset.getInt(index++);
+				 opis = rset.getString(index++);
+				 Film f = new Film( id, naziv, reziser, glumci, zanr, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis);
+				sviFilmovi.add(f);
 			}
+
 		} finally {
 			try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}
 			try {rset.close();} catch (Exception ex1) {ex1.printStackTrace();}
 			try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();} 
 		}
 		
-		return filmovi;
+		return sviFilmovi;
 	}
 
 		
@@ -94,8 +94,6 @@ public class FilmDAO {
 		////
 		return new ArrayList<>();
 	}
-
-	
 	public static boolean add(Film film) throws Exception {
 		Connection conn = ConnectionManager.getConnection();
 		PreparedStatement pstmt = null;

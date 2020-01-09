@@ -16,16 +16,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>LogoutServlet</display-name>
-    <servlet-name>LogoutServlet</servlet-name>
-    <servlet-class>servleti.LogoutServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LogoutServlet</servlet-name>
-    <url-pattern>/LogoutServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>RegistracijaServlet</display-name>
     <servlet-name>RegistracijaServlet</servlet-name>
     <servlet-class>servleti.RegistracijaServlet</servlet-class>
@@ -56,5 +46,65 @@
   <servlet-mapping>
     <servlet-name>DodajProjekcijuServlet</servlet-name>
     <url-pattern>/DodajProjekcijuServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SviFilmoviServlet</display-name>
+    <servlet-name>SviFilmoviServlet</servlet-name>
+    <servlet-class>servleti.SviFilmoviServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SviFilmoviServlet</servlet-name>
+    <url-pattern>/SviFilmoviServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SuccessServlet</display-name>
+    <servlet-name>SuccessServlet</servlet-name>
+    <servlet-class>status.SuccessServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SuccessServlet</servlet-name>
+    <url-pattern>/SuccessServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FailureServlet</display-name>
+    <servlet-name>FailureServlet</servlet-name>
+    <servlet-class>status.FailureServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FailureServlet</servlet-name>
+    <url-pattern>/FailureServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LogoutServlet</display-name>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>status.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/LogoutServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UnauthorizedServlet</display-name>
+    <servlet-name>UnauthorizedServlet</servlet-name>
+    <servlet-class>status.UnauthorizedServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UnauthorizedServlet</servlet-name>
+    <url-pattern>/UnauthorizedServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SviKorisniciServlet</display-name>
+    <servlet-name>SviKorisniciServlet</servlet-name>
+    <servlet-class>servleti.SviKorisniciServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SviKorisniciServlet</servlet-name>
+    <url-pattern>/SviKorisniciServlet</url-pattern>
   </servlet-mapping>
 </web-app>
