@@ -2,6 +2,7 @@ $(document).ready(function() {
 	var korisnickoImeInput = $('#korisnickoImeInput');
 	var lozinkaInput = $('#lozinkaInput');
 	var ponovljenaLozinkaInput =  $('#ponovljenaLozinkaInput');
+	
 	var RegistrujButton =  $('#RegistrujButton');
 	console.log("awfwf");
 
@@ -11,6 +12,7 @@ $('#RegistrujButton').on('click', function(event) {
         var ponovljenaLozinka = ponovljenaLozinkaInput.val();
 
 		params = {
+			 'action' : add,
 			'korisnickoIme': korisnickoIme, 
             'lozinka': lozinka,
             'ponovljenaLozinka': ponovljenaLozinka, 

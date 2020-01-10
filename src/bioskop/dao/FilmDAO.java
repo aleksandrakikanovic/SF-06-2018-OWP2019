@@ -149,14 +149,14 @@ public class FilmDAO {
 		}
 	}
 
-	public static boolean delete(int id) throws Exception {
+	public static boolean delete(int indexOf) throws Exception {
 		Connection conn = ConnectionManager.getConnection();
 		PreparedStatement pstmt = null;
 		try {
 			String query = "delete from Film where id = ?";
 			pstmt = conn.prepareStatement(query);
 			int index=1;
-			pstmt.setInt(index++, id);
+			pstmt.setInt(index++, indexOf);
 			System.out.println(pstmt);
 
 			return pstmt.executeUpdate() == 1;

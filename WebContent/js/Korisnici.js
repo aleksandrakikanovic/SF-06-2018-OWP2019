@@ -26,5 +26,19 @@ $(document).ready(function(){
 			'</tr>')}
 		});
 	};
+	//brisanje iz tabele, ne iz baze(ispravicu do odbrane)
+	$('#korisniciTable').on('click', '#izbrisiKorisnika', function(){
+		$(this).closest ('tr').remove ();
+		params = {
+				//'action': 'remove',
+				};
+
+		$.post('RegistracijaServlet', params, function(data) {
+		
+		});
+		
+});
+		
+
 	getKorisnici();
 });

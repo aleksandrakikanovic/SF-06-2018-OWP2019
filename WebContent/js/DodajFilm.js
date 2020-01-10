@@ -14,18 +14,23 @@ $(document).ready(function() {
 
 $('#dodajFilmButton').on('click', function(event) {
 		var naziv = nazivInput.val();
-        var reziser = reziserInput.val();
-        var glumci = glumciInput.val();
-		var zanr = zanrInput.val();
+        var reziser = reziserInput.val(); //opciono
+        var glumci = glumciInput.val(); //opciono
+		var zanr = zanrInput.val(); //opciono
 		var trajanje = trajanjeInput.val();
 		var distributer = distributerInput.val();
 		var zemljaPorekla = zemljaPoreklaInput.val();
 		var godinaProizvodnje = godinaProizvodnjeInput.val();
-		var opis = opisInput.val();
+		var opis = opisInput.val(); //opciono
 		console.log('naziv: ' + naziv);
 		console.log('reziser: ' + reziser);
-
+	    if (naziv == "" || trajanje == null || distributer == "" || zemljaPorekla == ""|| godinaProizvodnje == null
+	    	|| opis == "") {
+	        alert("Popunite sva polja!");
+	        return false;
+	    }
 		params = {
+			//'action' : 'add',
 			'naziv': naziv, 
             'reziser': reziser,
             'glumci': glumci, 
@@ -38,9 +43,9 @@ $('#dodajFilmButton').on('click', function(event) {
 
 		};
 		$.post('DodajFilmServlet', params, function(data) {
-			console.log('test')
-			console.log(data);
-			console.log(reziserInput.val());
+			//console.log('test')
+			//console.log(data);
+			//console.log(reziserInput.val());
 
 
 			if (data.status == 'unauthenticated') {
