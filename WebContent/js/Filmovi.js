@@ -1,9 +1,7 @@
 $(document).ready(function() { 
-	
 	var filmoviTable = $('#filmoviTable');
 	var izmeniFilmButton =  $('#izmeniFilm');
 	var izbrisiFilmButton =  $('#izbrisiFilm');
-
 	function getFilmovi(){
 		$.get('SviFilmoviServlet', function(data) {
 			var sviFilmovi = data.sviFilmovi;
@@ -24,16 +22,13 @@ $(document).ready(function() {
 						'<td>' + 
 							'<form>' + 
 							'<button type="button" class="btn btn-warning" id="izmeniFilm">Izmeni</button>' +
-								//'<input type="submit" value="Izmeni">' + 
 							'</form>' + 
 						'</td>' + 
 						'<td>' + 
 						'<form>' + 
 						'<button type="button" class="btn btn-danger" id="izbrisiFilm">Izbrisi</button>' +
-							//'<input type="submit" value="Izbrisi">' + 
 						'</form>' + 
 					'</td>' + 
-
 					'</tr>')}
 			})};
 			
@@ -45,10 +40,21 @@ $(document).ready(function() {
 			//	'action': 'remove',
 				//'index': index
 				};
-
 		$.post('DodajFilmServlet', params, function(data) {
 		
 		});
+});
+	$('#filmoviTable').on('click', '#izmeniFilm', function(){
+		params = {
+				//	'action': 'update',
+					//'index': index
+					};
+		//$.post('DodajFilmServlet', params, function(data) {
+		//});
+		//if (data.status == 'success') {
+			window.location.replace('DodajFilm.html');
+		//}
+
 		
 });
 		

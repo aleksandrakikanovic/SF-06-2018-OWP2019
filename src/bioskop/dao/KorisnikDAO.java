@@ -51,16 +51,15 @@ public class KorisnikDAO {
 			String query = "select * from Korisnik";
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();
-			//int index = 1;
 			String korisnickoIme = rset.getString(1);
 			String lozinka = rset.getString(2);
 			Date datumRegistracije = rset.getDate(3);
-			Uloga uloga = Uloga.valueOf(rset.getString(4));
+			Uloga uloga = Uloga.KORISNIK;
 			while (rset.next()) {
 				int index = 1;
 				 korisnickoIme = rset.getString(index++);
 				 lozinka = rset.getString(index++);
-				 uloga = Uloga.valueOf(rset.getString(index++));
+				 //Uloga uloga = Uloga.valueOf(rset.getString(index++));
 				 datumRegistracije = rset.getDate(index++);
 				Korisnik k = new Korisnik(korisnickoIme, lozinka, datumRegistracije, uloga);
 				sviKorisnici.add(k);
@@ -99,7 +98,6 @@ public class KorisnikDAO {
 	
 	public static boolean update(Korisnik korisnik) throws Exception {
 		Connection conn = ConnectionManager.getConnection();
-
 		PreparedStatement pstmt = null;
 		try {
 			String query = "update korisnik set korisnickoIme = ?, lozinka = ?, WHERE korisnickoIme = ?";
@@ -115,18 +113,14 @@ public class KorisnikDAO {
 		}
 	}
 
-	
 	public static boolean delete(String korisnickoIme) throws Exception {
 		Connection conn = ConnectionManager.getConnection();
-		//System.out.println(conn);
-
 		PreparedStatement pstmt = null;
 		try {
 			String query = "delete from Korisnik where korisnickoIme = ?";
 			int index=1;
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(index++, korisnickoIme);
-
 			return pstmt.executeUpdate() == 1;
 		} finally {
 			try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}

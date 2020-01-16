@@ -12,16 +12,10 @@ $(document).ready(function(){
 				'<td>' + sviKorisnici[korisnik].datumRegistracije + '</td>' + 
 				'<td>' + sviKorisnici[korisnik].uloga + '</td>' + 
 				'<td>' + 
-					//'<form>' + 
 					'<button type="button" class="btn btn-warning" id="izmeniKorisnika">Izmeni</button>' +
-						//'<input type="submit" value="Izmeni">' + 
-					//'</form>' + 
 				'</td>' + 
 				'<td>' + 
-				//'<form>' + 
 				'<button type="button" class="btn btn-danger" id="izbrisiKorisnika">Izbrisi</button>' +
-					//'<input type="submit" value="Izbrisi">' + 
-				//'</form>' + 
 			'</td>' + 
 			'</tr>')}
 		});
@@ -36,6 +30,19 @@ $(document).ready(function(){
 		$.post('RegistracijaServlet', params, function(data) {
 		
 		});
+		
+});
+	$('#korisniciTable').on('click', '#izmeniKorisnika', function(){
+		
+		params = {
+				//'action': 'update',
+				};
+		//if (data.status == 'success') {
+			window.location.replace('Registracija.html');
+		//}
+	//	$.post('RegistracijaServlet', params, function(data) {
+		
+		//});
 		
 });
 		

@@ -22,14 +22,12 @@ public class SviKorisniciServlet extends HttpServlet {
 			data.put("sviKorisnici", sviKorisnici);
 			request.setAttribute("data", data);
 			request.getRequestDispatcher("./SuccessServlet").forward(request, response);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		
 	}
 
 }

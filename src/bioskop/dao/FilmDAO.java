@@ -148,7 +148,6 @@ public class FilmDAO {
 			try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();}
 		}
 	}
-
 	public static boolean delete(int indexOf) throws Exception {
 		Connection conn = ConnectionManager.getConnection();
 		PreparedStatement pstmt = null;
