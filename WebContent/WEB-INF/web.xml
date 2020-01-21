@@ -107,4 +107,24 @@
     <servlet-name>SviKorisniciServlet</servlet-name>
     <url-pattern>/SviKorisniciServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PrikaziFilmServlet</display-name>
+    <servlet-name>PrikaziFilmServlet</servlet-name>
+    <servlet-class>servleti.PrikaziFilmServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PrikaziFilmServlet</servlet-name>
+    <url-pattern>/PrikaziFilmServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PrikaziKorisnikaServlet</display-name>
+    <servlet-name>PrikaziKorisnikaServlet</servlet-name>
+    <servlet-class>servleti.PrikaziKorisnikaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PrikaziKorisnikaServlet</servlet-name>
+    <url-pattern>/PrikaziKorisnikaServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

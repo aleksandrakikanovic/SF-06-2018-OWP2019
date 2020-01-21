@@ -27,7 +27,6 @@ $('#dodajFilmButton').on('click', function(event) {
 	    }
 	    
 		params = {
-			//'action' : 'add',
 			'naziv': naziv, 
             'reziser': reziser,
             'glumci': glumci, 
@@ -37,7 +36,6 @@ $('#dodajFilmButton').on('click', function(event) {
 			'zemljaPorekla': zemljaPorekla, 
 			'godinaProizvodnje': godinaProizvodnje, 
 			'opis': opis
-
 		};
 		$.post('DodajFilmServlet', params, function(data) {
 			if (data.status == 'unauthenticated') {
@@ -45,7 +43,7 @@ $('#dodajFilmButton').on('click', function(event) {
 				return;
 			}
 			if (data.status == 'success') {
-				window.location.replace('index.html');
+				window.location.replace('Filmovi.html');
 			}
 		});
 		

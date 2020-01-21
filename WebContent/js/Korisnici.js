@@ -33,10 +33,25 @@ $(document).ready(function(){
 		
 });
 	$('#korisniciTable').on('click', '#prikaziKorisnika', function(){
-		
+        var currentRow=$(this).closest("tr"); 
+        var korisnickoIme = currentRow.find("td:eq(0)").text(); 
+        var lozinka = currentRow.find("td:eq(1)").text();
+        var datumRegistracije = currentRow.find("td:eq(2)").text(); 
+        var data = 'Korisnicko ime:' + korisnickoIme + '\nLozinka: '+ lozinka + '\nDatum registracije: ' + datumRegistracije + '\nUloga: Korisnik';
+        alert(data);
+    
+        params = {
+    			'korisnickoIme' : korisnickoIme,
+    			'lozinka': lozinka, 
+                'datumRegistracije': datumRegistracije,
+
+    		};
+		$.post('PrikaziKorisnikaServlet', params, function(data) {
 			window.location.replace('Korisnik.html');
-		
+
+		});
 });
+
 		
 
 	getKorisnici();
