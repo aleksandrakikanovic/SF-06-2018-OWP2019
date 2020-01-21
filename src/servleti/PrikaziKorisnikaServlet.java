@@ -9,8 +9,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import model.Film;
 import model.Korisnik;
 import model.Korisnik.Uloga;
 
@@ -21,12 +19,11 @@ public class PrikaziKorisnikaServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
-
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			String korisnickoIme = request.getParameter("naziv");
-			String lozinka = request.getParameter("reziser");
+			String korisnickoIme = request.getParameter("korisnickoIme");
+			String lozinka = request.getParameter("lozinka");
 			Date datumRegistracije = null;
 			Korisnik izabraniKorisnik = new Korisnik(korisnickoIme, lozinka, datumRegistracije, Uloga.KORISNIK);
 			Map<String, Object> data = new LinkedHashMap<>();
