@@ -12,7 +12,8 @@ public class ConnectionManager {
 	private static final String WINDOWS_PATH = "C:" + FILE_SEPARATOR + "Users" +FILE_SEPARATOR 
 			+ "asus" + FILE_SEPARATOR + "Desktop" + FILE_SEPARATOR + "SQLite" + FILE_SEPARATOR + DATABASE_NAME;
 	private static final String LINUX_PATH = "SQLite" + FILE_SEPARATOR + DATABASE_NAME;
-	//za linux u c:/Temp 
+	//za linux u c:/Temp/SQLite napraviti folder //malim slovima bioskopprizma.db
+	// sa šemom baze  na Linux sistemu nalazi na ~/SQLite/)
 	public static final String PATH = WINDOWS_PATH;	
 	private static DataSource dataSource;
 

@@ -1,4 +1,4 @@
-create bioskopPrizma
+create database bioskopPrizma ? 
 
 use bioskopPrizma
 
