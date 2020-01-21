@@ -12,7 +12,7 @@ $(document).ready(function(){
 				'<td>' + sviKorisnici[korisnik].datumRegistracije + '</td>' + 
 				'<td>' + sviKorisnici[korisnik].uloga + '</td>' + 
 				'<td>' + 
-					'<button type="button" class="btn btn-warning" id="izmeniKorisnika">Izmeni</button>' +
+					'<button type="button" class="btn btn-warning" id="prikaziKorisnika">Prikazi</button>' +
 				'</td>' + 
 				'<td>' + 
 				'<button type="button" class="btn btn-danger" id="izbrisiKorisnika">Izbrisi</button>' +
@@ -22,7 +22,7 @@ $(document).ready(function(){
 	};
 	//brisanje iz tabele, ne iz baze(ispravicu do odbrane)
 	$('#korisniciTable').on('click', '#izbrisiKorisnika', function(){
-		$(this).closest ('tr').remove ();
+		$(this).closest ('tr').remove();
 		params = {
 				//'action': 'remove',
 				};
@@ -32,17 +32,9 @@ $(document).ready(function(){
 		});
 		
 });
-	$('#korisniciTable').on('click', '#izmeniKorisnika', function(){
+	$('#korisniciTable').on('click', '#prikaziKorisnika', function(){
 		
-		params = {
-				//'action': 'update',
-				};
-		//if (data.status == 'success') {
-			window.location.replace('Registracija.html');
-		//}
-	//	$.post('RegistracijaServlet', params, function(data) {
-		
-		//});
+			window.location.replace('Korisnik.html');
 		
 });
 		

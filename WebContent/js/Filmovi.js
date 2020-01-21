@@ -21,7 +21,7 @@ $(document).ready(function() {
 						'<td>' + sviFilmovi[film].opis + '</td>' + 
 						'<td>' + 
 							'<form>' + 
-							'<button type="button" class="btn btn-warning" id="izmeniFilm">Izmeni</button>' +
+							'<button type="button" class="btn btn-warning" id="prikaziFilm">Prikazi</button>' +
 							'</form>' + 
 						'</td>' + 
 						'<td>' + 
@@ -35,7 +35,6 @@ $(document).ready(function() {
 	//brisanje iz tabele, ne iz baze(ispravicu do odbrane)
 	$('#filmoviTable').on('click', '#izbrisiFilm', function(){
 		$(this).closest ('tr').remove ();
-		//var index = row.index() - 1; 
 		params = {
 			//	'action': 'remove',
 				//'index': index
@@ -44,21 +43,11 @@ $(document).ready(function() {
 		
 		});
 });
-	$('#filmoviTable').on('click', '#izmeniFilm', function(){
-		params = {
-				//	'action': 'update',
-					//'index': index
-					};
-		//$.post('DodajFilmServlet', params, function(data) {
-		//});
-		//if (data.status == 'success') {
-			window.location.replace('DodajFilm.html');
-		//}
-
+	$('#filmoviTable').on('click', '#prikaziFilm', function(){
 		
+			window.location.replace('Film.html');
 });
 		
 	getFilmovi();
 });
 
-//console.log(sviFilmovi);

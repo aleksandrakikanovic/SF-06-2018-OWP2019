@@ -30,9 +30,16 @@ public class SviFilmoviServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	
-	
-	}
+		try {
+			String id = request.getParameter("id");
+			Film izabranFilm = FilmDAO.get(id);
+			Map<String, Object> data = new LinkedHashMap<>();
+			data.put("izabranFilm", izabranFilm);
+			request.setAttribute("data", data);
+			request.getRequestDispatcher("./SuccessServlet").forward(request, response);
 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

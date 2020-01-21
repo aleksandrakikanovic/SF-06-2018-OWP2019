@@ -10,8 +10,6 @@ $(document).ready(function() {
 	var opisInput =  $('#reziserInput');
 	var dodajFilmButton =  $('#dodajFilmButton');
 	console.log("provera");
-
-
 $('#dodajFilmButton').on('click', function(event) {
 		var naziv = nazivInput.val();
         var reziser = reziserInput.val(); //opciono
@@ -22,13 +20,12 @@ $('#dodajFilmButton').on('click', function(event) {
 		var zemljaPorekla = zemljaPoreklaInput.val();
 		var godinaProizvodnje = godinaProizvodnjeInput.val();
 		var opis = opisInput.val(); //opciono
-		console.log('naziv: ' + naziv);
-		console.log('reziser: ' + reziser);
 	    if (naziv == "" || trajanje == null || distributer == "" || zemljaPorekla == ""|| godinaProizvodnje == null
 	    	|| opis == "") {
 	        alert("Popunite sva polja!");
 	        return false;
 	    }
+	    
 		params = {
 			//'action' : 'add',
 			'naziv': naziv, 
@@ -43,22 +40,18 @@ $('#dodajFilmButton').on('click', function(event) {
 
 		};
 		$.post('DodajFilmServlet', params, function(data) {
-			//console.log('test')
-			//console.log(data);
-			//console.log(reziserInput.val());
-
-
 			if (data.status == 'unauthenticated') {
 				window.location.replace('Login.html');
 				return;
 			}
-
 			if (data.status == 'success') {
 				window.location.replace('index.html');
 			}
 		});
 		
-		event.preventDefault();
-		return false;
 });
+	event.preventDefault();
+	return false;
+
+
 });

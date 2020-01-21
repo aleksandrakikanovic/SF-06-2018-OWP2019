@@ -28,15 +28,16 @@ public class KorisnikDAO {
 
 		if (rset.next()) {
 			Uloga uloga = Uloga.valueOf(rset.getString(3));
+			korisnickoIme = rset.getString(0);
 			String lozinka = rset.getString(1);
 			Date datumRegistracije = rset.getDate(2);
-
+			
 			return new Korisnik(korisnickoIme, lozinka, datumRegistracije, uloga);
 			}
 	} finally {
 		try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}
 		try {rset.close();} catch (Exception ex1) {ex1.printStackTrace();}
-		//try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();}
+		try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();}
 	}
 
 		return null;
@@ -53,14 +54,15 @@ public class KorisnikDAO {
 			rset = pstmt.executeQuery();
 			String korisnickoIme = rset.getString(1);
 			String lozinka = rset.getString(2);
-			Date datumRegistracije = rset.getDate(3);
+			 long millis=rset.getLong(3);
+		     Date datumRegistracije = new Date(millis);
 			Uloga uloga = Uloga.KORISNIK;
 			while (rset.next()) {
 				int index = 1;
 				 korisnickoIme = rset.getString(index++);
 				 lozinka = rset.getString(index++);
-				 //Uloga uloga = Uloga.valueOf(rset.getString(index++));
-				 datumRegistracije = rset.getDate(index++);
+				 millis=rset.getLong(index++);
+			     datumRegistracije = new Date(millis);				 
 				Korisnik k = new Korisnik(korisnickoIme, lozinka, datumRegistracije, uloga);
 				sviKorisnici.add(k);
 			}
@@ -83,11 +85,12 @@ public class KorisnikDAO {
 			String query = "insert into Korisnik (korisnickoIme, lozinka, datumRegistracije,uloga) values (?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(query);
 			int index = 1;
+			 long millis=System.currentTimeMillis();  
+		     java.sql.Date date = new java.sql.Date(millis);
 			pstmt.setString(index++, korisnik.getKorisnickoIme());
 			pstmt.setString(index++, korisnik.getLozinka());
 			pstmt.setDate(index++, korisnik.getDatumRegistracije());
 			pstmt.setString(index++, korisnik.getUloga().toString());
-
 			return pstmt.executeUpdate() == 1;
 		} finally {
 			try {pstmt.close();} catch (Exception ex) {ex.printStackTrace();}

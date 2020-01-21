@@ -18,10 +18,7 @@ public class DodajFilmServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			String action = request.getParameter("action");
-			System.out.print(action);
-			switch(action) {
-		case "add": {
+			
 			String naziv = request.getParameter("naziv");
 			String reziser = request.getParameter("reziser"); //opciono
 			String glumci = request.getParameter("glumci"); //opciono
@@ -44,16 +41,9 @@ public class DodajFilmServlet extends HttpServlet {
 				}
 				Film film = new Film(naziv, reziser, glumci, zanr, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis);
 				FilmDAO.add(film);
-				break; }
-			case "remove" :{
-				int index = Integer.parseInt(request.getParameter("index"));
-					FilmDAO.delete(index);
-				break;}
-			}} catch (Exception e) { //poruka greske
+			
+			} catch (Exception e) { 
 			e.printStackTrace(); }
-
-			//response.sendRedirect("./Filmovi.html");
-	
 }}
 
 

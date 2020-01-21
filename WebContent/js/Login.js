@@ -3,7 +3,7 @@ $(document).ready(function() {
 	var lozInput = $('#lozInput');
 	var loginButton = $('loginButton');
 	
-	$('#RegistrujButton').on('click', function(event) {
+	$('#loginButton').on('click', function(event) {
 		var korIme = korInput.val();
         var loz = lozInput.val();
 
@@ -13,12 +13,12 @@ $(document).ready(function() {
 
 		};
 		$.post('LoginServlet', params, function(data) {
-			//console.log('testiranje');
-
-
+			console.log('testiranje');
+			window.location.replace('Filmovi.html');
 			
 		});
 		
-		
+		event.preventDefault();
+		return false;
 });
 });

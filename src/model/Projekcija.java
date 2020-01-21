@@ -12,7 +12,6 @@ public class Projekcija {
 	private ETipProjekcije tipProjekcije;
 	private Sala sala;
 	private Date datumVreme;
-	//private Date vreme;
 	private double cenaKarte;
 	private Korisnik admin;
 	
@@ -24,7 +23,6 @@ public class Projekcija {
 		this.tipProjekcije = tipProjekcije;
 		this.sala = sala;
 		this.datumVreme = datumVreme;
-		//this.vreme = vreme;
 		this.cenaKarte = cenaKarte;
 		this.admin = admin;
 	}
@@ -32,11 +30,6 @@ public class Projekcija {
 	public int getId() {
 		return id;
 	}
-
-//	public void setId(int id) {
-//		this.id = id;
-//	}
-
 	public Film getFilm() {
 		return film;
 	}

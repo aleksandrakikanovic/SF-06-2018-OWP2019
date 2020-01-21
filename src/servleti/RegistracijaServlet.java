@@ -15,7 +15,6 @@ public class RegistracijaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
-
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
@@ -34,15 +33,12 @@ public class RegistracijaServlet extends HttpServlet {
 			if(!lozinka.equals(ponovljenaLozinka)) {
 				throw new Exception("Lozinke se ne podudaraju!");
 			}
-			//Uloga uloga = Uloga.KORISNIK; // default
-			//System.out.println(uloga);
-			long millis=System.currentTimeMillis();  
-			Date datumRegistracije=new Date(millis); 
-			//System.out.println(datumRegistracije);
-			//Date datumRegistracije = new Date(System.currentTimeMillis()); 
-			Korisnik korisnik = new Korisnik(korisnickoIme, lozinka, datumRegistracije, Uloga.KORISNIK);
-			KorisnikDAO.add(korisnik);
-		} catch (Exception e) { //dodati poruku greske
+			 long millis=System.currentTimeMillis();  
+		        java.sql.Date date = new java.sql.Date(millis);
+		        System.out.println(date);
+		        Korisnik korisnik = new Korisnik(korisnickoIme, lozinka, date, Uloga.KORISNIK);
+		        KorisnikDAO.add(korisnik);
+		} catch (Exception e) { 
 			e.printStackTrace();
 		}
 	}

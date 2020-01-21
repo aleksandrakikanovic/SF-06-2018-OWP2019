@@ -22,9 +22,6 @@ public class Karta {
 	public int getId() {
 		return id;
 	}
-//	public void setId(int id) {
-//		this.id = id;
-//	}
 	public Projekcija getProjekcija() {
 		return projekcija;
 	}

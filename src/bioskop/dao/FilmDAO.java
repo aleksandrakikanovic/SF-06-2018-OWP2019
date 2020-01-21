@@ -19,7 +19,6 @@ public class FilmDAO {
 		int id1= Integer.parseInt(id);
 		pstmt.setInt(index++, id1);
 		rset = pstmt.executeQuery();
-
 		if (rset.next()) {
 			String naziv = rset.getString(2);
 			String reziser = rset.getString(3);
@@ -52,7 +51,6 @@ public class FilmDAO {
 			String query = "select * from Film";
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();
-			//System.out.println(pstmt);
 			int id = rset.getInt(1);
 			String naziv = rset.getString(2);
 			String reziser = rset.getString(3);
