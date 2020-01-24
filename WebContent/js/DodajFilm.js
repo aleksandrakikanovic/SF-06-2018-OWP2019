@@ -1,4 +1,35 @@
-$(document).ready(function() { 
+$(document).ready(function() {
+
+	
+		$.post('SviFilmoviServlet', function(data) {
+			if (data.ulogaKorisnika == null) {
+				$('#prikaziKorisnike').hide();
+				$('#profilKorisnika').hide();
+				$('#logout').hide();
+			}else if(data.ulogaKorisnika=='ADMIN'){
+				$('#prikaziKorisnike').show();
+				$('#profilKorisnika').show();
+				$('#logout').show();
+			}else if(data.ulogaKorisnika=='KORISNIK'){
+				$('#prikaziKorisnike').hide();
+				$('#profilKorisnika').show();
+				$('#logout').show();
+			}
+		});
+	
+	
+  $('#logout').on('click', function(event) {
+		$.get('LogoutServlet', function(data) {
+			console.log(data);
+			if (data.status == 'unauthenticated') {
+				window.location.replace('index.html');
+				return;
+			}
+		});
+		event.preventDefault();
+		return false;
+	});
+	
 	var nazivInput = $('#nazivInput');
 	var reziserInput = $('#reziserInput');
 	var glumciInput =  $('#glumciInput');
@@ -10,7 +41,7 @@ $(document).ready(function() {
 	var opisInput =  $('#reziserInput');
 	var dodajFilmButton =  $('#dodajFilmButton');
 	console.log("provera");
-$('#dodajFilmButton').on('click', function(event) {
+  $('#dodajFilmButton').on('click', function(event) {
 		var naziv = nazivInput.val();
         var reziser = reziserInput.val(); //opciono
         var glumci = glumciInput.val(); //opciono
@@ -48,8 +79,8 @@ $('#dodajFilmButton').on('click', function(event) {
 		});
 		
 });
-	event.preventDefault();
-	return false;
-
+	//event.preventDefault();
+	//return false;
+  uloga();
 
 });

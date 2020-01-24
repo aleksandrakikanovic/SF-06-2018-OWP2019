@@ -1,46 +1,59 @@
 $(document).ready(function() { 
+	
+	$.post('LoginServlet', function(data) {
+		if (data.ulogaKorisnika == null) {
+			$('#prikaziKorisnike').hide();
+			$('#profilKorisnika').hide();
+			$('#dodajFilm').hide();
+			$('#logout').hide();
+		}else if(data.ulogaKorisnika=='ADMIN'){
+			$('#prikaziKorisnike').show();
+			$('#profilKorisnika').show();
+			$('#dodajFilm').show();
+			$('#logout').show();
+		}else if(data.ulogaKorisnika=='KORISNIK'){
+			$('#prikaziKorisnike').hide();
+			$('#profilKorisnika').show();
+			$('#dodajFilm').hide();
+			$('#logout').show();
+		}
+	});
+	
+	$('#logout').on('click', function(event) {
+		$.get('LogoutServlet', function(data) {
+			console.log(data);
+			if (data.status == 'unauthenticated') {
+				window.location.replace('index.html');
+				return;
+			}
+		});
+	
+		event.preventDefault();
+		return false;
+	});
 	var filmoviTable = $('#filmoviTable');
-	var izmeniFilmButton =  $('#izmeniFilm');
-	var izbrisiFilmButton =  $('#izbrisiFilm');
 	function getFilmovi(){
 		$.get('SviFilmoviServlet', function(data) {
 			var sviFilmovi = data.sviFilmovi;
 			for (film in sviFilmovi) {
 				filmoviTable.append(
 					'<tr>' +
-						'<td>' + sviFilmovi[film].id + '</td>' + 
 						'<td>' + sviFilmovi[film].naziv + '</td>' + 
-						'<td>' + sviFilmovi[film].reziser + '</td>' + 
-						'<td>' + sviFilmovi[film].glumci + '</td>' + 
 						'<td>' + sviFilmovi[film].zanr + '</td>' + 
 						'<td>' + sviFilmovi[film].trajanje + '</td>' + 
 						'<td>' + sviFilmovi[film].distributer + '</td>' + 
 						'<td>' + sviFilmovi[film].zemljaPorekla + '</td>' + 
 						'<td>' + sviFilmovi[film].godinaProizvodnje + '</td>' + 
-						'<td>' + sviFilmovi[film].opis + '</td>' + 
 						'<td>' + 
 						'<form>' + 
 						'<button type="button" class="btn btn-danger" id="prikaziFilm">Prikazi</button>' +
 						'</form>' + 
 						'</td>' + 
-						'<td>' + 
-						'<form>' + 
-						'<button type="button" class="btn btn-danger" id="izbrisiFilm">Izbrisi</button>' +
-						'</form>' + 
-					'</td>' + 
 					'</tr>')}
 			})};
 			
-	//brisanje iz tabele, ne iz baze(ispravicu do odbrane)
-	$('#filmoviTable').on('click', '#izbrisiFilm', function(){
-		$(this).closest ('tr').remove ();
-		params = {
-			//	'action': 'remove',
-				//'index': index
-				};
-		$.post('DodajFilmServlet', params, function(data) {
-		});
-});
+	
+
 	 
 	$('#filmoviTable').on('click', '#prikaziFilm', function(){
         var currentRow=$(this).closest("tr"); 
@@ -80,4 +93,3 @@ $(document).ready(function() {
 	getFilmovi();
 	
 });
-

@@ -35,7 +35,6 @@ public class RegistracijaServlet extends HttpServlet {
 			}
 			 long millis=System.currentTimeMillis();  
 		        java.sql.Date date = new java.sql.Date(millis);
-		        System.out.println(date);
 		        Korisnik korisnik = new Korisnik(korisnickoIme, lozinka, date, Uloga.KORISNIK);
 		        KorisnikDAO.add(korisnik);
 		} catch (Exception e) { 

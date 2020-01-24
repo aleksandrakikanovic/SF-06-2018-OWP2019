@@ -1,12 +1,18 @@
 package servleti;
 
 import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bioskop.dao.FilmDAO;
 import bioskop.dao.KorisnikDAO;
+import model.Film;
 import model.Korisnik;
 
 public class LoginServlet extends HttpServlet {
@@ -15,24 +21,22 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 }
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String korIme = request.getParameter("korIme");
 		String loz = request.getParameter("loz");
-		System.out.println(korIme);
 		try {
 			Korisnik korisnik = KorisnikDAO.get(korIme);
+			Map<String, Object> data = new LinkedHashMap<>();
 			if(korisnik ==null) {
-				System.out.println("null");
+				data.put("ulogaKorisnika", "neregistrovan");
 				request.getRequestDispatcher("./FailureServlet").forward(request, response);
 				return;
 			}else {
-				System.out.println("not null");
-
-			}
-
-			request.getSession().setAttribute("ulogovanKorisnik", korisnik.getKorisnickoIme());
+				data.put("ulogaKorisnika", "neregistrovan");
+			}			
+			request.setAttribute("data", data);
+			request.getSession().setAttribute("ulogovanKorisnik", korisnik);
 			request.getRequestDispatcher("./SuccessServlet").forward(request, response);
 
 		} catch (Exception e) {

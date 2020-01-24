@@ -28,67 +28,41 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Početna </a>
+                        <a class="nav-link" href="index.html">Početna </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="DodajFilm.html" id="dodajFilm">Dodaj film </a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="DodajFilm.html">Dodaj film </a>
-                    </li>                   
-                    <li class="nav-item">
-                    <a class="nav-link" href="Filmovi.html">Filmovi </a>
+                        <a class="nav-link" href="Korisnik.html" id="profilKorisnika">Moj profil</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="" id="logout">Odjava</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="#">Projekcije</a>
+                        <a class="nav-link" href="Korisnici.html" id="prikaziKorisnike">Korisnici</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Login.html">Prijava</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Registracija.html">Registracija </a>
-                    </li> 
-                    <li class="nav-item">
-                        <a class="nav-link" href="Korisnici.html">Korisnici</a>
-                    </li> 
-                    
                 </ul>
-
                     <form class="form-inline active-cyan-4">
                         <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Unesi ime filma" aria-label="Search">
                         <i class="fas fa-search" aria-hidden="true"></i>
                     </form> 
             </div>
         </nav>
+        
       
-       <table class="table table-striped table-dark" id="filmoviTable"  style="cursor: pointer;">
-    <tr>
-      <th scope="col">Id</th>
-      <th scope="col">Naziv filma</th>
-      <th scope="col">Reziser</th>
-      <th scope="col">Glumci</th>
-      <th scope="col">Zanr</th>
-      <th scope="col">Trajanje</th>
-      <th scope="col">Distributer</th>
-      <th scope="col">Zemlja porekla</th>
-      <th scope="col">Godina proizvodnje</th>
-      <th scope="col">Opis</th>
-      <th scope="col">Prikaz</th>
-      <th scope="col">Brisanje</th> 
-    </tr>
-  	 
-  	 <tr>
-       <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td> 
-   </tr>    
-</table>
-
-
+       <table class="table table-striped table-dark" id="filmoviTable">
+            <tr>
+                <th scope="col">Naziv filma <button type="button" class="btn btn-outline-light btn-sm" id="sortNaziv">Sortiraj</button> </th>
+                <th scope="col">Zanr  <button type="button" class="btn btn-outline-light btn-sm" id="sortZanr">Sortiraj</button> </th>
+                <th scope="col">Trajanje</th>
+                <th scope="col">Distributer  <button type="button" class="btn btn-outline-light btn-sm" id="sortDistributer">Sortiraj</button> </th>
+                <th scope="col">Zemlja porekla  <button type="button" class="btn btn-outline-light btn-sm" id="sortZemljaPorekla">Sortiraj</button> </th>
+                <th scope="col">Godina proizvodnje</th>
+                <th scope="col"></th>
+            </tr>   
+        </table>
+        
         <footer>
             <p> Radno vreme bioskopa - Radni dan: 08h-22h. Subota i nedelja:10h-23h </p>
             <p><a href="tel:+0900-111-1371">Call centar: +0900-111-1371 </a></p>    
@@ -100,7 +74,7 @@
         </footer>
 
     </div>
-    <script src="js/Filmovi.js"></script>
+    <script src="js/Filmovi.js"></script>    
 
 </body>
 </html>

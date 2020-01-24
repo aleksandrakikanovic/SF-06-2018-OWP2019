@@ -1,4 +1,13 @@
 $(document).ready(function(){
+	$('#logout').on('click', function(event) {
+		$.get('LogoutServlet', function(data) {
+			console.log(data);
+			if (data.status == 'unauthenticated') {
+				window.location.replace('index.html');
+				return;
+			}
+		});
+	});
 	
 	var korisniciTable = $('#korisniciTable');
 	function getKorisnici(){
@@ -14,9 +23,6 @@ $(document).ready(function(){
 				'<td>' + 
 					'<button type="button" class="btn btn-warning" id="prikaziKorisnika">Prikazi</button>' +
 				'</td>' + 
-				'<td>' + 
-				'<button type="button" class="btn btn-danger" id="izbrisiKorisnika">Izbrisi</button>' +
-			'</td>' + 
 			'</tr>')}
 		});
 	};

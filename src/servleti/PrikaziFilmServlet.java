@@ -11,15 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Film;
+import model.Korisnik;
 
 @SuppressWarnings("serial")
 public class PrikaziFilmServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
-	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			Korisnik ulogovanKorisnik = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
+			Map<String, Object> data = new LinkedHashMap<>();
+			request.setAttribute("data", data);
+			if(!(ulogovanKorisnik==null)) {
+				data.put("ulogaKorisnika", ulogovanKorisnik.getUloga());
+			}else {
+				data.put("ulogaKorisnika", "neregistrovan");
+			}
 			//int id =Integer.parseInt(request.getParameter("id"));
 			String naziv = request.getParameter("naziv");
 			String reziser = request.getParameter("reziser");
@@ -32,13 +38,16 @@ public class PrikaziFilmServlet extends HttpServlet {
 			//int godinaProizvodnje = Integer.parseInt(request.getParameter("godinaProizvodnje"));
 			int godinaProizvodnje = 0;
 			String opis = request.getParameter("opis"); 
-			Film izabraniFilm = new Film( naziv, reziser, glumci, zanr, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis);
-			Map<String, Object> data = new LinkedHashMap<>();
+			Film izabraniFilm = new Film(naziv, reziser, glumci, zanr, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis);
 			data.put("izabraniFilm", izabraniFilm);
+			//System.out.println(zanr.trim());
 			request.setAttribute("data", data);
 			request.getRequestDispatcher("./SuccessServlet").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}	}
+	}	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	}
+	}
 

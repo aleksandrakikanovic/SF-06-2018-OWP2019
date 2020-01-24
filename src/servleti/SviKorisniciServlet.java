@@ -17,10 +17,16 @@ public class SviKorisniciServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			List<Korisnik> sviKorisnici = KorisnikDAO.getAll();
-			Map<String, Object> data = new LinkedHashMap<String, Object>();
-			data.put("sviKorisnici", sviKorisnici);
+			Korisnik ulogovanKorisnik = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
+			Map<String, Object> data = new LinkedHashMap<>();
 			request.setAttribute("data", data);
+			if(!(ulogovanKorisnik==null)) {
+				data.put("ulogaKorisnika", ulogovanKorisnik.getUloga());
+			}else {
+				data.put("ulogaKorisnika", "neregistrovan");
+
+			}			List<Korisnik> sviKorisnici = KorisnikDAO.getAll();
+			data.put("sviKorisnici", sviKorisnici);
 			request.getRequestDispatcher("./SuccessServlet").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -12,24 +12,30 @@ import javax.servlet.http.HttpServletResponse;
 
 import bioskop.dao.FilmDAO;
 import model.Film;
+import model.Korisnik;
 
 @SuppressWarnings("serial")
 public class SviFilmoviServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			Korisnik ulogovanKorisnik = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
 			List<Film> sviFilmovi = FilmDAO.getAllZaAdmina();
 			Map<String, Object> data = new LinkedHashMap<>();
 			data.put("sviFilmovi", sviFilmovi);
 			request.setAttribute("data", data);
-			request.getRequestDispatcher("./SuccessServlet").forward(request, response);
+			if(!(ulogovanKorisnik==null)) {
+				data.put("ulogaKorisnika", ulogovanKorisnik.getUloga());
+			}else {
+				data.put("ulogaKorisnika", "neregistrovan");
 
+			}
+			request.getRequestDispatcher("./SuccessServlet").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
 	}
 }

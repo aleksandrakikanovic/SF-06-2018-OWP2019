@@ -39,6 +39,17 @@ public class Film {
 		this.godinaProizvodnje = godinaProizvodnje;
 		this.opis = opis;
 	}
+	public Film(String naziv, String zanr, int trajanje, String distributer,
+			String zemljaPorekla, int godinaProizvodnje) {
+		super();
+		this.naziv=naziv;
+		this.zanr = zanr;
+		this.trajanje = trajanje;
+		this.distributer = distributer;
+		this.zemljaPorekla = zemljaPorekla;
+		this.godinaProizvodnje = godinaProizvodnje;
+	}
+
 
 	public int getId() {
 		return id;

@@ -22,11 +22,18 @@ public class PrikaziKorisnikaServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			Korisnik ulogovanKorisnik = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
+			Map<String, Object> data = new LinkedHashMap<>();
+			request.setAttribute("data", data);
+			if(!(ulogovanKorisnik==null)) {
+				data.put("ulogaKorisnika", ulogovanKorisnik.getUloga());
+			}else {
+				data.put("ulogaKorisnika", "neregistrovan");
+			}
 			String korisnickoIme = request.getParameter("korisnickoIme");
 			String lozinka = request.getParameter("lozinka");
 			Date datumRegistracije = null;
 			Korisnik izabraniKorisnik = new Korisnik(korisnickoIme, lozinka, datumRegistracije, Uloga.KORISNIK);
-			Map<String, Object> data = new LinkedHashMap<>();
 			data.put("izabraniKorisnik", izabraniKorisnik);
 			request.setAttribute("data", data);
 			request.getRequestDispatcher("./SuccessServlet").forward(request, response);

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import bioskop.dao.FilmDAO;
 import model.Film;
-
+import model.Korisnik;
 
 @SuppressWarnings("serial")
 public class DodajFilmServlet extends HttpServlet {
@@ -18,10 +18,10 @@ public class DodajFilmServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		try {
-			
+			Korisnik ulogovanKorisnik = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
 			String naziv = request.getParameter("naziv");
 			String reziser = request.getParameter("reziser"); //opciono
 			String glumci = request.getParameter("glumci"); //opciono
@@ -44,7 +44,11 @@ public class DodajFilmServlet extends HttpServlet {
 				}
 				Film film = new Film(naziv, reziser, glumci, zanr, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis);
 				FilmDAO.add(film);
-			
+				Map<String, Object> data = new LinkedHashMap<>();
+				request.setAttribute("data", data);
+				if(!(ulogovanKorisnik==null)) {
+					data.put("ulogaKorisnika", ulogovanKorisnik.getUloga());
+				}
 			} catch (Exception e) { 
 			e.printStackTrace(); }
 }}

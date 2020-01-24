@@ -162,4 +162,108 @@ public class FilmDAO {
 			try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();}	}
 
 	}
+	public static Film nazivPretraga(String naziv) throws Exception {
+		Connection conn = ConnectionManager.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+		String query = "select * from Film where naziv = ?";
+		pstmt = conn.prepareStatement(query);
+		int index=0;
+		pstmt.setString(index++, naziv);
+		rset = pstmt.executeQuery();
+		if (rset.next()) {
+			naziv = rset.getString(2);
+			String zanr = rset.getString(5);
+			int trajanje = rset.getInt(6);
+			String distributer = rset.getString(7);
+			String zemljaPorekla = rset.getString(8);
+			int godinaProizvodnje = rset.getInt(9);
+			return new Film(naziv, zanr, trajanje, distributer, zemljaPorekla, godinaProizvodnje);
+			}
+	} finally {
+		try {pstmt.close();} catch (Exception ex) {ex.printStackTrace();}
+		try {rset.close();} catch (Exception ex) {ex.printStackTrace();}
+		try {conn.close();} catch (Exception ex) {ex.printStackTrace();}
+	}
+		return null;
+	}
+	public static Film zanrPretraga(String zanr) throws Exception {
+		Connection conn = ConnectionManager.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+		String query = "select * from Film where zanr = ?";
+		pstmt = conn.prepareStatement(query);
+		int index=0;
+		pstmt.setString(index++, zanr);
+		rset = pstmt.executeQuery();
+		if (rset.next()) {
+			String naziv = rset.getString(2);
+			zanr = rset.getString(5);
+			int trajanje = rset.getInt(6);
+			String distributer = rset.getString(7);
+			String zemljaPorekla = rset.getString(8);
+			int godinaProizvodnje = rset.getInt(9);
+			return new Film(naziv, zanr, trajanje, distributer, zemljaPorekla, godinaProizvodnje);
+			}
+	} finally {
+		try {pstmt.close();} catch (Exception ex) {ex.printStackTrace();}
+		try {rset.close();} catch (Exception ex) {ex.printStackTrace();}
+		try {conn.close();} catch (Exception ex) {ex.printStackTrace();}
+	}
+		return null;
+	}
+	public static Film distributerPretraga(String distributer) throws Exception {
+		Connection conn = ConnectionManager.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+		String query = "select * from Film where distributer = ?";
+		pstmt = conn.prepareStatement(query);
+		int index=0;
+		pstmt.setString(index++, distributer);
+		rset = pstmt.executeQuery();
+		if (rset.next()) {
+			String naziv = rset.getString(2);
+			String zanr = rset.getString(5);
+			int trajanje = rset.getInt(6);
+			distributer = rset.getString(7);
+			String zemljaPorekla = rset.getString(8);
+			int godinaProizvodnje = rset.getInt(9);
+			return new Film(naziv, zanr, trajanje, distributer, zemljaPorekla, godinaProizvodnje);
+			}
+	} finally {
+		try {pstmt.close();} catch (Exception ex) {ex.printStackTrace();}
+		try {rset.close();} catch (Exception ex) {ex.printStackTrace();}
+		try {conn.close();} catch (Exception ex) {ex.printStackTrace();}
+	}
+		return null;
+	}
+	public static Film zemljaPoreklaPretraga(String zemljaPorekla) throws Exception {
+		Connection conn = ConnectionManager.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+		String query = "select * from Film where zemljaPorekla = ?";
+		pstmt = conn.prepareStatement(query);
+		int index=0;
+		pstmt.setString(index++, zemljaPorekla);
+		rset = pstmt.executeQuery();
+		if (rset.next()) {
+			String naziv = rset.getString(2);
+			String zanr = rset.getString(5);
+			int trajanje = rset.getInt(6);
+			String distributer = rset.getString(7);
+			zemljaPorekla = rset.getString(8);
+			int godinaProizvodnje = rset.getInt(9);
+			return new Film(naziv, zanr, trajanje, distributer, zemljaPorekla, godinaProizvodnje);
+			}
+	} finally {
+		try {pstmt.close();} catch (Exception ex) {ex.printStackTrace();}
+		try {rset.close();} catch (Exception ex) {ex.printStackTrace();}
+		try {conn.close();} catch (Exception ex) {ex.printStackTrace();}
+	}
+		return null;
+	}
 }

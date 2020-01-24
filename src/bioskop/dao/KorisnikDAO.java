@@ -27,10 +27,11 @@ public class KorisnikDAO {
 		rset = pstmt.executeQuery();
 
 		if (rset.next()) {
-			Uloga uloga = Uloga.valueOf(rset.getString(3));
-			korisnickoIme = rset.getString(0);
-			String lozinka = rset.getString(1);
-			Date datumRegistracije = rset.getDate(2);
+			Uloga uloga = Uloga.valueOf(rset.getString(4));
+			korisnickoIme = rset.getString(1);
+			String lozinka = rset.getString(2);
+			long millis=rset.getLong(3);
+		    Date datumRegistracije = new Date(millis);
 			
 			return new Korisnik(korisnickoIme, lozinka, datumRegistracije, uloga);
 			}
@@ -54,15 +55,16 @@ public class KorisnikDAO {
 			rset = pstmt.executeQuery();
 			String korisnickoIme = rset.getString(1);
 			String lozinka = rset.getString(2);
-			 long millis=rset.getLong(3);
-		     Date datumRegistracije = new Date(millis);
-			Uloga uloga = Uloga.KORISNIK;
+			long millis=rset.getLong(3);
+		    Date datumRegistracije = new Date(millis);
+				Uloga uloga = Uloga.valueOf(rset.getString(4));
 			while (rset.next()) {
 				int index = 1;
 				 korisnickoIme = rset.getString(index++);
 				 lozinka = rset.getString(index++);
 				 millis=rset.getLong(index++);
-			     datumRegistracije = new Date(millis);				 
+			     datumRegistracije = new Date(millis);	
+				 System.out.println(datumRegistracije);
 				Korisnik k = new Korisnik(korisnickoIme, lozinka, datumRegistracije, uloga);
 				sviKorisnici.add(k);
 			}
