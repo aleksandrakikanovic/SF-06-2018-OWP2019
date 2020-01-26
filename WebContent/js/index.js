@@ -13,9 +13,8 @@ $(document).ready(function() {
 		return false;
 	});
 	
-	
 	$.post('LoginServlet', function(data) {
-		if (data.ulogaKorisnika == null) {
+		if (data.ulogaKorisnika == 'neregistrovan') {
 			$('#prikaziKorisnike').hide();
 			$('#profilKorisnika').hide();
 			$('#registracija').show();
@@ -36,5 +35,28 @@ $(document).ready(function() {
 
 		}
 	});
+	
+	var projekcijeTable = $('#projekcijeTable');
+	function getProjekcije(){
+		$.get('SveProjekcijeServlet', function(data) {
+			var sveProjekcije = data.sveProjekcije;
+			for (projekcija in sveProjekcije) {
+				projekcijeTable.append(
+					'<tr>' +
+						'<td>' + sveProjekcije[projekcija].film.naziv + '</td>' + 
+						'<td>' + sveProjekcije[projekcija].tipProjekcije + '</td>' + 
+						'<td>' + sveProjekcije[projekcija].sala.naziv + '</td>' + 
+						'<td>' + sveProjekcije[projekcija].datumVreme + '</td>' + 
+						'<td>' + sveProjekcije[projekcija].cenaKarte + '</td>' + 
+						'<td>' + 
+						'<form>' + 
+						'<button type="button" class="btn btn-danger" id="prikaziFilm">Prikazi</button>' +
+						'</form>' + 
+						'</td>' + 
+					'</tr>')}
+			})};
+
+getProjekcije();
+	
 	
 });

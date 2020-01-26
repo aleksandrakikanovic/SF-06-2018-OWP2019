@@ -127,4 +127,14 @@
     <servlet-name>PrikaziKorisnikaServlet</servlet-name>
     <url-pattern>/PrikaziKorisnikaServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SveProjekcijeServlet</display-name>
+    <servlet-name>SveProjekcijeServlet</servlet-name>
+    <servlet-class>servleti.SveProjekcijeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SveProjekcijeServlet</servlet-name>
+    <url-pattern>/SveProjekcijeServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

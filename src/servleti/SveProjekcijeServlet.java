@@ -11,18 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bioskop.dao.FilmDAO;
+import bioskop.dao.ProjekcijaDAO;
 import model.Film;
 import model.Korisnik;
+import model.Projekcija;
 
-@SuppressWarnings("serial")
-public class SviFilmoviServlet extends HttpServlet {
-	
+public class SveProjekcijeServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+ 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			Korisnik ulogovanKorisnik = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
-			List<Film> sviFilmovi = FilmDAO.getAllZaAdmina();
+			List<Projekcija> sveProjekcije = ProjekcijaDAO.getAll();
 			Map<String, Object> data = new LinkedHashMap<>();
-			data.put("sviFilmovi", sviFilmovi);
+			data.put("sveProjekcije", sveProjekcije);
 			request.setAttribute("data", data);
 			if(!(ulogovanKorisnik==null)) {
 				data.put("ulogaKorisnika", ulogovanKorisnik.getUloga());
@@ -39,4 +41,5 @@ public class SviFilmoviServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
+
 }

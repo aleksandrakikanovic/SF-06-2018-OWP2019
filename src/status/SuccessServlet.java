@@ -23,7 +23,7 @@ public class SuccessServlet extends HttpServlet {
 
 		ObjectMapper objectMapper = new ObjectMapper();
 		String jsonData = objectMapper.writeValueAsString(data);
-		//System.out.println(jsonData);
+		System.out.println(jsonData);
 
 		response.setContentType("application/json");
 		response.getWriter().write(jsonData);	}
