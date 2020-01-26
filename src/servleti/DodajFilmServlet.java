@@ -1,6 +1,7 @@
 package servleti;
-
 import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -9,8 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import bioskop.dao.FilmDAO;
+import bioskop.dao.ProjekcijaDAO;
+import bioskop.dao.SalaDAO;
 import model.Film;
 import model.Korisnik;
+import model.Projekcija;
+import model.Projekcija.ETipProjekcije;
+import model.Sala;
 
 @SuppressWarnings("serial")
 public class DodajFilmServlet extends HttpServlet {
@@ -51,6 +57,4 @@ public class DodajFilmServlet extends HttpServlet {
 				}
 			} catch (Exception e) { 
 			e.printStackTrace(); }
-}}
-
-
+		}}

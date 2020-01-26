@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dodaj novi film</title> 
+    <title>Dodaj projekciju</title> 
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <script src="bootstrap/js/jquery-3.3.1.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="Style.css">
-     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 </head>
 
 <body>
@@ -38,7 +37,6 @@
                    <li class="nav-item">
                       <a class="nav-link" href="" id="logout">Odjava</a>
                   </li> 
-                  
                 </ul>
 
                     <form class="form-inline active-cyan-4">
@@ -52,60 +50,50 @@
         <form class="space">
             <div class="form-row justify-content-md-center">
               <div class="col-md-3 mb-3">
-                <label for="validationDefault01">Naziv filma</label>
-                <input type="text" class="form-control" id="nazivInput" placeholder="" value="" required>
-              </div>
+                <label for="validationDefault01">Film</label>
+                <select name="Film" id="izaberiFilm" class="combobox">
+                    </select>
+                </div>
             </div>
             <div class="form-row justify-content-md-center">
               <div class="col-md-3 mb-3">
-                <label for="validationDefault02">Reziser</label>
-                <input type="text" class="form-control" id="reziserInput" placeholder="" value="" required>
-              </div>
-            </div>
-            <div class="form-row justify-content-md-center">
-                <div class="col-md-3 mb-3">
-                  <label for="validationDefault02">Glumci</label>
-                  <input type="text" class="form-control" id="glumciInput" placeholder="" value="" required>
-                </div>
-              </div>
-              <div class="form-row justify-content-md-center">
-                <div class="col-md-2 mb-3">
-                  <label for="validationDefault02">Zanr</label>
-                  <input type="text" class="form-control" id="zanrInput" placeholder="" value="" required>
-                </div>
-                <div class="col-md-1 mb-3">
-                    <label for="validationDefault02">Trajanje</label>
-                    <input type="text" class="form-control" id="trajanjeInput" placeholder="u minutima" value="" required>
+                <label for="validationDefault02">Tip projekcije </label>
+                <select name="Tip projekcije" id="izaberiTipProjekcije" class="combobox">
+                    <option value="dvaD">2D</option>
+                    <option value="triD">3D</option>
+                    <option value="cetiriD">4D</option>
+                    </select>
                 </div>
             </div>
             <div class="form-row justify-content-md-center">
                 <div class="col-md-3 mb-3">
-                  <label for="validationDefault02">Distributer</label>
-                  <input type="text" class="form-control" id="distributerInput" placeholder="" value="" required>
+                  <label for="validationDefault02">Sala</label>
+                  <select name="Sala" id="izaberiSalu" class="combobox">
+                    <option value="1">Prva sala</option>
+                    <option value="2">Druga sala</option>
+                    <option value="3">Treca sala</option>
+                    <option value="4">Cetvrta sala</option>
+                    <option value="5">Peta sala</option>
+                    </select>
                 </div>
               </div>
               <div class="form-row justify-content-md-center">
                 <div class="col-md-3 mb-3">
-                  <label for="validationDefault02">Zemlja porekla</label>
-                  <input type="text" class="form-control" id="zemljaPoreklaInput" placeholder="" value="" required>
+                  <label for="validationDefault02">Datum i vreme</label>
+                  <input type="datetime" class="form-control" id="datumVremeInput" placeholder="dd-MM-yyyy" value="" required>
                 </div>
               </div>
               <div class="form-row justify-content-md-center">
                 <div class="col-md-3 mb-3">
-                  <label for="validationDefault02">Godina proizvodnje</label>
-                  <input type="text" class="form-control" id="godinaProizvodnjeInput" placeholder="" value="" required>
+                    <label for="validationDefault02">Cena karte</label>
+                    <input type="number" class="form-control" id="cenaKarteInput" placeholder="" value="" required>
                 </div>
-              </div>
+            </div>
                 <div class="form-row justify-content-md-center">
-                    <div class="col-md-3 mb-3">
-                      <label for="validationDefault02">Opis</label>
-                      <input type="text" class="form-control" id="opisInput" placeholder="" value="" required>
-                    </div>
-                  </div>    
-                <div class="form-row justify-content-md-center">
-                  <button class="btn btn-light" type="submit" id="dodajFilmButton">Dodaj film</button>
+                  <button class="btn btn-light" type="submit" id="dodajProjekcijuButton">Dodaj projekciju</button>
                 </div>
           </form>
+          <table id="filmoviTable"></table>
 
 
         <footer>
@@ -119,7 +107,7 @@
         </footer>
 
     </div>
-<script src="js/DodajFilm.js"></script>
+<script src="js/DodajProjekciju.js"></script>
     
 </body>
 </html>

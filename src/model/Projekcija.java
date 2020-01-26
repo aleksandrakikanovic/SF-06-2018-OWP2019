@@ -6,7 +6,6 @@ public class Projekcija {
 	
 	public enum ETipProjekcije{	dvaD, triD, cetiriD}
 		
-		
 	private int id;
 	private Film film;
 	private ETipProjekcije tipProjekcije;
@@ -26,6 +25,17 @@ public class Projekcija {
 		this.cenaKarte = cenaKarte;
 		this.admin = admin;
 	}
+	public Projekcija( Film film, ETipProjekcije tipProjekcije, Sala sala, Date datumVreme,
+			double cenaKarte, Korisnik admin) {
+		super();
+		this.film = film;
+		this.tipProjekcije = tipProjekcije;
+		this.sala = sala;
+		this.datumVreme = datumVreme;
+		this.cenaKarte = cenaKarte;
+		this.admin = admin;
+	}
+
 
 	public int getId() {
 		return id;

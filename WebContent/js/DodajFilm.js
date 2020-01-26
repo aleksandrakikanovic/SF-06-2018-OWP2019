@@ -1,6 +1,4 @@
 $(document).ready(function() {
-
-	
 		$.post('SviFilmoviServlet', function(data) {
 			if (data.ulogaKorisnika == null) {
 				$('#prikaziKorisnike').hide();

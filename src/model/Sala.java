@@ -1,20 +1,18 @@
 package model;
-
-import java.util.ArrayList;
-
 import model.Projekcija.ETipProjekcije;
 
 public class Sala {
 	
 	private int id;
 	private String naziv;
-	private ArrayList<ETipProjekcije> listaProjekcija;
-	//lista ili samo jedan tip
-	public Sala(int id, String naziv, ArrayList<ETipProjekcije> listaProjekcija) {
+	private ETipProjekcije tipProjekcije;
+	private String ostaleProjekcije;
+	public Sala(int id, String naziv, ETipProjekcije tipProjekcije, String ostaleProjekcije) {
 		super();
 		this.id = id;
 		this.naziv = naziv;
-		this.listaProjekcija = listaProjekcija;
+		this.tipProjekcije = tipProjekcije;
+		this.ostaleProjekcije=ostaleProjekcije;
 	}
 	public int getId() {
 		return id;
@@ -28,13 +26,18 @@ public class Sala {
 	public void setNaziv(String naziv) {
 		this.naziv = naziv;
 	}
-	public ArrayList<ETipProjekcije> getListaProjekcija() {
-		return listaProjekcija;
+	public ETipProjekcije getTipProjekcije() {
+		return tipProjekcije;
 	}
-	public void setListaProjekcija(ArrayList<ETipProjekcije> listaProjekcija) {
-		this.listaProjekcija = listaProjekcija;
+	public void setTipProjekcije(ETipProjekcije tipProjekcije) {
+		this.tipProjekcije = tipProjekcije;
 	}
-	
+	public String getOstaleProjekcije() {
+		return ostaleProjekcije;
+	}
+	public void setOstaleProjekcije(String ostaleProjekcije) {
+		this.ostaleProjekcije = ostaleProjekcije;
+	}
 	
 
 }

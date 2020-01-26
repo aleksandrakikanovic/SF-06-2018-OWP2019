@@ -30,29 +30,71 @@ insert into Film (naziv, reziser, glumci, zanr, trajanje, distributer, zemljaPor
 values('Vuk sa Vol Strita', 'Martin Scorsese', ' Leonardo DiCaprio, Jonah Hill, Margot Robbie ', 'Krimi, biografija', 
 210, ' Paramount Pictures', 'USA', 2013, 'Americka je crna komedija u reziji Martina Skorsezea snimljena po istoimenoj knjizi memoara Dzordana Belforta.')
 
-
-
-
-
 CREATE TABLE Sala(
     id integer primary key,
     naziv varchar(30) not null,
     tipProjekcije varchar(20) not null,
       tipoviP varchar(12),
-    FOREIGN KEY(tipProjekcije) REFERENCES TipProjekcije(id) ON DELETE RESTRICT
-   )
+    FOREIGN KEY(tipProjekcije) REFERENCES TipProjekcije(id) ON DELETE RESTRICT)
+insert into Sala (naziv, tipProjekcije) values ('Prva sala',1)
+insert into Sala (naziv, tipProjekcije) values ('Druga sala',2)
+insert into Sala (naziv, tipProjekcije) values ('Treca sala',3)
+insert into Sala (naziv, tipProjekcije, tipoviP) values ('Cetvrta sala',1,'triD' )
+insert into Sala (naziv, tipProjekcije, tipoviP) values ('Peta sala',2, 'cetiriD')
+
 
 CREATE TABLE Sediste(
-    redniBroj int not null primary key,
+	id integer primary key,
+    redniBroj int not null,
     salaId int not null, 
     FOREIGN KEY(salaId) REFERENCES Sala(id) ON DELETE RESTRICT )
+    --prva sala
+insert into Sediste(rednibroj, salaId) values(1,1) 
+insert into Sediste(rednibroj, salaId) values(2,1)
+insert into Sediste(rednibroj, salaId) values(3,1)
+insert into Sediste(rednibroj, salaId) values(4,1) 
+--druga sala
+insert into Sediste(rednibroj, salaId) values( 1,2)
+insert into Sediste(rednibroj, salaId) values( 2,2)
+insert into Sediste(rednibroj, salaId) values( 3,2)
+insert into Sediste(rednibroj, salaId) values( 4,2)
+--treca sala
+insert into Sediste(rednibroj, salaId) values( 1,3)
+insert into Sediste(rednibroj, salaId) values( 2,3)
+insert into Sediste(rednibroj, salaId) values( 3,3)
+insert into Sediste(rednibroj, salaId) values( 4,3)
+insert into Sediste(rednibroj, salaId) values( 5,3)
+--cetvrta sala
+insert into Sediste(rednibroj, salaId) values( 1,4)
+insert into Sediste(rednibroj, salaId) values( 2,4)
+insert into Sediste(rednibroj, salaId) values( 3,4)
+insert into Sediste(rednibroj, salaId) values( 4,4)
+insert into Sediste(rednibroj, salaId) values( 5,4)
+insert into Sediste(rednibroj, salaId) values( 6,4)
+--peta sala
+insert into Sediste(rednibroj, salaId) values( 1,5)
+insert into Sediste(rednibroj, salaId) values( 2,5)
+insert into Sediste(rednibroj, salaId) values( 3,5)
+insert into Sediste(rednibroj, salaId) values( 4,5)
+insert into Sediste(rednibroj, salaId) values( 5,5)
+insert into Sediste(rednibroj, salaId) values( 6,5)
+insert into Sediste(rednibroj, salaId) values( 7,5)
+
+
+
+
 
 CREATE TABLE TipProjekcije(
-    id int primary key,
+    id integer primary key,
     tip varchar(8) NOT NULL DEFAULT 'dvaD' )
     
+ insert into TipProjekcije (tip) values('dvaD')
+ insert into TipProjekcije (tip) values('triD')
+ insert into TipProjekcije (tip) values('cetiriD')
+
+    
 CREATE TABLE Projekcija(
-    id int  primary key,
+    id integer  primary key,
     filmId int not null,
     tipProjekcije varchar(15) not null,
     salaId int not null,
@@ -65,7 +107,7 @@ CREATE TABLE Projekcija(
 	    FOREIGN KEY(admin) REFERENCES Korisnik(korisnickoIme) ON DELETE RESTRICT  )
     
 CREATE TABLE Karta(
-    id int  primary key,
+    id integer  primary key,
     projekcijaId int not null,
     idSediste int not null,
     datumVremeProdaje smalldatetime not null,

@@ -1,5 +1,19 @@
 $(document).ready(function() { 
 	
+	$('#logout').on('click', function(event) {
+		$.get('LogoutServlet', function(data) {
+			console.log(data);
+			if (data.status == 'unauthenticated') {
+				window.location.replace('index.html');
+				return;
+			}
+		});
+	
+		event.preventDefault();
+		return false;
+	});
+	
+	
 	$.post('LoginServlet', function(data) {
 		if (data.ulogaKorisnika == null) {
 			$('#prikaziKorisnike').hide();

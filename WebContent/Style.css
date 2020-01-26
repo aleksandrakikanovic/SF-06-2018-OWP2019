@@ -8,7 +8,6 @@ body{
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: 100% 100%;  
-
 }
 .container-fluid {
     padding-right:0 ;
@@ -23,12 +22,8 @@ body{
     width:200px;
     height: 90px;
 }
-.page-header{
-    text-align: center;
-}
-.col-lg-3{
-    margin-bottom:20px;
-}
+.page-header{ text-align: center; }
+.col-lg-3{ margin-bottom:20px; }
 .row-text p{
     font-size: 35px;
     color:black;
@@ -76,4 +71,9 @@ h3{
     text-align: center;
     color: black;
 }
-
+.combobox{
+    background-color:silver;
+    width: 290px;
+    height: 40px;
+}
+#izaberiTipProjekcije{ width: 230px; }

@@ -17,7 +17,7 @@ public class FilmDAO {
 		pstmt = conn.prepareStatement(query);
 		int index=0;
 		int id= Integer.parseInt(id1);
-		pstmt.setInt(index++, id);
+		pstmt.setInt(1, id);
 		rset = pstmt.executeQuery();
 		if (rset.next()) {
 			String naziv = rset.getString(2);
@@ -29,7 +29,6 @@ public class FilmDAO {
 			String zemljaPorekla = rset.getString(8);
 			int godinaProizvodnje = rset.getInt(9);
 			String opis = rset.getString(10);
-
 			return new Film(id, naziv, reziser, glumci, zanr, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis);
 			}
 	} finally {
