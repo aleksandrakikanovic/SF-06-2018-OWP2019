@@ -13,9 +13,8 @@ public class FilmDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
-		String query = "select * from Film where id = ?";
+		String query = "select * from Film where id = ? and deleted='no'";
 		pstmt = conn.prepareStatement(query);
-		int index=0;
 		int id= Integer.parseInt(id1);
 		pstmt.setInt(1, id);
 		rset = pstmt.executeQuery();
@@ -47,7 +46,7 @@ public class FilmDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
-			String query = "select * from Film";
+			String query = "select * from Film where deleted='no'";
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();
 			int id = rset.getInt(1);
@@ -96,8 +95,8 @@ public class FilmDAO {
 		PreparedStatement pstmt = null;
 		try {
 			
-			String query = "insert into Film (naziv, reziser, glumci,zanr, trajanje,distributer,zemljaPorekla,godinaProizvodnje,opis)"
-					+ " values (?,?,?,?,?,?,?,?,?)";
+			String query = "insert into Film (naziv, reziser, glumci,zanr, trajanje,distributer,zemljaPorekla,godinaProizvodnje,opis, deleted)"
+					+ " values (?,?,?,?,?,?,?,?,?,?)";
 
 			pstmt = conn.prepareStatement(query);
 			int index = 1;
@@ -110,6 +109,7 @@ public class FilmDAO {
 			pstmt.setString(index++, film.getZemljaPorekla());
 			pstmt.setInt(index++, film.getGodinaProizvodnje());
 			pstmt.setString(index++, film.getOpis());
+			pstmt.setString(index++, "no");
 
 			return pstmt.executeUpdate() == 1;
 		} finally {
@@ -149,7 +149,7 @@ public class FilmDAO {
 		Connection conn = ConnectionManager.getConnection();
 		PreparedStatement pstmt = null;
 		try {
-			String query = "delete from Film where id = ?";
+			String query = "update Film set deleted='yes' where id = ?";
 			pstmt = conn.prepareStatement(query);
 			int index=1;
 			pstmt.setInt(index++, indexOf);
@@ -169,7 +169,7 @@ public class FilmDAO {
 		String query = "select * from Film where naziv = ?";
 		pstmt = conn.prepareStatement(query);
 		int index=0;
-		pstmt.setString(index++, naziv);
+		pstmt.setString(1, naziv);
 		rset = pstmt.executeQuery();
 		if (rset.next()) {
 			naziv = rset.getString(2);
@@ -195,7 +195,7 @@ public class FilmDAO {
 		String query = "select * from Film where zanr = ?";
 		pstmt = conn.prepareStatement(query);
 		int index=0;
-		pstmt.setString(index++, zanr);
+		pstmt.setString(1, zanr);
 		rset = pstmt.executeQuery();
 		if (rset.next()) {
 			String naziv = rset.getString(2);
@@ -221,7 +221,7 @@ public class FilmDAO {
 		String query = "select * from Film where distributer = ?";
 		pstmt = conn.prepareStatement(query);
 		int index=0;
-		pstmt.setString(index++, distributer);
+		pstmt.setString(1, distributer);
 		rset = pstmt.executeQuery();
 		if (rset.next()) {
 			String naziv = rset.getString(2);
@@ -247,7 +247,7 @@ public class FilmDAO {
 		String query = "select * from Film where zemljaPorekla = ?";
 		pstmt = conn.prepareStatement(query);
 		int index=0;
-		pstmt.setString(index++, zemljaPorekla);
+		pstmt.setString(1, zemljaPorekla);
 		rset = pstmt.executeQuery();
 		if (rset.next()) {
 			String naziv = rset.getString(2);

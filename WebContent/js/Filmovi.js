@@ -1,24 +1,5 @@
 $(document).ready(function() { 
 	
-	$.post('LoginServlet', function(data) {
-		if (data.ulogaKorisnika == null) {
-			$('#prikaziKorisnike').hide();
-			$('#profilKorisnika').hide();
-			$('#dodajFilm').hide();
-			$('#logout').hide();
-		}else if(data.ulogaKorisnika=='ADMIN'){
-			$('#prikaziKorisnike').show();
-			$('#profilKorisnika').show();
-			$('#dodajFilm').show();
-			$('#logout').show();
-		}else if(data.ulogaKorisnika=='KORISNIK'){
-			$('#prikaziKorisnike').hide();
-			$('#profilKorisnika').show();
-			$('#dodajFilm').hide();
-			$('#logout').show();
-		}
-	});
-	
 	$('#logout').on('click', function(event) {
 		$.get('LogoutServlet', function(data) {
 			console.log(data);
@@ -34,6 +15,26 @@ $(document).ready(function() {
 	var filmoviTable = $('#filmoviTable');
 	function getFilmovi(){
 		$.get('SviFilmoviServlet', function(data) {
+			alert(data.ulogaKorisnika);
+			if (data.ulogaKorisnika == "neregistrovan") {
+				$('#prikaziKorisnike').hide();
+				$('#dodajProjekciju').hide();
+				$('#profilKorisnika').hide();
+				$('#dodajFilm').hide();
+				$('#logout').hide();
+			}else if(data.ulogaKorisnika=="ADMIN"){
+				$('#prikaziKorisnike').show();
+				$('#profilKorisnika').show();
+				$('#dodajProjekciju').show();
+				$('#dodajFilm').show();
+				$('#logout').show();
+			}else if(data.ulogaKorisnika=="KORISNIK"){
+				$('#prikaziKorisnike').hide();
+				$('#profilKorisnika').show();
+				$('#dodajProjekciju').hide();
+				$('#dodajFilm').hide();
+				$('#logout').show();
+			}
 			var sviFilmovi = data.sviFilmovi;
 			for (film in sviFilmovi) {
 				filmoviTable.append(

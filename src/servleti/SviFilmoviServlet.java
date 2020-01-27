@@ -25,7 +25,7 @@ public class SviFilmoviServlet extends HttpServlet {
 			data.put("sviFilmovi", sviFilmovi);
 			request.setAttribute("data", data);
 			if(!(ulogovanKorisnik==null)) {
-				data.put("ulogaKorisnika", ulogovanKorisnik.getUloga());
+				data.put("ulogaKorisnika", ulogovanKorisnik.getUloga().toString());
 			}else {
 				data.put("ulogaKorisnika", "neregistrovan");
 

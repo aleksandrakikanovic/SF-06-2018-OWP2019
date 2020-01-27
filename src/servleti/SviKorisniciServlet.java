@@ -21,7 +21,7 @@ public class SviKorisniciServlet extends HttpServlet {
 			Map<String, Object> data = new LinkedHashMap<>();
 			request.setAttribute("data", data);
 			if(!(ulogovanKorisnik==null)) {
-				data.put("ulogaKorisnika", ulogovanKorisnik.getUloga());
+				data.put("ulogaKorisnika", ulogovanKorisnik.getUloga().toString());
 			}else {
 				data.put("ulogaKorisnika", "neregistrovan");
 

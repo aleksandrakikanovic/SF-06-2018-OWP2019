@@ -1,14 +1,15 @@
 $(document).ready(function() {
 		$.post('SviFilmoviServlet', function(data) {
-			if (data.ulogaKorisnika == null) {
+			alert(data.ulogaKorisnika);
+			if (data.ulogaKorisnika == "neregistrovan") {
 				$('#prikaziKorisnike').hide();
 				$('#profilKorisnika').hide();
 				$('#logout').hide();
-			}else if(data.ulogaKorisnika=='ADMIN'){
+			}else if(data.ulogaKorisnika=="ADMIN"){
 				$('#prikaziKorisnike').show();
 				$('#profilKorisnika').show();
 				$('#logout').show();
-			}else if(data.ulogaKorisnika=='KORISNIK'){
+			}else if(data.ulogaKorisnika=="KORISNIK"){
 				$('#prikaziKorisnike').hide();
 				$('#profilKorisnika').show();
 				$('#logout').show();
@@ -79,6 +80,5 @@ $(document).ready(function() {
 });
 	//event.preventDefault();
 	//return false;
-  uloga();
 
 });

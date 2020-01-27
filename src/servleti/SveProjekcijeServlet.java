@@ -23,11 +23,12 @@ public class SveProjekcijeServlet extends HttpServlet {
 		try {
 			Korisnik ulogovanKorisnik = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
 			List<Projekcija> sveProjekcije = ProjekcijaDAO.getAll();
+			//sveProjekcije.sort(null);
 			Map<String, Object> data = new LinkedHashMap<>();
 			data.put("sveProjekcije", sveProjekcije);
 			request.setAttribute("data", data);
 			if(!(ulogovanKorisnik==null)) {
-				data.put("ulogaKorisnika", ulogovanKorisnik.getUloga());
+				data.put("ulogaKorisnika", ulogovanKorisnik.getUloga().toString());
 			}else {
 				data.put("ulogaKorisnika", "neregistrovan");
 

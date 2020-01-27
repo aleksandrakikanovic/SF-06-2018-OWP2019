@@ -37,6 +37,34 @@ public class SalaDAO {
 
 		return null;
 	}
+	
+	public static Sala pretragaNaziv(String naziv) throws Exception {
+		Connection conn = ConnectionManager.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+		String query = "select * from Sala where naziv = ?";
+		pstmt = conn.prepareStatement(query);
+		pstmt.setString(1, naziv);
+		rset = pstmt.executeQuery();
+		if (rset.next()) {
+			int id = rset.getInt(1);
+			String tip = rset.getString(3);
+			ETipProjekcije tipProjekcije;
+			if(tip=="1") {tipProjekcije=ETipProjekcije.dvaD;}
+			else if(tip=="2"){tipProjekcije=ETipProjekcije.triD;}
+			else{tipProjekcije=ETipProjekcije.cetiriD;}
+			String ostaleProjekcije = rset.getString(4);
+				return new Sala(id, naziv, tipProjekcije, ostaleProjekcije);
+			}
+	} finally {
+		try {pstmt.close();} catch (Exception ex) {ex.printStackTrace();}
+		try {rset.close();} catch (Exception ex) {ex.printStackTrace();}
+		try {conn.close();} catch (Exception ex) {ex.printStackTrace();}
+	}
+
+		return null;
+	}
 
 
 }

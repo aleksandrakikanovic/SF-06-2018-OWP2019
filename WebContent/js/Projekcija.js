@@ -1,5 +1,4 @@
 $(document).ready(function() {
-	
 	$('#logout').on('click', function(event) {
 		$.get('LogoutServlet', function(data) {
 			if (data.status == 'unauthenticated') {
@@ -7,33 +6,29 @@ $(document).ready(function() {
 				return;
 			}
 		});
-	
+		
 		event.preventDefault();
 		return false;
 	});
-	var tabela = $('#tabelaFilm');
-		$.get('PrikaziFilmServlet', function(data) {
-			var izabraniFilm = data.izabraniFilm;
+	
+	var tabela = $('#tabelaProjekcija');
+		$.get('PrikaziProjekcijuServlet', function(data) {
+			var izabranaProjekcija = data.izabranaProjekcija;
 			tabela.append(
 					'<tr>' +
-						'<td>' + izabraniFilm.id + '</td>' + 
-						'<td>' +  izabraniFilm.naziv + '</td>' + 
-						'<td>' +  izabraniFilm.reziser + '</td>' + 
-						'<td>'  +  izabraniFilm.glumci + '</td>' + 
-						'<td>' +  izabraniFilm.zanr + '</td>' + 
-						'<td>' +  izabraniFilm.trajanje + '</td>' + 
-						'<td>' +  izabraniFilm.distributer + '</td>' + 
-						'<td>' +  izabraniFilm.zemljaPorekla + '</td>' + 
-						'<td>' + izabraniFilm.godinaProizvodnje + '</td>' + 
-						'<td>' + izabraniFilm.opis + '</td>' + 
-						'<td>' + 
+					'<td>' + izabranaProjekcija + '</td>' + 
+					//'<td>' + izabranaProjekcija.tipProjekcije + '</td>' + 
+					//'<td>' + izabranaProjekcija.sala.naziv + '</td>' + 
+					//'<td>' + izabranaProjekcija.datumVreme + '</td>' + 
+					//'<td>' + izabranaProjekcija.cenaKarte + '</td>' +
+					'<td>' +
 							'<form>' + 
-							'<button type="button" class="btn btn-warning" id="izmeniFilm">Izmeni</button>' +
+							'<button type="button" class="btn btn-warning" id="izmeniProjekciju">Izmeni</button>' +
 							'</form>' + 
 						'</td>' + 
 						'<td>' + 
 						'<form>' + 
-						'<button type="button" class="btn btn-warning" id="izbrisiFilm">Izbrisi</button>' +
+						'<button type="button" class="btn btn-warning" id="izbrisiProjekciju">Izbrisi</button>' +
 						'</form>' + 
 					'</td>' + 
 					'</tr>' 
@@ -60,12 +55,12 @@ $(document).ready(function() {
 			}
 		});
 		
-		$('#filmoviTable').on('click', '#izbrisiFilm', function(){
+		$('#tabelaProjekcija').on('click', '#izbrisiProjekciju', function(){
 			$(this).closest ('tr').remove ();
 			params = {
-					'id':izabraniFilm.id
+					'id':izabranaProjekcija.id
 					};
-			$.get('DodajFilmServlet', params, function(data) {
+			$.get('DodajProjekcijuServlet', params, function(data) {
 				
 			});
 		});

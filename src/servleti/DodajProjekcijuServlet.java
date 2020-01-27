@@ -30,7 +30,7 @@ public class DodajProjekcijuServlet extends HttpServlet {
 			Map<String, Object> data = new LinkedHashMap<>();
 			request.setAttribute("data", data);
 			if(!(ulogovanKorisnik==null)) {
-				data.put("ulogaKorisnika", ulogovanKorisnik.getUloga());
+				data.put("ulogaKorisnika", ulogovanKorisnik.getUloga().toString());
 			}else {
 				data.put("ulogaKorisnika", "neregistrovan");
 
@@ -45,18 +45,14 @@ public class DodajProjekcijuServlet extends HttpServlet {
 		try {
 			Korisnik ulogovanKorisnik = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
 			String f= request.getParameter("film");
-			System.out.println(f);
 			Film film = FilmDAO.get(f);
 			String tip = request.getParameter("tipProjekcije");
 			ETipProjekcije tipProjekcije = ETipProjekcije.valueOf(tip);
 			String s = request.getParameter("sala");
 			Sala sala = SalaDAO.get(s);
-			String d = (request.getParameter("datumVreme")); 
-			SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
-		    java.util.Date date =  (java.util.Date) sdf1.parse(d);
-		    java.sql.Date datumVreme = new java.sql.Date(date.getTime());  
-		    System.out.println(datumVreme);
-
+			long d = System.currentTimeMillis(); 
+	        java.sql.Date datum = new java.sql.Date(d);
+			String vreme = request.getParameter("vreme");
 			double cenaKarte = Double.parseDouble(request.getParameter("cenaKarte"));
 				if(film.equals("")) {
 					throw new Exception("Izaberite naziv filma!");
@@ -64,17 +60,17 @@ public class DodajProjekcijuServlet extends HttpServlet {
 					throw new Exception("Izaberite tip projekcije!");
 				}if(sala.equals("")) {
 					throw new Exception("Izaberite salu!");
-				}if(datumVreme==null) {
-					throw new Exception("Pogresan format datuma!");
 				}if(cenaKarte<0) {
 					throw new Exception("Cena karte mora biti veca od 0!");
 				}
-				Projekcija projekcija = new Projekcija(film, tipProjekcije, sala, datumVreme, cenaKarte, ulogovanKorisnik);
+				Projekcija projekcija = new Projekcija(film, tipProjekcije, sala, datum, vreme, cenaKarte, ulogovanKorisnik);
 				ProjekcijaDAO.add(projekcija);
 				Map<String, Object> data = new LinkedHashMap<>();
 				request.setAttribute("data", data);
 				if(!(ulogovanKorisnik==null)) {
 					data.put("ulogaKorisnika", ulogovanKorisnik.getUloga());
+				}else {
+					data.put("ulogaKorisnika", "neregistrovan");
 				}
 			} catch (Exception e) { 
 			e.printStackTrace(); }

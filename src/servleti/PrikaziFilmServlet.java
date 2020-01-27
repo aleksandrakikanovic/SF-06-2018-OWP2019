@@ -22,11 +22,10 @@ public class PrikaziFilmServlet extends HttpServlet {
 			Map<String, Object> data = new LinkedHashMap<>();
 			request.setAttribute("data", data);
 			if(!(ulogovanKorisnik==null)) {
-				data.put("ulogaKorisnika", ulogovanKorisnik.getUloga());
+				data.put("ulogaKorisnika", ulogovanKorisnik.getUloga().toString());
 			}else {
 				data.put("ulogaKorisnika", "neregistrovan");
 			}
-			//int id =Integer.parseInt(request.getParameter("id"));
 			String naziv = request.getParameter("naziv");
 			String reziser = request.getParameter("reziser");
 			String glumci = request.getParameter("glumci"); 

@@ -14,13 +14,12 @@ import bioskop.dao.ConnectionManager;
 
 public class KorisnikDAO {
 	
-	
 	public static Korisnik get(String korisnickoIme) throws Exception {
 		Connection conn = ConnectionManager.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
-		String query = "select * from Korisnik where korisnickoIme = ?";
+		String query = "select * from Korisnik where korisnickoIme = ? and deleted='no'";
 		pstmt = conn.prepareStatement(query);
 		int index=1;
 		pstmt.setString(index++, korisnickoIme);
@@ -50,7 +49,7 @@ public class KorisnikDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
-			String query = "select * from Korisnik";
+			String query = "select * from Korisnik where deleted='no'";
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();
 			String korisnickoIme = rset.getString(1);
@@ -84,15 +83,15 @@ public class KorisnikDAO {
 
 		try {
 			
-			String query = "insert into Korisnik (korisnickoIme, lozinka, datumRegistracije,uloga) values (?, ?, ?, ?)";
+			String query = "insert into Korisnik (korisnickoIme, lozinka, datumRegistracije,uloga, deleted) values (?, ?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(query);
 			int index = 1;
-			 long millis=System.currentTimeMillis();  
-		     java.sql.Date date = new java.sql.Date(millis);
 			pstmt.setString(index++, korisnik.getKorisnickoIme());
 			pstmt.setString(index++, korisnik.getLozinka());
 			pstmt.setDate(index++, korisnik.getDatumRegistracije());
 			pstmt.setString(index++, korisnik.getUloga().toString());
+			pstmt.setString(index++, "no");
+
 			return pstmt.executeUpdate() == 1;
 		} finally {
 			try {pstmt.close();} catch (Exception ex) {ex.printStackTrace();}
@@ -122,7 +121,7 @@ public class KorisnikDAO {
 		Connection conn = ConnectionManager.getConnection();
 		PreparedStatement pstmt = null;
 		try {
-			String query = "delete from Korisnik where korisnickoIme = ?";
+			String query = "update Korisnik set deleted='yes' where korisnickoIme = ?";
 			int index=1;
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(index++, korisnickoIme);

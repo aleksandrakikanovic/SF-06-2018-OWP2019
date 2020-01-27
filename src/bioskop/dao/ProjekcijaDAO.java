@@ -20,7 +20,7 @@ public class ProjekcijaDAO {
 		Connection conn = ConnectionManager.getConnection();
 		PreparedStatement pstmt = null;
 		try {
-			String query = "insert into Projekcija (filmId, tipProjekcije ,salaId, datumVreme,cenaKarte,admin)"
+			String query = "insert into Projekcija (filmId, tipProjekcije ,salaId, datum, vreme, cenaKarte,admin)"
 					+ " values (?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(query);
 			int index = 1;
@@ -28,6 +28,7 @@ public class ProjekcijaDAO {
 			pstmt.setString(index++, projekcija.getTipProjekcije().toString());
 			pstmt.setInt(index++, projekcija.getSala().getId());
 			pstmt.setDate(index++, projekcija.getDatum());
+			pstmt.setString(index++, projekcija.getVreme());
 			pstmt.setDouble(index++, projekcija.getCenaKarte());
 			pstmt.setString(index++, "a");
 
@@ -45,7 +46,7 @@ public class ProjekcijaDAO {
 		ResultSet rset = null;
 		try {
 
-			String query = "select * from Projekcija";
+			String query = "select * from Projekcija order by datumVreme";
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();
 			int id = rset.getInt(1);
@@ -55,12 +56,9 @@ public class ProjekcijaDAO {
 			ETipProjekcije tipProjekcije = ETipProjekcije.valueOf(t);
 			String s = rset.getString(4);
 			Sala sala = SalaDAO.get(s);
-//			String d = rset.getString(5);
-//			SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
-//		    java.util.Date date =  (java.util.Date) sdf1.parse(d);
-//		    java.sql.Date datumVreme = new java.sql.Date(date.getTime());  
 			long millis=rset.getLong(5);
-		    Date datumVreme = new Date(millis);
+			String vreme = rset.getString(6);
+		    Date datum = new Date(millis);
 			double cenaKarte = rset.getInt(6);
 			String a = rset.getString(7);
 			Korisnik admin = KorisnikDAO.get(a);
@@ -72,15 +70,14 @@ public class ProjekcijaDAO {
 				 s = rset.getString(index++);
 				 //d = rset.getString(index++);
 				 millis=rset.getLong(index++);
+				 vreme = rset.getString(index++);
 				 cenaKarte = rset.getInt(index++);
 				 a = rset.getString(index++);
 				 admin=KorisnikDAO.get(a);
 				 film = FilmDAO.get(f);
 				 tipProjekcije = ETipProjekcije.valueOf(t);
-				  datumVreme = new Date(millis);
-				 //date =  (java.util.Date) sdf1.parse(d);
-				 //datumVreme = new java.sql.Date(date.getTime());
-				 Projekcija projekcija = new Projekcija(id, film, tipProjekcije, sala, datumVreme, cenaKarte, admin);
+				 datum = new Date(millis);
+				 Projekcija projekcija = new Projekcija(id, film, tipProjekcije, sala, datum, vreme, cenaKarte, admin);
 				 sveProjekcije.add(projekcija);
 			}
 

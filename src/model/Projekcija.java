@@ -2,6 +2,8 @@ package model;
 
 import java.sql.Date;
 
+import org.apache.tomcat.jni.Time;
+
 public class Projekcija {
 	
 	public enum ETipProjekcije{	dvaD, triD, cetiriD}
@@ -10,31 +12,35 @@ public class Projekcija {
 	private Film film;
 	private ETipProjekcije tipProjekcije;
 	private Sala sala;
-	private Date datumVreme;
+	private Date datum;
+	private String vreme;
 	private double cenaKarte;
 	private Korisnik admin;
 	
-	public Projekcija(int id, Film film, ETipProjekcije tipProjekcije, Sala sala, Date datumVreme,
+	public Projekcija(int id, Film film, ETipProjekcije tipProjekcije, Sala sala, Date datum, String vreme,
 			double cenaKarte, Korisnik admin) {
 		super();
 		this.id = id;
 		this.film = film;
 		this.tipProjekcije = tipProjekcije;
 		this.sala = sala;
-		this.datumVreme = datumVreme;
+		this.datum = datum;
+		this.vreme = vreme;
 		this.cenaKarte = cenaKarte;
 		this.admin = admin;
 	}
-	public Projekcija( Film film, ETipProjekcije tipProjekcije, Sala sala, Date datumVreme,
+	public Projekcija( Film film, ETipProjekcije tipProjekcije, Sala sala, Date datum, String vreme,
 			double cenaKarte, Korisnik admin) {
 		super();
 		this.film = film;
 		this.tipProjekcije = tipProjekcije;
 		this.sala = sala;
-		this.datumVreme = datumVreme;
+		this.datum = datum;
+		this.vreme = vreme;
 		this.cenaKarte = cenaKarte;
 		this.admin = admin;
 	}
+
 
 
 	public int getId() {
@@ -63,16 +69,19 @@ public class Projekcija {
 	public void setSala(Sala sala) {
 		this.sala = sala;
 	}
-
+	
 	public Date getDatum() {
-		return datumVreme;
+		return datum;
 	}
-
 	public void setDatum(Date datum) {
-		this.datumVreme = datum;
+		this.datum = datum;
 	}
-
-
+	public String getVreme() {
+		return vreme;
+	}
+	public void setVreme(String vreme) {
+		this.vreme = vreme;
+	}
 	public double getCenaKarte() {
 		return cenaKarte;
 	}

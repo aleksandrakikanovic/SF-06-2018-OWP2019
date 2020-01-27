@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
 				request.getRequestDispatcher("./FailureServlet").forward(request, response);
 				return;
 			}else {
-				data.put("ulogaKorisnika", "neregistrovan");
+				data.put("ulogaKorisnika",korisnik.getUloga().toString());
 			}			
 			request.setAttribute("data", data);
 			request.getSession().setAttribute("ulogovanKorisnik", korisnik);
