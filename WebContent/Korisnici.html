@@ -52,10 +52,24 @@
         <table class="table table-hover table-dark" id="korisniciTable" style="cursor: pointer;">
             <thead>
               <tr>
-                <th scope="col">Korisnicko ime </th>
+                <th scope="col">
+                	 <select name="" id="sortKorImeCombobox" class="combobox1">
+			             <option value="">Korisnicko ime</option>
+			             <option value="sortAsc">A-Z</option>
+			             <option value="sortDesc">Z-A</option>
+		              </select>      
+                 </th>
                 <th scope="col">Lozinka</th>
                 <th scope="col">Datum registracije</th>
-                <th scope="col">Uloga </th>
+                <th scope="col">
+                    <select name="" id="sortUlogaCombobox" class="combobox1">
+			             <option value="">Uloga</option>
+			             <option value="KORISNIK">Korisnik</option>
+			             <option value="ADMIN">Admin</option>
+		              </select>      
+                
+                 </th>
+                 
                 <th scope="col"></th>
               </tr>
             </thead>

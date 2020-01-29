@@ -147,4 +147,14 @@
     <servlet-name>PrikaziProjekcijuServlet</servlet-name>
     <url-pattern>/PrikaziProjekcijuServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>IzvestajServlet</display-name>
+    <servlet-name>IzvestajServlet</servlet-name>
+    <servlet-class>servleti.IzvestajServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>IzvestajServlet</servlet-name>
+    <url-pattern>/IzvestajServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import bioskop.dao.FilmDAO;
 import bioskop.dao.KorisnikDAO;
 import bioskop.dao.SalaDAO;
+import bioskop.dao.SedisteDAO;
 import model.Film;
 import model.Korisnik;
 import model.Projekcija;
@@ -41,19 +42,22 @@ public class PrikaziProjekcijuServlet extends HttpServlet {
 			long d = Long.parseLong((request.getParameter("datumVreme"))); 
 	        java.sql.Date datum = new java.sql.Date(d);
 		    Korisnik admin = KorisnikDAO.get("aleksandra");
-		Projekcija izabranaProjekcija = new Projekcija(film, tipProjekcije, sala, datum, vreme, cenaKarte, admin);
-		Map<String, Object> data = new LinkedHashMap<>();
-		request.setAttribute("data", data);
-		data.put("izabranaProjekcija", izabranaProjekcija);
-		if(!(ulogovanKorisnik==null)) {
-			data.put("ulogaKorisnika", ulogovanKorisnik.getUloga().toString());
-		}else {
-			data.put("ulogaKorisnika", "neregistrovan");
-		}
+		    Projekcija izabranaProjekcija = new Projekcija(film, tipProjekcije, sala, datum, vreme, cenaKarte, admin);
+		    int brojSedista  = SedisteDAO.get(izabranaProjekcija);
+			Map<String, Object> data = new LinkedHashMap<>();
+			request.setAttribute("data", data);
+			data.put("brojSedista", brojSedista);
 
-		request.getRequestDispatcher("./SuccessServlet").forward(request, response);
-	} catch (Exception e) {
-		e.printStackTrace();
+			data.put("izabranaProjekcija", izabranaProjekcija);
+			if(!(ulogovanKorisnik==null)) {
+				data.put("ulogaKorisnika", ulogovanKorisnik.getUloga().toString());
+			}else {
+				data.put("ulogaKorisnika", "neregistrovan");
+			}
+
+			request.getRequestDispatcher("./SuccessServlet").forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
 	}
 }	
 	

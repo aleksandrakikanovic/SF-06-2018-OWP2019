@@ -41,17 +41,12 @@ $(document).ready(function() {
 			for (projekcija in sveProjekcije) {
 				projekcijeTable.append(
 					'<tr>' +
-						'<td>' + sveProjekcije[projekcija].film.naziv + '</td>' + 
+					'<td><a href="Film.html?id=' + sveProjekcije[projekcija].film.id + '">' + sveProjekcije[projekcija].film.naziv + '</a></td>' + 
 						'<td>' + sveProjekcije[projekcija].tipProjekcije + '</td>' + 
 						'<td>' + sveProjekcije[projekcija].sala.naziv + '</td>' + 
 						'<td>' + sveProjekcije[projekcija].datum + '</td>' + 
 						'<td>' + sveProjekcije[projekcija].vreme + '</td>' + 
 						'<td>' + sveProjekcije[projekcija].cenaKarte + '</td>' + 
-						'<td>' + 
-						'<form>' + 
-						'<button type="button" class="btn btn-danger" id="prikaziProjekciju">Prikazi</button>' +
-						'</form>' + 
-						'</td>' + 
 					'</tr>')}
 			})};
 	$('#projekcijeTable').on('click', '#prikaziProjekciju', function(){
@@ -78,7 +73,19 @@ $(document).ready(function() {
 
 			});
 	});
+	var filmCmb = $('#izaberiFilm');
+	function getFilmovi(){
+		$.get('SviFilmoviServlet', function(data) {
+			var sviFilmovi = data.sviFilmovi;
+			for (film in sviFilmovi) {
+				filmCmb.append(
+					'<option value="'+sviFilmovi[film].id+ '">' + sviFilmovi[film].naziv+ '</option>'
+				
+				)}
+			})};	
+
 
 getProjekcije();
+getFilmovi();
 	
 });

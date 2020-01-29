@@ -14,13 +14,16 @@ $(document).ready(function() {
 	var tabela = $('#tabelaProjekcija');
 		$.get('PrikaziProjekcijuServlet', function(data) {
 			var izabranaProjekcija = data.izabranaProjekcija;
+			var brojSedista = data.brojSedista;
+			alert(brojSedista);
 			tabela.append(
 					'<tr>' +
-					'<td>' + izabranaProjekcija + '</td>' + 
-					//'<td>' + izabranaProjekcija.tipProjekcije + '</td>' + 
-					//'<td>' + izabranaProjekcija.sala.naziv + '</td>' + 
-					//'<td>' + izabranaProjekcija.datumVreme + '</td>' + 
-					//'<td>' + izabranaProjekcija.cenaKarte + '</td>' +
+					'<td>' + izabranaProjekcija.film.naziv + '</td>' + 
+					'<td>' + izabranaProjekcija.tipProjekcije + '</td>' + 
+					'<td>' + izabranaProjekcija.sala.naziv + '</td>' + 
+					'<td>' + izabranaProjekcija.datumVreme + '</td>' + 
+					'<td>' + izabranaProjekcija.cenaKarte + '</td>' +
+					'<td>' + brojSedista + '</td>' +
 					'<td>' +
 							'<form>' + 
 							'<button type="button" class="btn btn-warning" id="izmeniProjekciju">Izmeni</button>' +

@@ -20,10 +20,11 @@ public class ProjekcijaDAO {
 		Connection conn = ConnectionManager.getConnection();
 		PreparedStatement pstmt = null;
 		try {
-			String query = "insert into Projekcija (filmId, tipProjekcije ,salaId, datum, vreme, cenaKarte,admin)"
-					+ " values (?,?,?,?,?,?)";
+			String query = "insert into Projekcija (filmId, tipProjekcije ,salaId, datum, vreme, cenaKarte,admin, deleted)"
+					+ " values (?,?,?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(query);
 			int index = 1;
+			String deleted = "no";
 			pstmt.setInt(index++, projekcija.getFilm().getId());
 			pstmt.setString(index++, projekcija.getTipProjekcije().toString());
 			pstmt.setInt(index++, projekcija.getSala().getId());
@@ -31,6 +32,7 @@ public class ProjekcijaDAO {
 			pstmt.setString(index++, projekcija.getVreme());
 			pstmt.setDouble(index++, projekcija.getCenaKarte());
 			pstmt.setString(index++, "a");
+			pstmt.setString(index++, deleted);
 
 			return pstmt.executeUpdate() == 1;
 		} finally {
@@ -46,7 +48,7 @@ public class ProjekcijaDAO {
 		ResultSet rset = null;
 		try {
 
-			String query = "select * from Projekcija order by datumVreme";
+			String query = "select * from Projekcija";
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();
 			int id = rset.getInt(1);

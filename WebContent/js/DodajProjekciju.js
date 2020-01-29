@@ -41,24 +41,23 @@ $('#logout').on('click', function(event) {
 var izaberiFilm = $('#izaberiFilm');
 var izaberiTipProjekcije = $('#izaberiTipProjekcije');
 var izaberiSalu =  $('#izaberiSalu');
-var datumVremeInput =  $('#datumVremeInput');
+var datumInput =  $('#datumInput');
+var vremeInput =  $('#vremeInput');
+
 var cenaKarteInput =  $('#cenaKarteInput');
 $('#dodajProjekcijuButton').on('click', function(event) {
     var film = izaberiFilm.val();
     var tipProjekcije = izaberiTipProjekcije.val(); 
     var sala = izaberiSalu.val(); 
-    var datumVreme = datumVremeInput.val(); 
+    var datum = datumInput.val(); 
+    var vreme = vremeInput.val(); 
     var cenaKarte = cenaKarteInput.val();
-    if (film == null || tipProjekcije == null || sala == null || datumVreme == null
-        || cenaKarte == null) {
-        alert("Popunite sva polja!");
-        return false;
-    }
     params = {
         'film': film, 
         'tipProjekcije': tipProjekcije,
         'sala': sala, 
-        'datumVreme': datumVreme, 
+        'datum': datum, 
+        'vreme':vreme,
         'cenaKarte': cenaKarte, 
     };
     $.post('DodajProjekcijuServlet', params, function(data) {

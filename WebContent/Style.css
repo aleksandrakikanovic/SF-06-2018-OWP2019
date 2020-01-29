@@ -71,9 +71,13 @@ h3{
     text-align: center;
     color: black;
 }
+
 .combobox{
     background-color:silver;
     width: 290px;
     height: 40px;
 }
+
 #izaberiTipProjekcije{ width: 230px; }
+
+

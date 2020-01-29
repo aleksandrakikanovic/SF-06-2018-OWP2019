@@ -16,6 +16,9 @@ public class Projekcija {
 	private String vreme;
 	private double cenaKarte;
 	private Korisnik admin;
+	int brojProjekcija;
+	int brojKarata;
+	double ukupnaCenaKarata;
 	
 	public Projekcija(int id, Film film, ETipProjekcije tipProjekcije, Sala sala, Date datum, String vreme,
 			double cenaKarte, Korisnik admin) {
@@ -40,8 +43,13 @@ public class Projekcija {
 		this.cenaKarte = cenaKarte;
 		this.admin = admin;
 	}
-
-
+	public Projekcija( Film film, int brojProjekcija, int brojKarata, double ukupnaCenaKarata) {
+		super();
+		this.film = film;
+		this.brojProjekcija = brojProjekcija;
+		this.brojKarata = brojKarata;
+		this.ukupnaCenaKarata = ukupnaCenaKarata;
+	}
 
 	public int getId() {
 		return id;
@@ -97,7 +105,24 @@ public class Projekcija {
 	public void setAdmin(Korisnik admin) {
 		this.admin = admin;
 	}
-	
+	public int getBrojProjekcija() {
+		return brojProjekcija;
+	}
+	public void setBrojProjekcija(int brojProjekcija) {
+		this.brojProjekcija = brojProjekcija;
+	}
+	public int getBrojKarata() {
+		return brojKarata;
+	}
+	public void setBrojKarata(int brojKarata) {
+		this.brojKarata = brojKarata;
+	}
+	public double getUkupnaCenaKarata() {
+		return ukupnaCenaKarata;
+	}
+	public void setUkupnaCenaKarata(double ukupnaCenaKarata) {
+		this.ukupnaCenaKarata = ukupnaCenaKarata;
+	}
 	
 	
 	

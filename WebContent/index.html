@@ -39,11 +39,14 @@
                     </li> 
                     <li class="nav-item">
                         <a class="nav-link" href="Korisnik.html" id="profilKorisnika">Moj profil</a>
-                    </li>  
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="Izvestaj.html" id="izvestaj">Izvestaj</a>
+                    </li> 
                      <li class="nav-item">
                         <a class="nav-link" href="" id="logout">Odjava</a>
                     </li> 
-                             
+    
                 	</ul>
                     <form class="form-inline active-cyan-4">
                         <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Unesi ime filma" aria-label="Search">
@@ -67,14 +70,54 @@
           	<div class="col-md-10 mb-10">
 
 	          <table class="table table-hover table-dark" id="projekcijeTable" style="cursor: pointer;">
+	          <tr>                     
+                 <select name="Film" id="izaberiFilm" class="combobox">
+                   <option value="">Film</option>
+                    </select>
+                
+	          	<select name="" id="salaCombobox" class="combobox">
+                    <option value="">Sala</option>
+                    <option value="1">Prva sala</option>
+                    <option value="2">Druga sala</option>
+                    <option value="3">Treca sala</option>
+                    <option value="4">Cetvrta sala</option>
+                    <option value="5">Peta sala</option>
+                    </select>
+               	  <select name="" id="tipProjekcijeCombobox" class="combobox">
+                    <option value="">Tip projekcije</option>
+                    <option value="dvaD">2D</option>
+                    <option value="triD">3D</option>
+                    <option value="cetiriD">4D</option>
+                    </select>  
+                <button class="btn btn-sm" type="submit" id="filtrirajProjekcijuButton">Pretrazi</button>
+	           </tr>
 					<tr>
-	          			 <th scope="col">Film</th>
+	          			 <th scope="col">
+	          			 <select name="" id="sortFilmCombobox" class="combobox1">
+			                    <option value="">Film</option>
+			                    <option value="sortAsc">A-Z</option>
+			                    <option value="sortDesc">Z-A</option>
+		                    </select>      
+	          			 </th>
 	                     <th scope="col">Tip projekcije</th>
-	                     <th scope="col">Sala</th>
+	                     <th scope="col">
+	                     	<select name="" id="sortSalaCombobox" class="combobox1">
+			                    <option value="">Sala</option>
+			                    <option value="sortAsc">A-Z</option>
+			                    <option value="sortDesc">Z-A</option>
+		                    </select>      
+	                    
+	                     </th>
 	                     <th scope="col">Datum</th>
 	                     <th scope="col">Vreme</th>
-	                     <th scope="col">Cena karte</th>
-	                     <th scope="col">Prikaz</th>
+	                     <th scope="col"> 
+	                     	<select name="" id="sortCenaCombobox" class="combobox1">
+			                    <option value="">Cena</option>
+			                    <option value="sortAsc">Rastuca cena</option>
+			                    <option value="sortDesc">Opadajuca cena</option>
+		                    </select>                   
+                		</th>
+	                     
 	                     
 	          		</tr>
 	   			</table>

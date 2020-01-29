@@ -32,8 +32,12 @@ public class PrikaziKorisnikaServlet extends HttpServlet {
 			}
 			String korisnickoIme = request.getParameter("korisnickoIme");
 			String lozinka = request.getParameter("lozinka");
-			Date datumRegistracije = null;
-			Korisnik izabraniKorisnik = new Korisnik(korisnickoIme, lozinka, datumRegistracije, Uloga.KORISNIK);
+			String d = request.getParameter("datumRegistracije");
+			long datum = Long.parseLong(d);
+			String u = request.getParameter("uloga");
+			Uloga uloga = Uloga.valueOf(u);
+			Date datumRegistracije = new Date(datum);
+			Korisnik izabraniKorisnik = new Korisnik(korisnickoIme, lozinka, datumRegistracije, uloga);
 			data.put("izabraniKorisnik", izabraniKorisnik);
 			request.setAttribute("data", data);
 			request.getRequestDispatcher("./SuccessServlet").forward(request, response);
