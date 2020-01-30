@@ -24,16 +24,8 @@ public class SviFilmoviServlet extends HttpServlet {
 		try {
 			Korisnik ulogovanKorisnik = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
 			List<Film> sviFilmovi = FilmDAO.getAllZaAdmina();
-			List<Projekcija> izvestaj = new ArrayList<>();
-
-			for(Film f : sviFilmovi) {
-				Projekcija p = IzvestajDAO.getIzvestaj(f.getId());
-				izvestaj.add(p);
-			}
 			Map<String, Object> data = new LinkedHashMap<>();
 			data.put("sviFilmovi", sviFilmovi);
-			data.put("izvestaj", izvestaj);
-
 			request.setAttribute("data", data);
 			if(!(ulogovanKorisnik==null)) {
 				data.put("ulogaKorisnika", ulogovanKorisnik.getUloga().toString());

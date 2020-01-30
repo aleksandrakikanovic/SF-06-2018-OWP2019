@@ -14,36 +14,18 @@ $(document).ready(function() {
 	});
 	
 	
-	var izvestaj = $('#izvestajTable');
+	var izvestajTable = $('#izvestajTable');
 	function getIzvestaj(){
 		$.get('SveProjekcijeServlet', function(data) {
-			if (data.ulogaKorisnika == "neregistrovan") {
-				$('#prikaziKorisnike').hide();
-				$('#profilKorisnika').hide();
-				$('#registracija').show();
-				$('#logout').hide();
-				$('#login').show();
-			}else if(data.ulogaKorisnika=="ADMIN"){
-				$('#prikaziKorisnike').show();
-				$('#profilKorisnika').show();
-				$('#registracija').hide();
-				$('#logout').show();
-				$('#login').hide();
-			}else if(data.ulogaKorisnika=="KORISNIK"){
-				$('#prikaziKorisnike').hide();
-				$('#profilKorisnika').show();
-				$('#registracija').hide();
-				$('#logout').show();
-				$('#login').hide();
-
-			}var izvestaj = data.izvestaj;
-			for (p in izvestaj) {
-				izvestaj.append(
+			var izvestaj = data.izvestaj;
+			for (projekcija in izvestaj) {
+				alert(projekcija.brojKarata);
+				izvestajTable.append(
 					'<tr>' +
-					'<td><a href="Film.html?id=' + izvestaj[p].film.id + '">' + izvestaj[p].film.naziv + '</a></td>' + 
-						'<td>' + izvestaj[p].brojProjekcija + '</td>' + 
-						'<td>' + izvestaj[p].brojKarata + '</td>' + 
-						'<td>' + izvestaj[p].ukupnaCenaKarata + '</td>' + 
+					'<td><a href="Film.html?id=' + izvestaj[projekcija].film.id + '">' + izvestaj[projekcija].film.naziv + '</a></td>' + 
+						'<td>' + izvestaj[projekcija].brojProjekcija + '</td>' + 
+						'<td>' + izvestaj[projekcija].brojKarata + '</td>' + 
+						'<td>' + izvestaj[projekcija].ukupnaCenaKarata + '</td>' + 
 					'</tr>')}
 		})};
 	getIzvestaj();		

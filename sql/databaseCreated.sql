@@ -120,10 +120,10 @@ CREATE TABLE Karta(
     idSediste int not null,
     datumVremeProdaje smalldatetime not null,
     imeKorisnika varchar(30) not null, 
+     deleted varchar(3) default 'no',
    	FOREIGN KEY(projekcijaId) REFERENCES Projekcija(id) ON DELETE RESTRICT,
-	FOREIGN KEY(idSediste) REFERENCES Sediste(redniBroj) ON DELETE RESTRICT, 
-	FOREIGN KEY(imeKorisnika) REFERENCES Korisnik(korisnickoIme) ON DELETE RESTRICT,
-	    deleted varchar(3) default 'no'
+	FOREIGN KEY(idSediste) REFERENCES Sediste(id) ON DELETE RESTRICT, 
+	FOREIGN KEY(imeKorisnika) REFERENCES Korisnik(korisnickoIme) ON DELETE RESTRICT
 )
 	    
 CREATE TABLE Korisnik(

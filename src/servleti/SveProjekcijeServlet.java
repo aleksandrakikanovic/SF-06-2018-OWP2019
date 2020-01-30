@@ -1,6 +1,7 @@
 package servleti;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bioskop.dao.FilmDAO;
+import bioskop.dao.IzvestajDAO;
 import bioskop.dao.ProjekcijaDAO;
 import model.Film;
 import model.Korisnik;
@@ -23,9 +25,15 @@ public class SveProjekcijeServlet extends HttpServlet {
 		try {
 			Korisnik ulogovanKorisnik = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
 			List<Projekcija> sveProjekcije = ProjekcijaDAO.getAll();
-			//sveProjekcije.sort(null);
 			Map<String, Object> data = new LinkedHashMap<>();
 			data.put("sveProjekcije", sveProjekcije);
+			List<Projekcija> izvestaj  = new ArrayList<>();
+			for(Projekcija p : sveProjekcije) {
+				Projekcija projekcijaIz = IzvestajDAO.getIzvestaj(p.getFilm().getId());
+				izvestaj.add(projekcijaIz);
+			}
+			data.put("izvestaj", izvestaj);
+
 			request.setAttribute("data", data);
 			if(!(ulogovanKorisnik==null)) {
 				data.put("ulogaKorisnika", ulogovanKorisnik.getUloga().toString());

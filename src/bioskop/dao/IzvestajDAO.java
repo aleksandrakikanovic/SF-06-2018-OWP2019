@@ -12,35 +12,32 @@ import model.Projekcija;
 public class IzvestajDAO {
 	
 	public static Projekcija getIzvestaj(int idF) throws Exception {
-
+		List<Projekcija> izvestajLista = new ArrayList<>();
 		Connection conn = ConnectionManager.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
-		String query = "select filmId, count(filmId), count(Karta.id), sum(cenaKarte) from Projekcija, Karta where filmId = ? and"
-		+ " Projekcija.id=Karta.projekcijaId";
-		pstmt = conn.prepareStatement(query);
-		pstmt.setInt(1, idF);
-		rset = pstmt.executeQuery();
-		
-		if (rset.next()) {
-			int filmId = rset.getInt(1);
-			String f = Integer.toString(filmId);
+			String query = "select count(film.Id), count(Karta.id), sum(cenaKarte)"
+					+ " from Projekcija, Karta, Film where Projekcija.filmId=? and Projekcija.id=Karta.projekcijaId and Projekcija.filmId=Film.id";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, idF);
+			rset = pstmt.executeQuery();
+			String f = Integer.toString(idF);
 			Film film = FilmDAO.get(f);
-			int brojProjekcija = rset.getInt(2);
-			int brojKarata = rset.getInt(3);
-			double ukupnaCenaKarata = rset.getDouble(4);
-			Projekcija p = new Projekcija(film, brojProjekcija, brojKarata, ukupnaCenaKarata);
-			return p;
+			if (rset.next()) {
+				int brojProjekcija = rset.getInt(1);
+				int brojKarata = rset.getInt(2);
+				double ukupnaCenaKarata = rset.getDouble(3);
+				return new Projekcija(film, brojProjekcija, brojKarata, ukupnaCenaKarata);
+				
 			}
-	} finally {
-		try {pstmt.close();} catch (Exception ex) {ex.printStackTrace();}
-		try {rset.close();} catch (Exception ex) {ex.printStackTrace();}
-		try {conn.close();} catch (Exception ex) {ex.printStackTrace();}
-	}
 
+		} finally {
+			try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}
+			try {rset.close();} catch (Exception ex1) {ex1.printStackTrace();}
+			try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();} 
+		}
+		
 		return null;
 	}
-	
-
 }
