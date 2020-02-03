@@ -41,7 +41,7 @@ $(document).ready(function() {
 			for (projekcija in sveProjekcije) {
 				projekcijeTable.append(
 					'<tr>' +
-					'<td><a href="Film.html?id=' + sveProjekcije[projekcija].film.id + '">' + sveProjekcije[projekcija].film.naziv + '</a></td>' + 
+					'<td><a href="Projekcija.html?id=' + sveProjekcije[projekcija].id + '">' + sveProjekcije[projekcija].film.naziv + '</a></td>' + 
 						'<td>' + sveProjekcije[projekcija].tipProjekcije + '</td>' + 
 						'<td>' + sveProjekcije[projekcija].sala.naziv + '</td>' + 
 						'<td>' + sveProjekcije[projekcija].datum + '</td>' + 
@@ -49,7 +49,7 @@ $(document).ready(function() {
 						'<td>' + sveProjekcije[projekcija].cenaKarte + '</td>' + 
 					'</tr>')}
 			})};
-	$('#projekcijeTable').on('click', '#prikaziProjekciju', function(){
+	/*$('#projekcijeTable').on('click', '#prikaziProjekciju', function(){
 		var currentRow=$(this).closest("tr"); 
 		var film = currentRow.find("td:eq(0)").text();
 		var tipProjekcije = currentRow.find("td:eq(1)").text(); 
@@ -72,7 +72,7 @@ $(document).ready(function() {
 				window.location.replace('Projekcija.html');
 
 			});
-	});
+	}); */
 	var filmCmb = $('#izaberiFilm');
 	function getFilmovi(){
 		$.get('SviFilmoviServlet', function(data) {

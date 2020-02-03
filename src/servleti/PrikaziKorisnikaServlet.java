@@ -9,6 +9,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import bioskop.dao.KorisnikDAO;
 import model.Korisnik;
 import model.Korisnik.Uloga;
 
@@ -30,14 +32,8 @@ public class PrikaziKorisnikaServlet extends HttpServlet {
 			}else {
 				data.put("ulogaKorisnika", "neregistrovan");
 			}
-			String korisnickoIme = request.getParameter("korisnickoIme");
-			String lozinka = request.getParameter("lozinka");
-			String d = request.getParameter("datumRegistracije");
-			long datum = Long.parseLong(d);
-			String u = request.getParameter("uloga");
-			Uloga uloga = Uloga.valueOf(u);
-			Date datumRegistracije = new Date(datum);
-			Korisnik izabraniKorisnik = new Korisnik(korisnickoIme, lozinka, datumRegistracije, uloga);
+			String korisnickoIme = request.getParameter("korIme");
+			Korisnik izabraniKorisnik = KorisnikDAO.get(korisnickoIme);
 			data.put("izabraniKorisnik", izabraniKorisnik);
 			request.setAttribute("data", data);
 			request.getRequestDispatcher("./SuccessServlet").forward(request, response);

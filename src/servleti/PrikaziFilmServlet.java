@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bioskop.dao.FilmDAO;
 import model.Film;
 import model.Korisnik;
 
@@ -26,6 +27,11 @@ public class PrikaziFilmServlet extends HttpServlet {
 			}else {
 				data.put("ulogaKorisnika", "neregistrovan");
 			}
+			String id = request.getParameter("id");
+			System.out.println(id);
+			System.out.println("id");
+
+			Film izabraniFilm = FilmDAO.get(id);
 			String naziv = request.getParameter("naziv");
 			String reziser = request.getParameter("reziser");
 			String glumci = request.getParameter("glumci"); 
@@ -37,9 +43,9 @@ public class PrikaziFilmServlet extends HttpServlet {
 			//int godinaProizvodnje = Integer.parseInt(request.getParameter("godinaProizvodnje"));
 			int godinaProizvodnje = 0;
 			String opis = request.getParameter("opis"); 
-			Film izabraniFilm = new Film(naziv, reziser, glumci, zanr, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis);
+			//Film izabraniFilm = new Film(naziv, reziser, glumci, zanr, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis);
 			data.put("izabraniFilm", izabraniFilm);
-			//System.out.println(zanr.trim());
+			
 			request.setAttribute("data", data);
 			request.getRequestDispatcher("./SuccessServlet").forward(request, response);
 		} catch (Exception e) {

@@ -1,6 +1,5 @@
 $(document).ready(function() {
 		$.post('SviFilmoviServlet', function(data) {
-			alert(data.ulogaKorisnika);
 			if (data.ulogaKorisnika == "neregistrovan") {
 				$('#prikaziKorisnike').hide();
 				$('#profilKorisnika').hide();

@@ -16,15 +16,11 @@ $(document).ready(function(){
 			for(korisnik in sviKorisnici){
 				korisniciTable.append(
 				'<tr>' +
-				
-				'<td>' + sviKorisnici[korisnik].korisnickoIme + '</td>' + 
-				'<td>' + sviKorisnici[korisnik].lozinka + '</td>' + 
-				'<td>' + sviKorisnici[korisnik].datumRegistracije + '</td>' + 
-				'<td>' + sviKorisnici[korisnik].uloga + '</td>' + 
-				'<td>' + 
-					'<button type="button" class="btn btn-warning" id="prikaziKorisnika">Prikazi</button>' +
-				'</td>' + 
-			'</tr>')}
+					'<td><a href="Korisnik.html?korIme=' + sviKorisnici[korisnik].korisnickoIme + '">' + sviKorisnici[korisnik].korisnickoIme + '</a></td>' + 
+					'<td>' + sviKorisnici[korisnik].lozinka + '</td>' + 
+					'<td>' + sviKorisnici[korisnik].datumRegistracije + '</td>' + 
+					'<td>' + sviKorisnici[korisnik].uloga + '</td>' + 
+				'</tr>')}
 		});
 	};
 	//brisanje iz tabele, ne iz baze(ispravicu do odbrane)

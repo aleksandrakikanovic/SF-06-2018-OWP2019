@@ -8,21 +8,22 @@ import model.Sediste;
 
 public class SedisteDAO {
 	
-	public static int get(Projekcija projekcija) throws Exception {
+	public static String get(Projekcija projekcija) throws Exception {
 		Connection conn = ConnectionManager.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		int brojSedista = 0;
+		String brojSedista = "";
 		try {
-		String query = "count(*) from Sediste where  where salaId = ? and id not in (select idSediste from Karta where projekcijaId != ?)";
+		String query = "select count(*) from Sediste  where salaId = ? and id not in (select idSediste from Karta where projekcijaId = ?)";
 		pstmt = conn.prepareStatement(query);
+		int index=1;
 		int idSala= projekcija.getSala().getId();
-		pstmt.setInt(1, idSala);
+		pstmt.setInt(index++, idSala);
 		int idProjekcija = projekcija.getId();
-		pstmt.setInt(1, idProjekcija);
+		pstmt.setInt(index++, idProjekcija);
 		rset = pstmt.executeQuery();
 		if (rset.next()) {
-			brojSedista = rset.getInt(1);
+			return brojSedista = rset.getString(1);
 			
 			}
 	} finally {
@@ -33,5 +34,4 @@ public class SedisteDAO {
 
 		return brojSedista;
 	}
-	
 }

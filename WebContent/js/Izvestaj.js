@@ -19,7 +19,6 @@ $(document).ready(function() {
 		$.get('SveProjekcijeServlet', function(data) {
 			var izvestaj = data.izvestaj;
 			for (projekcija in izvestaj) {
-				alert(projekcija.brojKarata);
 				izvestajTable.append(
 					'<tr>' +
 					'<td><a href="Film.html?id=' + izvestaj[projekcija].film.id + '">' + izvestaj[projekcija].film.naziv + '</a></td>' + 

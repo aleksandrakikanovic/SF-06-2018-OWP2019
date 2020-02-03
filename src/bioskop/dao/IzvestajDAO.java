@@ -12,7 +12,6 @@ import model.Projekcija;
 public class IzvestajDAO {
 	
 	public static Projekcija getIzvestaj(int idF) throws Exception {
-		List<Projekcija> izvestajLista = new ArrayList<>();
 		Connection conn = ConnectionManager.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;

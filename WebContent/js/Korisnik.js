@@ -12,27 +12,34 @@ $(document).ready(function() {
 		event.preventDefault();
 		return false;
 	});
+	var korIme = window.location.search.slice(1).split('&')[0].split('=')[1];
+	params={
+			'korIme':korIme
+	};
+
 	var tabela = $('#tabelaKorisnik');
 	function getKorisnik(){
-		$.post('PrikaziKorisnikaServlet', function(data) {
+		$.post('PrikaziKorisnikaServlet',params, function(data) {
 			var korisnik = data.izabraniKorisnik;
 			tabela.append(
-					'<tr>' +
-						'<td>' + korisnik.korisnickoIme + '</td>' + 
-						'<td>' +  korisnik.datumRegistracije + '</td>' + 
-						'<td>'  +  korisnik.uloga + '</td>' + 
-						'<td>' + 
-							'<form>' + 
-							'<button type="button" class="btn btn-warning" id="izmeni">Izmeni</button>' +
-							'</form>' + 
-						'</td>' +
-						'<td>' + 
-							'<form>' + 
-								'<button type="button" class="btn btn-warning" id="izbrisi">Izbrisi</button>' +
-							'</form>' + 
-					'</td>' + 
-
-					'</tr>' 
+						 '<tr>'+
+					      '<th scope="col">Korisnicko ime</th> ' + 	
+							'<td>' + korisnik.korisnickoIme + '</td>' + 
+				    	  '</tr>' +
+						  '<tr>'+
+					      '<th scope="col">Datum registracije</th> ' + 	
+							'<td>' +  korisnik.datumRegistracije + '</td>' + 
+				    	  '</tr>' +
+						  '<tr>'+
+					      '<th scope="col">Uloga</th> ' + 	
+							'<td>' + korisnik.uloga + '</td>' + 
+				    	  '</tr>' +
+						  '<tr>'+
+						  	'<td>'+'</td>'+
+						  	'<td align="center">'+
+							'<button type="button" class="btn btn-warning" id="izmeniKorisnika">Izmeni korisnika</button>' +
+							'</td>'+
+				    	  '</tr>'
 					);
 		});
 	};

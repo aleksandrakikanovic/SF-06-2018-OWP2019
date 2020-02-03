@@ -10,31 +10,47 @@ $(document).ready(function() {
 		event.preventDefault();
 		return false;
 	});
-	
+	var id = window.location.search.slice(1).split('&')[0].split('=')[1];
+	params={'id':id };
 	var tabela = $('#tabelaProjekcija');
-		$.get('PrikaziProjekcijuServlet', function(data) {
-			var izabranaProjekcija = data.izabranaProjekcija;
+		$.get('PrikaziProjekcijuServlet',params, function(data) {
+			var izabranaProjekcija = data.izabranaProjekcija;	
 			var brojSedista = data.brojSedista;
-			alert(brojSedista);
 			tabela.append(
-					'<tr>' +
-					'<td>' + izabranaProjekcija.film.naziv + '</td>' + 
-					'<td>' + izabranaProjekcija.tipProjekcije + '</td>' + 
-					'<td>' + izabranaProjekcija.sala.naziv + '</td>' + 
-					'<td>' + izabranaProjekcija.datumVreme + '</td>' + 
-					'<td>' + izabranaProjekcija.cenaKarte + '</td>' +
-					'<td>' + brojSedista + '</td>' +
-					'<td>' +
-							'<form>' + 
-							'<button type="button" class="btn btn-warning" id="izmeniProjekciju">Izmeni</button>' +
-							'</form>' + 
-						'</td>' + 
-						'<td>' + 
-						'<form>' + 
-						'<button type="button" class="btn btn-warning" id="izbrisiProjekciju">Izbrisi</button>' +
-						'</form>' + 
-					'</td>' + 
-					'</tr>' 
+					  '<tr>'+
+				      '<th scope="col">Naziv filma</th> ' + 	
+				      '<td>' + izabranaProjekcija.film.naziv + '</td>' + 
+			    	  '</tr>' +
+					  '<tr>'+
+				      '<th scope="col">Tip projekcije</th> ' + 	
+						'<td>' + izabranaProjekcija.tipProjekcije + '</td>' + 
+			    	  '</tr>' +
+					  '<tr>'+
+				      '<th scope="col">Sala</th> ' + 	
+						'<td>' + izabranaProjekcija.sala.naziv + '</td>' + 
+			    	  '</tr>' +
+					  '<tr>'+
+				      '<th scope="col">Datum</th> ' + 	
+						'<td>' + izabranaProjekcija.datum + '</td>' + 
+			    	  '</tr>' +
+					  '<tr>'+
+				      '<th scope="col">Vreme</th> ' + 	
+						'<td>' + izabranaProjekcija.vreme + '</td>' + 
+			    	  '</tr>' +
+					  '<tr>'+
+				      '<th scope="col">Cena karte</th> ' + 	
+						'<td>' + izabranaProjekcija.cenaKarte + '</td>' +
+			    	  '</tr>' +
+					  '<tr>'+
+				      '<th scope="col">Slobodna sedista</th> ' + 	
+						'<td>' + brojSedista + '</td>' +
+			    	  '</tr>' +
+					  '<tr>'+
+					  	'<td>'+'</td>'+
+					  	'<td align="center">'+
+						'<button type="button" class="btn btn-warning" id="kupiKartu">Kupi kartu</button>' +
+						'</td>'+
+			    	  '</tr>'
 					);
 			if (data.ulogaKorisnika == "neregistrovan") {
 				$('#prikaziKorisnike').hide();
@@ -54,7 +70,6 @@ $(document).ready(function() {
 				$('#logout').show();
 				$('#izmeniFilm').hide();
 				$('#izbrisiFilm').hide();
-
 			}
 		});
 		
