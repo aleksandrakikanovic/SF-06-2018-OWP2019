@@ -21,6 +21,7 @@ $(document).ready(function() {
 				$('#prikaziKorisnike').hide();
 				$('#profilKorisnika').hide();
 				$('#registracija').show();
+				$('#izvestaj').hide();
 				$('#logout').hide();
 				$('#login').show();
 			}else if(data.ulogaKorisnika=="ADMIN"){
@@ -28,12 +29,14 @@ $(document).ready(function() {
 				$('#profilKorisnika').show();
 				$('#registracija').hide();
 				$('#logout').show();
+				$('#izvestaj').show();
 				$('#login').hide();
 			}else if(data.ulogaKorisnika=="KORISNIK"){
 				$('#prikaziKorisnike').hide();
 				$('#profilKorisnika').show();
 				$('#registracija').hide();
 				$('#logout').show();
+				$('#izvestaj').hide();
 				$('#login').hide();
 
 			}
@@ -49,30 +52,7 @@ $(document).ready(function() {
 						'<td>' + sveProjekcije[projekcija].cenaKarte + '</td>' + 
 					'</tr>')}
 			})};
-	/*$('#projekcijeTable').on('click', '#prikaziProjekciju', function(){
-		var currentRow=$(this).closest("tr"); 
-		var film = currentRow.find("td:eq(0)").text();
-		var tipProjekcije = currentRow.find("td:eq(1)").text(); 
-		var sala = currentRow.find("td:eq(2)").text(); 
-		var datum = currentRow.find("td:eq(3)").text();
-		var vreme = currentRow.find("td:eq(4)").text();
-		var cenaKarte = currentRow.find("td:eq(5)").text();
-        var data="Film:"+film+"\nTip projekcije: "+tipProjekcije+"\nSala: "+sala+"\nDatum i vreme: "+datum+ " " + vreme + "\nCena karte: "+cenaKarte;
-        alert(data);
-
-		 params = {
-	    			'film': film, 
-	                'tipProjekcije': tipProjekcije,
-	                'sala': sala, 
-	    			'datum': datum, 
-	    			'vreme':vreme,
-	    			'cenaKarte': cenaKarte, 
-	    		};
-			$.get('PrikaziProjekcijuServlet', params, function(data) {
-				window.location.replace('Projekcija.html');
-
-			});
-	}); */
+	
 	var filmCmb = $('#izaberiFilm');
 	function getFilmovi(){
 		$.get('SviFilmoviServlet', function(data) {

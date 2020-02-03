@@ -8,15 +8,20 @@ public class Karta {
 	private Projekcija projekcija;
 	private Sediste sediste;
 	private Date datum;
-	private Date vreme;
 	private Korisnik korisnik;
-	public Karta(int id, Projekcija projekcija, Sediste sediste, Date datum, Date vreme, Korisnik korisnik) {
+	public Karta(int id, Projekcija projekcija, Sediste sediste, Date datum, Korisnik korisnik) {
 		super();
 		this.id = id;
 		this.projekcija = projekcija;
 		this.sediste = sediste;
 		this.datum = datum;
-		this.vreme = vreme;
+		this.korisnik = korisnik;
+	}
+	public Karta(Projekcija projekcija, Sediste sediste, Date datum, Korisnik korisnik) {
+		super();
+		this.projekcija = projekcija;
+		this.sediste = sediste;
+		this.datum = datum;
 		this.korisnik = korisnik;
 	}
 	public int getId() {
@@ -40,19 +45,11 @@ public class Karta {
 	public void setDatum(Date datum) {
 		this.datum = datum;
 	}
-	public Date getVreme() {
-		return vreme;
-	}
-	public void setVreme(Date vreme) {
-		this.vreme = vreme;
-	}
 	public Korisnik getKorisnik() {
 		return korisnik;
 	}
 	public void setKorisnik(Korisnik korisnik) {
 		this.korisnik = korisnik;
 	}
-	
-	
 
 }

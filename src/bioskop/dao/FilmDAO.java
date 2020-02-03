@@ -86,10 +86,6 @@ public class FilmDAO {
 
 		
 			
-	public static List<Film> getAllZaKorisnike(int id) throws Exception {
-		////
-		return new ArrayList<>();
-	}
 	public static boolean add(Film film) throws Exception {
 		Connection conn = ConnectionManager.getConnection();
 		PreparedStatement pstmt = null;

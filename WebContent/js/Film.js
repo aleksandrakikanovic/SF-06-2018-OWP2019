@@ -95,6 +95,15 @@ $(document).ready(function() {
 					
 				});
 			});
+			$('#filmoviTable').on('click', '#kupiKartu', function(){
+				$(this).closest ('tr').remove();
+				params = {
+						'id':izabraniFilm.id
+						};
+				$.get('KupiKartuServlet', params, function(data) {
+					
+				});
+			});
 		};
 	getFilm();
 });				
