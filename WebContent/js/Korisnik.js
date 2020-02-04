@@ -12,15 +12,13 @@ $(document).ready(function() {
 		event.preventDefault();
 		return false;
 	});
-	var korIme = window.location.search.slice(1).split('&')[0].split('=')[1];
-	params={
-			'korIme':korIme
-	};
 
 	var tabela = $('#tabelaKorisnik');
+	var tabelaKarte = $('#tabelaKarte');
+
 	function getKorisnik(){
-		$.post('PrikaziKorisnikaServlet',params, function(data) {
-			var korisnik = data.izabraniKorisnik;
+		$.post('PrikaziKorisnikaServlet', function(data) {
+			var korisnik = data.ulogovanKorisnik;
 			tabela.append(
 						 '<tr>'+
 					      '<th scope="col">Korisnicko ime</th> ' + 	
@@ -36,13 +34,31 @@ $(document).ready(function() {
 				    	  '</tr>' +
 						  '<tr>'+
 						  	'<td>'+'</td>'+
-						  	'<td align="center">'+
-							'<button type="button" class="btn btn-warning" id="izmeniKorisnika">Izmeni korisnika</button>' +
+						  	'<td align="right">'+
+							'<button type="button" class="btn btn-warning" id="izmeniKorisnika">Izmeni</button>' +
 							'</td>'+
 				    	  '</tr>'
 					);
 		});
 	};
+	
+	function getKarte(){
+		$.post('PrikaziKorisnikaServlet', function(data) {
+			var karteKorisnika = data.karteKorisnika;
+			for (karta in karteKorisnika){
+				alert(karta.id);
+			tabelaKarte.append(
+						'<tr>'+
+							'<td>' + karteKorisnika[karta].korisnik.korisnickoIme + '</td>' + 
+							'<td><a href="KartaKorisnika.html?id=' + karteKorisnika[karta].id + '">'
+							+ karteKorisnika[karta].datum + '</a></td>' +
+						'</tr>'
+							
+				    	 					); 
+			};
+		});
+	};
 	getKorisnik();
+	getKarte();
 });				
 			

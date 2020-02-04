@@ -53,7 +53,7 @@ $(document).ready(function(){
 
     		};
 		$.post('PrikaziKorisnikaServlet', params, function(data) {
-			window.location.replace('Korisnik.html');
+			window.location.replace('KorisnikZaAdmina.html');
 
 		});
 });

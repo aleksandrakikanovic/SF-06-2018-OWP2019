@@ -129,6 +129,58 @@ public class ProjekcijaDAO {
 		
 		return sveProjekcije;
 	}
+	public static List<Projekcija> getAllZaFilm(int filmId) throws Exception {
+		List<Projekcija> projekcijeFilma = new ArrayList<>();
+		Connection conn = ConnectionManager.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			//369
+			String query = "select * from Projekcija where filmId = ?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, filmId);
+			rset = pstmt.executeQuery();
+			int id = rset.getInt(1);
+			String f = rset.getString(2);
+			Film film = FilmDAO.get(f);
+			String t = rset.getString(3);
+			ETipProjekcije tipProjekcije = ETipProjekcije.valueOf(t);
+			String s = rset.getString(4);
+			Sala sala = SalaDAO.get(s);
+			long millis=rset.getLong(5);
+			String vreme = rset.getString(6);
+		    Date datum = new Date(millis);
+			double cenaKarte = rset.getInt(6);
+			String a = rset.getString(7);
+			Korisnik admin = KorisnikDAO.get(a);
+			while (rset.next()) {
+				int index = 1;
+				id = rset.getInt(index++);
+				 f = rset.getString(index++);
+				 t = rset.getString(index++);
+				 s = rset.getString(index++);
+				 //d = rset.getString(index++);
+				 millis=rset.getLong(index++);
+				 System.out.println(f);
+				 vreme = rset.getString(index++);
+				 cenaKarte = rset.getInt(index++);
+				 a = rset.getString(index++);
+				 admin=KorisnikDAO.get(a);
+				 film = FilmDAO.get(f);
+				 tipProjekcije = ETipProjekcije.valueOf(t);
+				 datum = new Date(millis);
+				 Projekcija projekcija = new Projekcija(id, film, tipProjekcije, sala, datum, vreme, cenaKarte, admin);
+				 projekcijeFilma.add(projekcija);
+			}
+
+		} finally {
+			try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}
+			try {rset.close();} catch (Exception ex1) {ex1.printStackTrace();}
+			try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();} 
+		}
+		
+		return projekcijeFilma;
+	}
 
 		
 			

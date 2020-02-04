@@ -83,7 +83,6 @@ public class FilmDAO {
 		
 		return sviFilmovi;
 	}
-
 		
 			
 	public static boolean add(Film film) throws Exception {

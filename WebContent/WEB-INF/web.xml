@@ -167,4 +167,14 @@
     <servlet-name>KupiKartuServlet</servlet-name>
     <url-pattern>/KupiKartuServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ProjekcijeZaFilmServlet</display-name>
+    <servlet-name>ProjekcijeZaFilmServlet</servlet-name>
+    <servlet-class>servleti.ProjekcijeZaFilmServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProjekcijeZaFilmServlet</servlet-name>
+    <url-pattern>/ProjekcijeZaFilmServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

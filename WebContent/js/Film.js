@@ -58,22 +58,31 @@ $(document).ready(function() {
 								'<td>' + izabraniFilm.opis + '</td>' + 
 					    	  '</tr>' +
 							  '<tr>'+
-							  	'<td>'+'</td>'+
+							  	'<td>'+
+								'<td><a href="ProjekcijeFilma.html?id=' + izabraniFilm.id + '" id="kupiKartu">Kupi kartu</a></td>' + 
+								'</td>'+ '<td>' + '</td>'+
+					    	  '</tr>'+
+					    	  '<tr>'+
 							  	'<td align="center">'+
-								'<button type="button" class="btn btn-warning" id="kupiKartu">Kupi kartu</button>' +
+								'<button type="button" class="btn btn-warning" id="izmeniFilm">Izmeni</button>' +
+							  	'</td>'+
+							  	'<td>'+
+								'<button type="button" class="btn btn-warning" id="izbrisiFilm">Izbrisi</button>' +
 								'</td>'+
-					    	  '</tr>'
+					    	  '</tr>'	   
 						);
 				if (data.ulogaKorisnika == "neregistrovan") {
 					$('#prikaziKorisnike').hide();
 					$('#profilKorisnika').hide();
 					$('#izmeniFilm').hide();
+					$('#kupiKartu').hide();
 					$('#izbrisiFilm').hide();
 					$('#logout').hide();
 				}else if(data.ulogaKorisnika=="ADMIN"){
 					$('#prikaziKorisnike').show();
 					$('#profilKorisnika').show();
 					$('#logout').show();
+					$('#kupiKartu').hide();
 					$('#izmeniFilm').show();
 					$('#izbrisiFilm').show();
 				}else if(data.ulogaKorisnika=="KORISNIK"){
@@ -82,28 +91,21 @@ $(document).ready(function() {
 					$('#logout').show();
 					$('#izmeniFilm').hide();
 					$('#izbrisiFilm').hide();
-	
+					$('#kupiKartu').show();
+
 				}
 			});
 			
 			$('#filmoviTable').on('click', '#izbrisiFilm', function(){
-				$(this).closest ('tr').remove();
 				params = {
 						'id':izabraniFilm.id
 						};
-				$.get('DodajFilmServlet', params, function(data) {
+				$.post('PrikaziFilmServlet', params, function(data) {
 					
 				});
 			});
-			$('#filmoviTable').on('click', '#kupiKartu', function(){
-				$(this).closest ('tr').remove();
-				params = {
-						'id':izabraniFilm.id
-						};
-				$.get('KupiKartuServlet', params, function(data) {
-					
-				});
-			});
+			
+			
 		};
 	getFilm();
 });				

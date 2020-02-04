@@ -3,6 +3,7 @@ package servleti;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bioskop.dao.KartaDAO;
 import bioskop.dao.KorisnikDAO;
+import model.Karta;
 import model.Korisnik;
 import model.Korisnik.Uloga;
 
@@ -32,9 +35,9 @@ public class PrikaziKorisnikaServlet extends HttpServlet {
 			}else {
 				data.put("ulogaKorisnika", "neregistrovan");
 			}
-			String korisnickoIme = request.getParameter("korIme");
-			Korisnik izabraniKorisnik = KorisnikDAO.get(korisnickoIme);
-			data.put("izabraniKorisnik", izabraniKorisnik);
+			data.put("ulogovanKorisnik", ulogovanKorisnik);
+			List<Karta> karteKorisnika = KartaDAO.getAllZaKorisnika(ulogovanKorisnik.getKorisnickoIme());
+			data.put("karteKorisnika", karteKorisnika);
 			request.setAttribute("data", data);
 			request.getRequestDispatcher("./SuccessServlet").forward(request, response);
 		} catch (Exception e) {

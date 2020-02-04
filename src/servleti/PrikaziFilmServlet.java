@@ -2,14 +2,18 @@ package servleti;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import bioskop.dao.FilmDAO;
+import bioskop.dao.KorisnikDAO;
+import bioskop.dao.ProjekcijaDAO;
 import model.Film;
 import model.Korisnik;
+import model.Projekcija;
 
 @SuppressWarnings("serial")
 public class PrikaziFilmServlet extends HttpServlet {
@@ -34,6 +38,16 @@ public class PrikaziFilmServlet extends HttpServlet {
 		}
 	}	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		int id = Integer.parseInt(request.getParameter("id"));
+		System.out.println(id);
+		try {
+			FilmDAO.delete(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
 	}
 	}
 

@@ -38,7 +38,6 @@ $(document).ready(function() {
 				$('#logout').show();
 				$('#izvestaj').hide();
 				$('#login').hide();
-
 			}
 			var sveProjekcije = data.sveProjekcije;
 			for (projekcija in sveProjekcije) {
