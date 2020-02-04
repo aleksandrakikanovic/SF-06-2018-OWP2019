@@ -3,6 +3,7 @@ package servleti;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -19,6 +20,7 @@ import model.Film;
 import model.Korisnik;
 import model.Projekcija;
 import model.Sala;
+import model.Sediste;
 import model.Projekcija.ETipProjekcije;
 
 
@@ -31,11 +33,12 @@ public class PrikaziProjekcijuServlet extends HttpServlet {
 			Korisnik ulogovanKorisnik = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
 			String id = request.getParameter("id");
 		    Projekcija izabranaProjekcija = ProjekcijaDAO.get(id);
-		    String brojSedista = SedisteDAO.get(izabranaProjekcija);
+		    String slobodnaSedista = SedisteDAO.get(izabranaProjekcija);
 			Map<String, Object> data = new LinkedHashMap<>();
 			request.setAttribute("data", data);
 			data.put("izabranaProjekcija", izabranaProjekcija);
-			data.put("brojSedista", brojSedista);
+			data.put("slobodnaSedista", slobodnaSedista);
+
 			if(!(ulogovanKorisnik==null)) {
 				data.put("ulogaKorisnika", ulogovanKorisnik.getUloga().toString());
 			}else {
@@ -47,9 +50,33 @@ public class PrikaziProjekcijuServlet extends HttpServlet {
 			e.printStackTrace();
 	}
 }	
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+	    try {
+			Korisnik ulogovanKorisnik = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
+			String id = request.getParameter("id");
+			String sediste = request.getParameter("sediste");
+			Projekcija zaKartu = ProjekcijaDAO.get(id);
+			List<Sediste> svaSedista = SedisteDAO.getAllZaKartu(zaKartu);
+			Map<String, Object> data = new LinkedHashMap<>();
+			request.setAttribute("data", data);
+			data.put("zaKartu", zaKartu);
+			data.put("svaSedista", svaSedista);
+			data.put("sediste", sediste);
+			if(!(ulogovanKorisnik==null)) {
+				data.put("ulogaKorisnika", ulogovanKorisnik.getUloga().toString());
+			}else {
+				data.put("ulogaKorisnika", "neregistrovan");
+			}
+			request.getRequestDispatcher("./SuccessServlet").forward(request, response);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		
+		
+		
+		
 	}
 
 }

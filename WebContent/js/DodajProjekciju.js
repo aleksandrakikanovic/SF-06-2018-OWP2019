@@ -52,6 +52,9 @@ $('#dodajProjekcijuButton').on('click', function(event) {
     var datum = datumInput.val(); 
     var vreme = vremeInput.val(); 
     var cenaKarte = cenaKarteInput.val();
+    if(film=="" || tipProjekcije == "" || sala == "" ||  datum == "" || vreme == "" || cenaKarte==null){
+    	alert('Popunite sva polja!');
+    }
     params = {
         'film': film, 
         'tipProjekcije': tipProjekcije,

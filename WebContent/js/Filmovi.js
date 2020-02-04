@@ -47,34 +47,7 @@ $(document).ready(function() {
 						
 					'</tr>')}
 			})};
-	 
-	 /*$('#filmoviTable').on('click', '#prikaziFilm', function(){
-        var currentRow=$(this).closest("tr"); 
-        var id =  currentRow.find("td:eq(0)").text();
-        alert(id);
-       // var naziv = currentRow.find("td:eq(1)").text();
-        var zanr = currentRow.find("td:eq(4)").text();
-        var trajanje = currentRow.find("td:eq(5)").text();
-        var distributer = currentRow.find("td:eq(6)").text(); 
-        var zemljaPorekla = currentRow.find("td:eq(7)").text();
-        var godinaProizvodnje = currentRow.find("td:eq(8)").text(); 
-    
-        params = {
-    			'id':id,
-    			'naziv': naziv, 
-    			'zanr': zanr, 
-    			'trajanje': trajanje, 
-    			'distributer': distributer, 
-    			'zemljaPorekla': zemljaPorekla, 
-    			'godinaProizvodnje': godinaProizvodnje, 
-
-    		};
-		$.post('PrikaziFilmServlet', params, function(data) {
-			window.location.replace('Film.html');
-
-		}); 
-}); */
-	
+			
 	getFilmovi();
 	
 });

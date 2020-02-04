@@ -19,6 +19,9 @@ $(document).ready(function() {
 	$('#loginButton').on('click', function(event) {
 		var korIme = korInput.val();
         var loz = lozInput.val();
+        if(korIme=="" || loz==""){
+        	alert("Neispravni podaci.Pokusajte opet.");
+        }
 		params = {
 			'korIme': korIme, 
             'loz': loz

@@ -15,7 +15,7 @@ $(document).ready(function() {
 	var tabela = $('#tabelaProjekcija');
 		$.get('PrikaziProjekcijuServlet',params, function(data) {
 			var izabranaProjekcija = data.izabranaProjekcija;	
-			var brojSedista = data.brojSedista;
+			var brojSedista = data.slobodnaSedista;
 			tabela.append(
 				'<tr>'+
 				      '<th scope="col">Naziv filma</th> ' + 	
@@ -48,7 +48,7 @@ $(document).ready(function() {
 				'<tr>'+
 					 '<td>'+'</td>'+
 					  '<td align="center">'+
-						'<button type="button" class="btn btn-warning" id="kupiKartu">Kupi kartu</button>' +
+						'<td><a href="KupiKartu.html?id=' + izabranaProjekcija.id + '" id="kupiKartu">Kupi kartu</a></td>' + 
 					'</td>'+
 			    '</tr>'+
 			    '<tr>'+
@@ -87,7 +87,6 @@ $(document).ready(function() {
 				$('#izbrisiFilm').hide();
 			}
 		
-		
 		$('#tabelaProjekcija').on('click', '#izbrisiProjekciju', function(){
 			$(this).closest ('tr').remove();
 			params = {
@@ -98,7 +97,6 @@ $(document).ready(function() {
 			});
 		});
 
-			
 			$('#tabelaProjekcija').on('click', '#izmeniProjekciju', function(){
 				params = {
 						'id':izabranaProjekcija.id
@@ -107,19 +105,6 @@ $(document).ready(function() {
 					
 				});
 		});
-			$('#tabelaProjekcija').on('click', '#kupiKartu', function(){
-				params = {
-						'projekcijaId':izabranaProjekcija.id,
-						};
-				$.get('KupiKartuServlet', params, function(data) {
-					//if (data.status == 'success') {
-						window.location.replace('KupiKartu.html');
-				//	}
-				});
-		});
-			
-	});
-
-			
+	});		
 });				
 			

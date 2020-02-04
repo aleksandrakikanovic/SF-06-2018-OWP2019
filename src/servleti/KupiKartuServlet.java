@@ -32,8 +32,6 @@ public class KupiKartuServlet extends HttpServlet {
 			}
 			String projekcijaId = request.getParameter("projekcijaId");
 			Projekcija kartaZaProjekciju = ProjekcijaDAO.get(projekcijaId);
-			List<Sediste> svaSedista = SedisteDAO.getAllZaKartu(kartaZaProjekciju);
-
 			int sedisteId = Integer.parseInt(request.getParameter("sedisteId"));
 			Sediste sediste = SedisteDAO.getOne(sedisteId);
 			long millis=System.currentTimeMillis();  
@@ -42,7 +40,6 @@ public class KupiKartuServlet extends HttpServlet {
 			KartaDAO.add(karta);
 			request.setAttribute("data", data);
 			data.put("kartaZaProjekciju", kartaZaProjekciju);
-			data.put("svaSedista", svaSedista);
 			request.getRequestDispatcher("./SuccessServlet").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();

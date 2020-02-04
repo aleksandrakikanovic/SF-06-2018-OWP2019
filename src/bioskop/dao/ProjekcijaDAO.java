@@ -84,9 +84,10 @@ public class ProjekcijaDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
-
-			String query = "select * from Projekcija";
+			//369
+			String query = "select * from Projekcija where deleted='no'";
 			pstmt = conn.prepareStatement(query);
+			//long millis1 = System.currentTimeMillis();
 			rset = pstmt.executeQuery();
 			int id = rset.getInt(1);
 			String f = rset.getString(2);

@@ -21,6 +21,9 @@ $('#RegistrujButton').on('click', function(event) {
 		var korisnickoIme = korisnickoImeInput.val();
         var lozinka = lozinkaInput.val();
         var ponovljenaLozinka = ponovljenaLozinkaInput.val();
+        if(korisnickoIme=="" || lozinka=="" || ponovljenaLozinka=="" || lozinka!=ponovljenaLozinka){
+        	alert("Neispravni podaci.Pokusajte opet.");
+        }
 
 		params = {
 			'korisnickoIme': korisnickoIme, 
