@@ -22,7 +22,6 @@ public class PrikaziFilmServlet extends HttpServlet {
 		try {
 			Korisnik ulogovanKorisnik = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
 			Map<String, Object> data = new LinkedHashMap<>();
-			request.setAttribute("data", data);
 			if(!(ulogovanKorisnik==null)) {
 				data.put("ulogaKorisnika", ulogovanKorisnik.getUloga().toString());
 			}else {
@@ -38,11 +37,17 @@ public class PrikaziFilmServlet extends HttpServlet {
 		}
 	}	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
 		int id = Integer.parseInt(request.getParameter("id"));
-		System.out.println(id);
 		try {
+			Korisnik ulogovanKorisnik = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
+			Map<String, Object> data = new LinkedHashMap<>();
+			request.setAttribute("data", data);
+			if(!(ulogovanKorisnik==null)) {
+				data.put("ulogaKorisnika", ulogovanKorisnik.getUloga().toString());
+			}else {
+				data.put("ulogaKorisnika", "neregistrovan");
+			}
+			request.getRequestDispatcher("./SuccessServlet").forward(request, response);
 			FilmDAO.delete(id);
 		} catch (Exception e) {
 			e.printStackTrace();

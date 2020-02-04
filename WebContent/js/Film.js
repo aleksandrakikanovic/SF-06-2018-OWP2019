@@ -93,20 +93,35 @@ $(document).ready(function() {
 					$('#izbrisiFilm').hide();
 					$('#kupiKartu').show();
 
-				}
-			});
-			
-			$('#filmoviTable').on('click', '#izbrisiFilm', function(){
-				params = {
-						'id':izabraniFilm.id
-						};
-				$.post('PrikaziFilmServlet', params, function(data) {
-					
+				};	
+
+			$('#tabelaFilm').on('click', '#izbrisiFilm', function(){
+				params = { 'id':izabraniFilm.id };
+				tabela.append(
+						 '<tr>'+
+						 	'<td>'+'</td>'+
+							  	'<td>'+
+				                  '<button class="btn btn-warning" type="submit" id="potvrdiBrisanje">Potvrdi brisanje</button>' +
+								'</td>'+
+						'</tr>'+
+					    '<tr>' 
+				);
+				$('#tabelaFilm').on('click', '#potvrdiBrisanje', function(){
+					$.post('PrikaziFilmServlet', params, function(data) {
+					  if (data.status == 'unauthenticated') {
+				            window.location.replace('Login.html');
+				            return;
+				        }
+				        if (data.status == 'success') {
+				            window.location.replace('FIlmovi.html');
+				        }
+				});
 				});
 			});
-			
-			
+			});
+
 		};
+		
 	getFilm();
 });				
 			

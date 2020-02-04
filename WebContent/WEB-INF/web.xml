@@ -177,4 +177,14 @@
     <servlet-name>ProjekcijeZaFilmServlet</servlet-name>
     <url-pattern>/ProjekcijeZaFilmServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>KartaIzmenaServlet</display-name>
+    <servlet-name>KartaIzmenaServlet</servlet-name>
+    <servlet-class>servleti.KartaIzmenaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>KartaIzmenaServlet</servlet-name>
+    <url-pattern>/KartaIzmenaServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

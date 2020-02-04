@@ -148,8 +148,6 @@ public class FilmDAO {
 			pstmt = conn.prepareStatement(query);
 			int index=1;
 			pstmt.setInt(index++, indexOf);
-			System.out.println(pstmt);
-
 			return pstmt.executeUpdate() == 1;
 		} finally {
 			try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}
@@ -163,7 +161,6 @@ public class FilmDAO {
 		try {
 		String query = "select * from Film where naziv = ?";
 		pstmt = conn.prepareStatement(query);
-		int index=0;
 		pstmt.setString(1, naziv);
 		rset = pstmt.executeQuery();
 		if (rset.next()) {

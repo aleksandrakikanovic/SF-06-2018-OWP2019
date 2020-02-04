@@ -22,9 +22,7 @@ public class LoginServlet extends HttpServlet {
 		doGet(request, response);
 }
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String korIme = request.getParameter("korIme");
-		String loz = request.getParameter("loz");
 		try {
 			Korisnik korisnik = KorisnikDAO.get(korIme);
 			Map<String, Object> data = new LinkedHashMap<>();

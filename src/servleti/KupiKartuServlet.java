@@ -54,7 +54,6 @@ public class KupiKartuServlet extends HttpServlet {
 				Map<String, Object> data = new LinkedHashMap<>();
 				request.setAttribute("data", data);
 				data.put("sediste", sediste);
-				System.out.println(sediste);
 				if(!(ulogovanKorisnik==null)) {
 					data.put("ulogaKorisnika", ulogovanKorisnik.getUloga().toString());
 				}else {

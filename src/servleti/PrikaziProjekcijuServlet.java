@@ -70,11 +70,5 @@ public class PrikaziProjekcijuServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		
-		
-		
-		
 	}
-
 }

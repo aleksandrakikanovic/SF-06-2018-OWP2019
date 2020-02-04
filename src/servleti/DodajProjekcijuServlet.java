@@ -1,17 +1,12 @@
 package servleti;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import bioskop.dao.FilmDAO;
 import bioskop.dao.ProjekcijaDAO;
 import bioskop.dao.SalaDAO;
@@ -25,21 +20,9 @@ import model.Projekcija.ETipProjekcije;
 public class DodajProjekcijuServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			Korisnik ulogovanKorisnik = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
-			Map<String, Object> data = new LinkedHashMap<>();
-			request.setAttribute("data", data);
-			if(!(ulogovanKorisnik==null)) {
-				data.put("ulogaKorisnika", ulogovanKorisnik.getUloga().toString());
-			}else {
-				data.put("ulogaKorisnika", "neregistrovan");
-
-			}		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		doPost(request, response);
 	}
 
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {

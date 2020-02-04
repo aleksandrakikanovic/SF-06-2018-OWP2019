@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bioskop.dao.FilmDAO;
 import bioskop.dao.ProjekcijaDAO;
 import model.Korisnik;
 import model.Projekcija;
@@ -38,7 +39,21 @@ public class ProjekcijeZaFilmServlet extends HttpServlet {
 		}
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		int id = Integer.parseInt(request.getParameter("id"));
+		try {
+			Korisnik ulogovanKorisnik = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
+			Map<String, Object> data = new LinkedHashMap<>();
+			request.setAttribute("data", data);
+			if(!(ulogovanKorisnik==null)) {
+				data.put("ulogaKorisnika", ulogovanKorisnik.getUloga().toString());
+			}else {
+				data.put("ulogaKorisnika", "neregistrovan");
+			}
+			request.getRequestDispatcher("./SuccessServlet").forward(request, response);
+			ProjekcijaDAO.delete(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -46,7 +46,6 @@ $(document).ready(function() {
 		$.post('PrikaziKorisnikaServlet', function(data) {
 			var karteKorisnika = data.karteKorisnika;
 			for (karta in karteKorisnika){
-				alert(karta.id);
 			tabelaKarte.append(
 						'<tr>'+
 							'<td>' + karteKorisnika[karta].korisnik.korisnickoIme + '</td>' + 

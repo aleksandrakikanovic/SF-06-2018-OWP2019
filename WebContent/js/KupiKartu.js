@@ -64,7 +64,7 @@ $(document).ready(function() {
 	$('#kupiKartuFilm').on('click', '#kupiKartu', function(){
 		var cmb = $('#cmbSediste');
 	    var sediste = cmb.val();
-	    var sedisteName = cmb.name();x
+	    //var sedisteName = cmb.name();
 	    params = {'sediste':sediste,
 	    		'id': id};
 	    $('#cmb').remove();
@@ -72,7 +72,7 @@ $(document).ready(function() {
 		tabela.append(
 				'<tr>'+
 			      '<th scope="col">Izabrano sediste</th> ' + 	
-					'<td>'+ sedisteName + '</td>'+
+					'<td>'+ sediste + '</td>'+
 			    '</tr>' +
 			    '<tr>'+
 				 	'<td>'+'</td>'+

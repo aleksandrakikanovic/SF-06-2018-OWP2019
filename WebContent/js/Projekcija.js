@@ -10,6 +10,7 @@ $(document).ready(function() {
 		event.preventDefault();
 		return false;
 	});
+	function getProjekcija(){
 	var id = window.location.search.slice(1).split('&')[0].split('=')[1];
 	params={'id':id };
 	var tabela = $('#tabelaProjekcija');
@@ -52,13 +53,13 @@ $(document).ready(function() {
 			    '<tr>'+
 			    	'<td>'+'</td>'+
 			    	'<td align="center">'+
-						'<button type="button" class="btn btn-warning" id="izmeniFilm">Izmeni</button>' +
+						'<button type="button" class="btn btn-warning" id="izmeniProjekciju">Izmeni</button>' +
 					'</td>'+
 				'</tr>'+
 			    '<tr>'+
 			    	'<td>'+'</td>'+
 			    	'<td align="center">'+
-						'<button type="button" class="btn btn-warning" id="izbrisiFilm">Izbrisi film</button>' +
+						'<button type="button" class="btn btn-warning" id="izbrisiProjekciju">Izbrisi</button>' +
 				     '</td>'+
 				'</tr>'
 					);
@@ -68,8 +69,8 @@ $(document).ready(function() {
 			if (data.ulogaKorisnika == "neregistrovan") {
 				$('#prikaziKorisnike').hide();
 				$('#profilKorisnika').hide();
-				$('#izmeniFilm').hide();
-				$('#izbrisiFilm').hide();
+				$('#izmeniProjekciju').hide();
+				$('#izbrisiProjekciju').hide();
 				$('#kupiKartu').hide();
 				$('#logout').hide();
 			}else if(data.ulogaKorisnika=="ADMIN"){
@@ -77,35 +78,42 @@ $(document).ready(function() {
 				$('#profilKorisnika').show();
 				$('#logout').show();
 				$('#kupiKartu').hide();
-				$('#izmeniFilm').show();
-				$('#izbrisiFilm').show();
+				$('#izmeniProjekciju').show();
+				$('#izbrisiProjekciju').show();
 			}else if(data.ulogaKorisnika=="KORISNIK"){
 				$('#prikaziKorisnike').hide();
 				$('#profilKorisnika').show();
 				$('#logout').show();
 				$('#kupiKartu').show();
-				$('#izmeniFilm').hide();
-				$('#izbrisiFilm').hide();
+				$('#izmeniProjekciju').hide();
+				$('#izbrisiProjekciju').hide();
 			}
 			
-		$('#tabelaProjekcija').on('click', '#izbrisiProjekciju', function(){
-			$(this).closest ('tr').remove();
-			params = {
-					'id':izabranaProjekcija.id
-					};
-			$.get('DodajProjekcijuServlet', params, function(data) {
-				
-			});
-		});
-
-			$('#tabelaProjekcija').on('click', '#izmeniProjekciju', function(){
-				params = {
-						'id':izabranaProjekcija.id
-						};
-				$.get('DodajProjekcijuServlet', params, function(data) {
-					
+			$('#tabelaProjekcija').on('click', '#izbrisiProjekciju', function(){
+				params = { 'id':izabranaProjekcija.id };
+				tabela.append(
+						 '<tr>'+
+						 	'<td>'+'</td>'+
+							  	'<td>'+
+				                  '<button class="btn btn-warning" type="submit" id="potvrdiBrisanje">Potvrdi brisanje</button>' +
+								'</td>'+
+						'</tr>'+
+					    '<tr>' 
+				);
+				$('#tabelaProjekcija').on('click', '#potvrdiBrisanje', function(){
+					$.post('ProjekcijeZaFilmServlet', params, function(data) {
+					  if (data.status == 'unauthenticated') {
+				            window.location.replace('Login.html');
+				            return;
+				        }
+				        if (data.status == 'success') {
+				            window.location.replace('index.html');
+				        }
 				});
-		});
-	});		
+				});
+			});
+	});	
+	};
+	getProjekcija();
 });				
 			
