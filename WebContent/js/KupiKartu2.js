@@ -18,8 +18,12 @@ $(document).ready(function() {
 	function kupiKartu(){
 		$.post('PrikaziProjekcijuServlet',params, function(data) {
 			var izabranaProjekcija = data.zaKartu;
-			var sediste = data.sediste;
-			tabela.append(
+			$.post('KupiKartuServlet',params, function(data) {
+				var sediste = data.sediste;
+				alert(sediste);
+
+			
+				tabela.append(
 				'<tr>'+
 				      '<th scope="col">Naziv filma</th> ' + 	
 						'<td><a href="Film.html?id=' + izabranaProjekcija.film.id  + '" id="prikaziFilm">' + izabranaProjekcija.film.naziv + '</a></td>' + 
@@ -47,13 +51,15 @@ $(document).ready(function() {
 			    '</tr>' +
 			    '<tr>'+
 				 	'<td>'+'</td>'+
-					  	'<td align="center">'+
-		                  '<button class="btn btn-light" type="submit" id="potvrdiKupovinuKarte">Potvrdi kupovinu</button>' +
+					  	'<td>'+
+		                  '<button class="btn btn-sm" type="submit" id="potvrdiKupovinuKarte">Potvrdi kupovinu</button>' +
 						'</td>'+
 				'</tr>'+
 			    '<tr>' );
+			
 	});
-	
+
+		});
 	
 };
 kupiKartu();

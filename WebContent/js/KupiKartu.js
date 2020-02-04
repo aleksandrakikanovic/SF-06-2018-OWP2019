@@ -17,6 +17,7 @@ $(document).ready(function() {
 	function kupiKartu(){
 	$.post('PrikaziProjekcijuServlet',params, function(data) {
 		var izabranaProjekcija = data.zaKartu;
+		var id =izabranaProjekcija.id;
 		var svaSedista = data.svaSedista;
 		tabela.append(
 			'<tr>'+
@@ -40,14 +41,15 @@ $(document).ready(function() {
 			      '<th scope="col">Cena karte</th> ' + 	
 					'<td>' + izabranaProjekcija.cenaKarte + '</td>' + 
 		    '</tr>' +
-			'<tr>'+
+			'<tr  id="cmb">'+
 		      '<th scope="col">Sediste</th> ' + 	
 				'<td>'+ '<select name="" id="cmbSediste" class="combobox1">' + '</td>'+
 		    '</tr>' +
-		    '<tr>'+
+		    '<tr id="btn">'+
 			 	'<td>'+'</td>'+
 				  	'<td align="center">'+
-					'<td><a href="KupiKartu2.html?id=' + izabranaProjekcija.id + '" id="kupiKartu">Dalje</a></td>' + 
+	                  '<button class="btn btn-sm" type="submit" id="kupiKartu">Dalje</button>' +
+
 					'</td>'+
 			'</tr>'+
 		    '<tr>' );
@@ -56,19 +58,45 @@ $(document).ready(function() {
 			cmbSediste.append(
 				'<option value="'+svaSedista[sediste].id+ '">' + svaSedista[sediste].redniBroj+ '</option>'
 			)}
-	});
-	function izabranoSediste(){
-		var sedisteId = $('#cmbSediste')
-		var sediste = sedisteId.val();
-		params = {
-				'sediste':sediste
-				};
-		$.post('PrikaziProjekcijuServlet', params, function(data) {	
 		
 	});
-	};
 	
-};
+	$('#kupiKartuFilm').on('click', '#kupiKartu', function(){
+		var cmb = $('#cmbSediste');
+	    var sediste = cmb.val();
+	    var sedisteName = cmb.name();x
+	    params = {'sediste':sediste,
+	    		'id': id};
+	    $('#cmb').remove();
+	    $('#btn').remove();
+		tabela.append(
+				'<tr>'+
+			      '<th scope="col">Izabrano sediste</th> ' + 	
+					'<td>'+ sedisteName + '</td>'+
+			    '</tr>' +
+			    '<tr>'+
+				 	'<td>'+'</td>'+
+					  	'<td align="center">'+
+		                  '<button class="btn btn-sm" type="submit" id="potvrdiKupovinuKarte">Potvrdi kupovinu</button>' +
+						'</td>'+
+				'</tr>'+
+			    '<tr>' );
+	$('#kupiKartuFilm').on('click', '#potvrdiKupovinuKarte', function(){
+		 $.get('KupiKartuServlet', params, function(data) {
+		        if (data.status == 'unauthenticated') {
+		            window.location.replace('Login.html');
+		            return;
+		        }
+		        if (data.status == 'success') {
+		        	alert('success');
+		            window.location.replace('index.html');
+		        }
+		    });
+		
+		});
+
+	});
+
+};	
 kupiKartu();
-izabranoSediste();
 });

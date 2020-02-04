@@ -30,9 +30,9 @@ public class KupiKartuServlet extends HttpServlet {
 			}else {
 				data.put("ulogaKorisnika", "neregistrovan");
 			}
-			String projekcijaId = request.getParameter("projekcijaId");
+			String projekcijaId = request.getParameter("id");
 			Projekcija kartaZaProjekciju = ProjekcijaDAO.get(projekcijaId);
-			int sedisteId = Integer.parseInt(request.getParameter("sedisteId"));
+			int sedisteId = Integer.parseInt(request.getParameter("sediste"));
 			Sediste sediste = SedisteDAO.getOne(sedisteId);
 			long millis=System.currentTimeMillis();  
 		    Date datumKupovine = new Date(millis);
@@ -48,7 +48,24 @@ public class KupiKartuServlet extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		 try {
+				Korisnik ulogovanKorisnik = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
+				String sediste = request.getParameter("sediste");
+				Map<String, Object> data = new LinkedHashMap<>();
+				request.setAttribute("data", data);
+				data.put("sediste", sediste);
+				System.out.println(sediste);
+				if(!(ulogovanKorisnik==null)) {
+					data.put("ulogaKorisnika", ulogovanKorisnik.getUloga().toString());
+				}else {
+					data.put("ulogaKorisnika", "neregistrovan");
+				}
+				request.getRequestDispatcher("./SuccessServlet").forward(request, response);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
 	}
 
 }

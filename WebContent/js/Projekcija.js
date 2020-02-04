@@ -45,11 +45,9 @@ $(document).ready(function() {
 				      '<th scope="col">Slobodna sedista</th> ' + 	
 						'<td>' + brojSedista + '</td>' +
 			    '</tr>' +
-				'<tr>'+
-					 '<td>'+'</td>'+
-					  '<td align="center">'+
+				'<tr id="kupovinaKarte">'+
+					'<td>' + '</td>'+ 
 						'<td><a href="KupiKartu.html?id=' + izabranaProjekcija.id + '" id="kupiKartu">Kupi kartu</a></td>' + 
-					'</td>'+
 			    '</tr>'+
 			    '<tr>'+
 			    	'<td>'+'</td>'+
@@ -64,6 +62,9 @@ $(document).ready(function() {
 				     '</td>'+
 				'</tr>'
 					);
+			if(brojSedista==0){
+				$('#kupovinaKarte').remove();
+		}
 			if (data.ulogaKorisnika == "neregistrovan") {
 				$('#prikaziKorisnike').hide();
 				$('#profilKorisnika').hide();
@@ -86,7 +87,7 @@ $(document).ready(function() {
 				$('#izmeniFilm').hide();
 				$('#izbrisiFilm').hide();
 			}
-		
+			
 		$('#tabelaProjekcija').on('click', '#izbrisiProjekciju', function(){
 			$(this).closest ('tr').remove();
 			params = {

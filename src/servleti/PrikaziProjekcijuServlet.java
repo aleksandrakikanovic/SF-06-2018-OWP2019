@@ -54,14 +54,12 @@ public class PrikaziProjekcijuServlet extends HttpServlet {
 	    try {
 			Korisnik ulogovanKorisnik = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
 			String id = request.getParameter("id");
-			String sediste = request.getParameter("sediste");
 			Projekcija zaKartu = ProjekcijaDAO.get(id);
 			List<Sediste> svaSedista = SedisteDAO.getAllZaKartu(zaKartu);
 			Map<String, Object> data = new LinkedHashMap<>();
 			request.setAttribute("data", data);
 			data.put("zaKartu", zaKartu);
 			data.put("svaSedista", svaSedista);
-			data.put("sediste", sediste);
 			if(!(ulogovanKorisnik==null)) {
 				data.put("ulogaKorisnika", ulogovanKorisnik.getUloga().toString());
 			}else {

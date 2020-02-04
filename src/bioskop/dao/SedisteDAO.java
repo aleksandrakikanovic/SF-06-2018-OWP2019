@@ -46,7 +46,7 @@ public class SedisteDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
-		String query = "select * from Sediste  where id = ?)";
+		String query = "select * from Sediste  where id = ?";
 		pstmt = conn.prepareStatement(query);
 		pstmt.setInt(1, id);
 		rset = pstmt.executeQuery();
