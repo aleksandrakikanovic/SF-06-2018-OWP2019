@@ -31,6 +31,9 @@ $('#RegistrujButton').on('click', function(event) {
             'ponovljenaLozinka': ponovljenaLozinka, 
 		};
 		$.post('RegistracijaServlet', params, function(data) {
+			if (data.status == 'success') {
+				window.location.replace('index.html');
+			}
 		});
 		
 	});

@@ -56,7 +56,7 @@ public class KorisnikDAO {
 			String lozinka = rset.getString(2);
 			long millis=rset.getLong(3);
 		    Date datumRegistracije = new Date(millis);
-				Uloga uloga = Uloga.valueOf(rset.getString(4));
+			Uloga uloga = Uloga.valueOf(rset.getString(4));
 			while (rset.next()) {
 				int index = 1;
 				 korisnickoIme = rset.getString(index++);
@@ -64,6 +64,7 @@ public class KorisnikDAO {
 				 millis=rset.getLong(index++);
 			     datumRegistracije = new Date(millis);	
 				 System.out.println(datumRegistracije);
+				 uloga = Uloga.valueOf(rset.getString(index++));
 				Korisnik k = new Korisnik(korisnickoIme, lozinka, datumRegistracije, uloga);
 				sviKorisnici.add(k);
 			}

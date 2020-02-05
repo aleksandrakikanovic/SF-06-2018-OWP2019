@@ -88,7 +88,6 @@ $(document).ready(function() {
 		            return;
 		        }
 		        if (data.status == 'success') {
-		        	alert('success');
 		            window.location.replace('index.html');
 		        }
 		    });

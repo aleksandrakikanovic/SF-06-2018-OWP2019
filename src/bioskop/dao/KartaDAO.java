@@ -76,24 +76,15 @@ public class KartaDAO {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, korisnickoIme);
 			rset = pstmt.executeQuery();
-			int kartaId = rset.getInt(1);
-			int projekcijaId = rset.getInt(2);
-			Projekcija p = ProjekcijaDAO.get(Integer.toString(projekcijaId));
-			int sedisteId = rset.getInt(3);
-			Sediste s = SedisteDAO.getOne(sedisteId);
-			Date datumVremeProdaje = rset.getDate(4);
-			String imeKorisnika = rset.getString(5);
-			Korisnik k = KorisnikDAO.get(imeKorisnika);
-			while (rset.next()) {
-				int index=1;
-				 kartaId = rset.getInt(index++);
-				 projekcijaId = rset.getInt(index++);
-				 p = ProjekcijaDAO.get(Integer.toString(projekcijaId));
-				 sedisteId = rset.getInt(index++);
-				 s = SedisteDAO.getOne(sedisteId);
-				 datumVremeProdaje = rset.getDate(index++);
-				 imeKorisnika = rset.getString(index++);
-				 k = KorisnikDAO.get(imeKorisnika);
+			if (rset.next()) {
+				int kartaId = rset.getInt(1);
+				int projekcijaId = rset.getInt(2);
+				Projekcija p = ProjekcijaDAO.get(Integer.toString(projekcijaId));
+				int sedisteId = rset.getInt(3);
+				Sediste s = SedisteDAO.getOne(sedisteId);
+				Date datumVremeProdaje = rset.getDate(4);
+				String imeKorisnika = rset.getString(5);
+				Korisnik k = KorisnikDAO.get(imeKorisnika);
 				Karta karta = new Karta(kartaId, p, s, datumVremeProdaje, k);
 				karteKorisnika.add(karta);
 			}
