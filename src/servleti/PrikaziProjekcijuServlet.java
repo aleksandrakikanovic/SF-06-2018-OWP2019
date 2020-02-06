@@ -33,6 +33,7 @@ public class PrikaziProjekcijuServlet extends HttpServlet {
 			Korisnik ulogovanKorisnik = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
 			String id = request.getParameter("id");
 		    Projekcija izabranaProjekcija = ProjekcijaDAO.get(id);
+		    System.out.println(izabranaProjekcija.getCenaKarte());
 		    String slobodnaSedista = SedisteDAO.get(izabranaProjekcija);
 			Map<String, Object> data = new LinkedHashMap<>();
 			request.setAttribute("data", data);

@@ -1,5 +1,4 @@
 $(document).ready(function() { 
-	
 	$('#logout').on('click', function(event) {
 		$.get('LogoutServlet', function(data) {
 			console.log(data);
@@ -8,12 +7,9 @@ $(document).ready(function() {
 				return;
 			}
 		});
-	
 		event.preventDefault();
 		return false;
 	});
-	
-	
 	var projekcijeTable = $('#projekcijeTable');
 	function getProjekcije(){
 		$.get('SveProjekcijeServlet', function(data) {
@@ -43,10 +39,10 @@ $(document).ready(function() {
 			for (projekcija in sveProjekcije) {
 				projekcijeTable.append(
 					'<tr>' +
-					'<td><a href="Projekcija.html?id=' + sveProjekcije[projekcija].id + '">' + sveProjekcije[projekcija].film.naziv + '</a></td>' + 
+						'<td><a href="Projekcija.html?id=' + sveProjekcije[projekcija].id + '">' + sveProjekcije[projekcija].film.naziv + '</a></td>' + 
 						'<td>' + sveProjekcije[projekcija].tipProjekcije + '</td>' + 
 						'<td>' + sveProjekcije[projekcija].sala.naziv + '</td>' + 
-						'<td>' + sveProjekcije[projekcija].datum + '</td>' + 
+						'<td>' + new Date(sveProjekcije[projekcija].datum).toLocaleDateString() + '</td>' + 
 						'<td>' + sveProjekcije[projekcija].vreme + '</td>' + 
 						'<td>' + sveProjekcije[projekcija].cenaKarte + '</td>' + 
 					'</tr>')}
@@ -58,12 +54,9 @@ $(document).ready(function() {
 			var sviFilmovi = data.sviFilmovi;
 			for (film in sviFilmovi) {
 				filmCmb.append(
-					'<option value="'+sviFilmovi[film].id+ '">' + sviFilmovi[film].naziv+ '</option>'
-				
-				)}
+					'<option value="'+sviFilmovi[film].id+ '">' + sviFilmovi[film].naziv+ '</option>');
+				}
 			})};	
-
-
 getProjekcije();
 getFilmovi();
 	

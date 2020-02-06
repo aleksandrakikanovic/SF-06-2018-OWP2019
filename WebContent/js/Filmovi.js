@@ -43,11 +43,9 @@ $(document).ready(function() {
 						'<td>' + sviFilmovi[film].trajanje + '</td>' + 
 						'<td>' + sviFilmovi[film].distributer + '</td>' + 
 						'<td>' + sviFilmovi[film].zemljaPorekla + '</td>' + 
-						'<td>' + sviFilmovi[film].godinaProizvodnje + '</td>' + 
-						
+						'<td>' + sviFilmovi[film].godinaProizvodnje + '</td>' + 	
 					'</tr>')}
-			})};
-			
+			})};	
 	getFilmovi();
 	
 });

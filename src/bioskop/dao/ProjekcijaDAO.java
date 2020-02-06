@@ -62,7 +62,7 @@ public class ProjekcijaDAO {
 				long millis=rset.getLong(5);
 				String vreme = rset.getString(6);
 			    Date datum = new Date(millis);
-				double cenaKarte = rset.getInt(6);
+				double cenaKarte = rset.getDouble(7);
 				String a = rset.getString(7);
 				Korisnik admin = KorisnikDAO.get(a);
 				 return new  Projekcija(id, film, tipProjekcije, sala, datum, vreme, cenaKarte, admin);
@@ -84,10 +84,8 @@ public class ProjekcijaDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
-			//369
 			String query = "select * from Projekcija where deleted='no'";
 			pstmt = conn.prepareStatement(query);
-			//long millis1 = System.currentTimeMillis();
 			rset = pstmt.executeQuery();
 			int id = rset.getInt(1);
 			String f = rset.getString(2);
@@ -108,7 +106,6 @@ public class ProjekcijaDAO {
 				 f = rset.getString(index++);
 				 t = rset.getString(index++);
 				 s = rset.getString(index++);
-				 //d = rset.getString(index++);
 				 millis=rset.getLong(index++);
 				 vreme = rset.getString(index++);
 				 cenaKarte = rset.getInt(index++);
@@ -135,7 +132,6 @@ public class ProjekcijaDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
-			//369
 			String query = "select * from Projekcija where filmId = ?";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, filmId);
@@ -159,9 +155,7 @@ public class ProjekcijaDAO {
 				 f = rset.getString(index++);
 				 t = rset.getString(index++);
 				 s = rset.getString(index++);
-				 //d = rset.getString(index++);
 				 millis=rset.getLong(index++);
-				 System.out.println(f);
 				 vreme = rset.getString(index++);
 				 cenaKarte = rset.getInt(index++);
 				 a = rset.getString(index++);

@@ -1,5 +1,4 @@
 $(document).ready(function() {
-	
 	$('#logout').on('click', function(event) {
 		$.get('LogoutServlet', function(data) {
 			if (data.status == 'unauthenticated') {
@@ -7,16 +6,13 @@ $(document).ready(function() {
 				return;
 			}
 		});
-	
 		event.preventDefault();
 		return false;
 	});
 	
 	function getFilm(){
 		var id = window.location.search.slice(1).split('&')[0].split('=')[1];
-		params = {
-				'id':id
-				};	
+		params = {'id':id};	
 		var tabela = $('#tabelaFilm');
 			$.get('PrikaziFilmServlet', params, function(data) {
 				var izabraniFilm = data.izabraniFilm;
@@ -92,20 +88,15 @@ $(document).ready(function() {
 					$('#izmeniFilm').hide();
 					$('#izbrisiFilm').hide();
 					$('#kupiKartu').show();
-
 				};	
-
 			$('#tabelaFilm').on('click', '#izbrisiFilm', function(){
 				params = { 'id':izabraniFilm.id };
 				tabela.append(
 						 '<tr>'+
 						 	'<td>'+'</td>'+
-							  	'<td>'+
-				                  '<button class="btn btn-warning" type="submit" id="potvrdiBrisanje">Potvrdi brisanje</button>' +
-								'</td>'+
+							'<td>'+ '<button class="btn btn-warning" type="submit" id="potvrdiBrisanje">Potvrdi brisanje</button>' +'</td>'+
 						'</tr>'+
-					    '<tr>' 
-				);
+					    '<tr>' );
 				$('#tabelaFilm').on('click', '#potvrdiBrisanje', function(){
 					$.post('PrikaziFilmServlet', params, function(data) {
 					  if (data.status == 'unauthenticated') {
@@ -115,13 +106,12 @@ $(document).ready(function() {
 				        if (data.status == 'success') {
 				            window.location.replace('FIlmovi.html');
 				        }
-				});
+					});
 				});
 			});
-			});
+		});
 
-		};
-		
+	};	
 	getFilm();
 });				
 			

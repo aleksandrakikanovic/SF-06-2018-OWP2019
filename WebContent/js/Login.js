@@ -8,20 +8,16 @@ $(document).ready(function() {
 				return;
 			}
 		});
-	
 		event.preventDefault();
 		return false;
 	});
 	var korInput = $('#korInput');
 	var lozInput = $('#lozInput');
 	var loginButton = $('loginButton');
-	
 	$('#loginButton').on('click', function(event) {
 		var korIme = korInput.val();
         var loz = lozInput.val();
-        if(korIme=="" || loz==""){
-        	alert("Neispravni podaci.Pokusajte opet.");
-        }
+        if(korIme=="" || loz==""){ alert("Neispravni podaci.Pokusajte opet.");  }
 		params = {
 			'korIme': korIme, 
             'loz': loz
@@ -37,7 +33,5 @@ $(document).ready(function() {
 				window.location.replace('index.html');
 			}
 		});		
-		event.preventDefault();
-		return false;
-});
+	});
 });

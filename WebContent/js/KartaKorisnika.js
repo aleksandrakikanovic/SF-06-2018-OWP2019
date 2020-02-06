@@ -29,7 +29,7 @@ $(document).ready(function() {
 						'<tr>'+
 					     '<th scope="col">Datum i vreme projekcije</th> ' + 	
 						'<td><a href="Film.html?id=' + izabranaKarta.projekcija.film.id +
-						'" id="prikaziProjekciju">' + izabranaKarta.projekcija.datum + ' ' + izabranaKarta.projekcija.vreme + '</a></td>' + 
+						'" id="prikaziProjekciju">' + new Date(izabranaKarta.projekcija.datum).toLocaleDateString() + ' ' + izabranaKarta.projekcija.vreme + '</a></td>' + 
 						'</tr>'+
 						'<tr>'+
 					     '<th scope="col">Tip projekcije</th> ' + 	
@@ -52,7 +52,17 @@ $(document).ready(function() {
 						'<button type="button" class="btn btn-warning" id="izbrisiKartu">Izbrisi</button>' +
 						'</td>'+
 			    	  '</tr>'
-				   	); 
+				   	);
+				if (data.ulogaKorisnika == "neregistrovan") {
+					$('#profilKorisnika').hide();
+					$('#logout').hide();
+				}else if(data.ulogaKorisnika=="ADMIN"){
+					$('#profilKorisnika').show();
+					$('#logout').show();
+				}else if(data.ulogaKorisnika=="KORISNIK"){
+					$('#profilKorisnika').show();
+					$('#logout').show();
+				};	
 			$('#kartaKorisnika').on('click', '#izbrisiKartu', function(){
 				params = { 'id':izabranaKarta.id };
 				tabela.append(
@@ -62,8 +72,7 @@ $(document).ready(function() {
 				                  '<button class="btn btn-warning" type="submit" id="potvrdiBrisanje">Potvrdi brisanje</button>' +
 								'</td>'+
 						'</tr>'+
-					    '<tr>' 
-				);
+					    '<tr>');
 				$('#kartaKorisnika').on('click', '#potvrdiBrisanje', function(){
 					$.get('KartaIzmenaServlet', params, function(data) {
 					  if (data.status == 'unauthenticated') {
@@ -73,12 +82,11 @@ $(document).ready(function() {
 				        if (data.status == 'success') {
 				            window.location.replace('Korisnik.html');
 				        }
-				});
+					});
 				});
 			});
-			});
-
-		};
+		});
+	};
 	getKarta();
 });				
 		

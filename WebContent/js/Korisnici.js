@@ -8,7 +8,6 @@ $(document).ready(function(){
 			}
 		});
 	});
-	
 	var korisniciTable = $('#korisniciTable');
 	function getKorisnici(){
 		$.get('SviKorisniciServlet', function(data){
@@ -18,47 +17,20 @@ $(document).ready(function(){
 				'<tr>' +
 					'<td><a href="Korisnik.html?korIme=' + sviKorisnici[korisnik].korisnickoIme + '">' + sviKorisnici[korisnik].korisnickoIme + '</a></td>' + 
 					'<td>' + sviKorisnici[korisnik].lozinka + '</td>' + 
-					'<td>' + sviKorisnici[korisnik].datumRegistracije + '</td>' + 
+					'<td>' + new Date(sviKorisnici[korisnik].datumRegistracije).toLocaleDateString() + '</td>' + 
 					'<td>' + sviKorisnici[korisnik].uloga + '</td>' + 
 				'</tr>')}
+			if (data.ulogaKorisnika == "neregistrovan") {
+				$('#profilKorisnika').hide();
+				$('#logout').hide();
+			}else if(data.ulogaKorisnika=="ADMIN"){
+				$('#profilKorisnika').show();
+				$('#logout').show();
+			}else if(data.ulogaKorisnika=="KORISNIK"){
+				$('#profilKorisnika').show();
+				$('#logout').show();
+			};	
 		});
 	};
-	//brisanje iz tabele, ne iz baze(ispravicu do odbrane)
-	$('#korisniciTable').on('click', '#izbrisiKorisnika', function(){
-		$(this).closest ('tr').remove();
-		params = {
-				//'action': 'remove',
-				};
-
-		$.post('RegistracijaServlet', params, function(data) {
-		
-		});
-		
-});
-	$('#korisniciTable').on('click', '#prikaziKorisnika', function(){
-        var currentRow=$(this).closest("tr"); 
-        var korisnickoIme = currentRow.find("td:eq(0)").text(); 
-        var lozinka = currentRow.find("td:eq(1)").val();
-        var datumRegistracije = currentRow.find("td:eq(2)").text();
-        var uloga = currentRow.find("td:eq(3)").text(); 
-
-        var data = 'Korisnicko ime:' + korisnickoIme + '\nLozinka: '+ lozinka + '\nDatum registracije: ' + datumRegistracije + '\nUloga: ' + uloga;
-        alert(data);
-    
-        params = {
-    			'korisnickoIme' : korisnickoIme,
-    			'lozinka': lozinka, 
-                'datumRegistracije': datumRegistracije,
-                'uloga':uloga
-
-    		};
-		$.post('PrikaziKorisnikaServlet', params, function(data) {
-			window.location.replace('KorisnikZaAdmina.html');
-
-		});
-});
-
-		
-
 	getKorisnici();
 });

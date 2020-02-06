@@ -1,33 +1,15 @@
 $(document).ready(function() {
-		$.post('SviFilmoviServlet', function(data) {
-			if (data.ulogaKorisnika == "neregistrovan") {
-				$('#prikaziKorisnike').hide();
-				$('#profilKorisnika').hide();
-				$('#logout').hide();
-			}else if(data.ulogaKorisnika=="ADMIN"){
-				$('#prikaziKorisnike').show();
-				$('#profilKorisnika').show();
-				$('#logout').show();
-			}else if(data.ulogaKorisnika=="KORISNIK"){
-				$('#prikaziKorisnike').hide();
-				$('#profilKorisnika').show();
-				$('#logout').show();
-			}
+	$('#logout').on('click', function(event) {
+			$.get('LogoutServlet', function(data) {
+				console.log(data);
+				if (data.status == 'unauthenticated') {
+					window.location.replace('index.html');
+					return;
+				}
+			});
+			event.preventDefault();
+			return false;
 		});
-	
-	
-  $('#logout').on('click', function(event) {
-		$.get('LogoutServlet', function(data) {
-			console.log(data);
-			if (data.status == 'unauthenticated') {
-				window.location.replace('index.html');
-				return;
-			}
-		});
-		event.preventDefault();
-		return false;
-	});
-	
 	var nazivInput = $('#nazivInput');
 	var reziserInput = $('#reziserInput');
 	var glumciInput =  $('#glumciInput');
@@ -38,8 +20,22 @@ $(document).ready(function() {
 	var godinaProizvodnjeInput =  $('#godinaProizvodnjeInput');
 	var opisInput =  $('#reziserInput');
 	var dodajFilmButton =  $('#dodajFilmButton');
-	console.log("provera");
-  $('#dodajFilmButton').on('click', function(event) {
+	$.post('SviFilmoviServlet', function(data) {
+		if (data.ulogaKorisnika == "neregistrovan") {
+			$('#prikaziKorisnike').hide();
+			$('#profilKorisnika').hide();
+			$('#logout').hide();
+		}else if(data.ulogaKorisnika=="ADMIN"){
+			$('#prikaziKorisnike').show();
+			$('#profilKorisnika').show();
+			$('#logout').show();
+		}else if(data.ulogaKorisnika=="KORISNIK"){
+			$('#prikaziKorisnike').hide();
+			$('#profilKorisnika').show();
+			$('#logout').show();
+		}
+	});
+	$('#dodajFilmButton').on('click', function(event) {
 		var naziv = nazivInput.val();
         var reziser = reziserInput.val(); //opciono
         var glumci = glumciInput.val(); //opciono
@@ -54,7 +50,6 @@ $(document).ready(function() {
 	        alert("Popunite sva polja!");
 	        return false;
 	    }
-	    
 		params = {
 			'naziv': naziv, 
             'reziser': reziser,
@@ -76,8 +71,5 @@ $(document).ready(function() {
 			}
 		});
 		
-});
-	//event.preventDefault();
-	//return false;
-
+	});
 });

@@ -21,7 +21,7 @@ public class SedisteDAO {
 		ResultSet rset = null;
 		String brojSedista = "";
 		try {
-		String query = "select count(*) from Sediste  where salaId = ? and id not in (select idSediste from Karta where projekcijaId = ?)";
+		String query = "select count(*) from Sediste  where salaId = ? and id not in (select idSediste from Karta where projekcijaId = ? and deleted='no')";
 		pstmt = conn.prepareStatement(query);
 		int index=1;
 		int idSala= projekcija.getSala().getId();
@@ -101,7 +101,7 @@ public class SedisteDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
-			String query = "select * from Sediste where salaId = ? and  id not in (select idSediste from Karta where projekcijaId = ?)";
+			String query = "select * from Sediste where salaId = ? and  id not in (select idSediste from Karta where projekcijaId = ? and deleted='no')";
 			pstmt = conn.prepareStatement(query);
 			int index1=1;
 			int idSala= projekcija.getSala().getId();
