@@ -105,12 +105,13 @@ public class KorisnikDAO {
 		Connection conn = ConnectionManager.getConnection();
 		PreparedStatement pstmt = null;
 		try {
-			String query = "update korisnik set korisnickoIme = ?, lozinka = ?, WHERE korisnickoIme = ?";
+			String query = "update korisnik set korisnickoIme = ?, lozinka = ?, uloga = ? WHERE korisnickoIme = ?";
 			pstmt = conn.prepareStatement(query);
 			int index = 1;
 			pstmt.setString(index++, korisnik.getKorisnickoIme());
 			pstmt.setString(index++, korisnik.getLozinka());
-			pstmt.setDate(index++, korisnik.getDatumRegistracije());
+			pstmt.setString(index++, korisnik.getUloga().toString());
+
 			return pstmt.executeUpdate() == 1;
 		} finally {
 			try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}

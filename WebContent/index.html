@@ -34,6 +34,9 @@
                       <li class="nav-item">
                     <a class="nav-link" href="FIlmovi.html" id="prikaziFilmove">Filmovi</a>
                     </li> 
+                     <li class="nav-item">
+                      <a class="nav-link" href="DodajProjekciju.html" id="dodajProjekciju">Dodaj projekciju</a>
+                    </li> 
                     <li class="nav-item">
                     <a class="nav-link" href="Korisnici.html" id="prikaziKorisnike">Korisnici</a>
                     </li> 
@@ -65,61 +68,44 @@
                 <p>Danasnje projekcije u našem bioskopu</p>
             </div>
         </div>
-
          <div class="form-row justify-content-md-center">
           	<div class="col-md-10 mb-10">
 
 	          <table class="table table-hover table-dark" id="projekcijeTable" style="cursor: pointer;">
-	          <tr>                     
-                 <select name="Film" id="izaberiFilm" class="combobox">
-                   <option value="">Film</option>
-                    </select>
-                
-	          	<select name="" id="salaCombobox" class="combobox">
+	          <tr>              
+               <td><input type="text"  id="pretragaFilm" placeholder="unesi ime filma"> </td>
+                <td><select name="" id="tipProjekcijeCombobox" class="combobox2">
+                    <option value="">Tip projekcije</option>
+                    <option value="dvaD">2D</option>
+                    <option value="triD">3D</option>
+                    <option value="cetiriD">4D</option>
+                </select> </td>
+         		<td><select name="" id="salaCombobox" class="combobox2">
                     <option value="">Sala</option>
                     <option value="1">Prva sala</option>
                     <option value="2">Druga sala</option>
                     <option value="3">Treca sala</option>
                     <option value="4">Cetvrta sala</option>
                     <option value="5">Peta sala</option>
-                    </select>
-               	  <select name="" id="tipProjekcijeCombobox" class="combobox">
-                    <option value="">Tip projekcije</option>
-                    <option value="dvaD">2D</option>
-                    <option value="triD">3D</option>
-                    <option value="cetiriD">4D</option>
-                    </select>  
-                <button class="btn btn-sm" type="submit" id="filtrirajProjekcijuButton">Pretrazi</button>
+                 </select> </td>
+                <td><input type="number"  id="pretragaCenaMin" placeholder="Cena: od"> </td>
+               <td><input type="number"  id="pretragaCenaMax" placeholder="Cena: do"> </td>
+             </tr>
+             <tr>
+               <td><p>Datum:od</p> </td>
+               <td> <input type="date"  id="pretragaDatumOd" placeholder=""> </td>
+               <td> <p>Datum:do</p> </td>
+               <td> <input type="date"  id="pretragaDatumDo" placeholder=""> </td>
+               <td> <button id="pretraziProjekcije">Pretrazi</button></td>
 	           </tr>
-					<tr>
-	          			 <th scope="col">
-	          			 <select name="" id="sortFilmCombobox" class="combobox1">
-			                    <option value="">Film</option>
-			                    <option value="sortAsc">A-Z</option>
-			                    <option value="sortDesc">Z-A</option>
-		                    </select>      
-	          			 </th>
+				 	<thead>
+	                     <th scope="col">Film</th>
 	                     <th scope="col">Tip projekcije</th>
-	                     <th scope="col">
-	                     	<select name="" id="sortSalaCombobox" class="combobox1">
-			                    <option value="">Sala</option>
-			                    <option value="sortAsc">1-N</option>
-			                    <option value="sortDesc">N-1</option>
-		                    </select>      
+	                     <th scope="col">Sala</th>
+	                     <th scope="col">Datum i vreme</th>
+	                     <th scope="col">Cena</th>
 	                    
-	                     </th>
-	                     <th scope="col">Datum</th>
-	                     <th scope="col">Vreme</th>
-	                     <th scope="col"> 
-	                     	<select name="" id="sortCenaCombobox" class="combobox1">
-			                    <option value="">Cena</option>
-			                    <option value="sortAsc">Rastuca cena</option>
-			                    <option value="sortDesc">Opadajuca cena</option>
-		                    </select>                   
-                		</th>
-	                     
-	                     
-	          		</tr>
+	          		</thead>
 	   			</table>
            </div>
           </div>

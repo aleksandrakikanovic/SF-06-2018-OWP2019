@@ -8,8 +8,7 @@ $(document).ready(function() {
 		});
 		event.preventDefault();
 		return false;
-	});
-	
+	});		
 	function getProjekcija(){
 		var id = window.location.search.slice(1).split('&')[0].split('=')[1];
 		params={'id':id };
@@ -53,12 +52,6 @@ $(document).ready(function() {
 				    '<tr>'+
 				    	'<td>'+'</td>'+
 				    	'<td align="center">'+
-							'<button type="button" class="btn btn-warning" id="izmeniProjekciju">Izmeni</button>' +
-						'</td>'+
-					'</tr>'+
-				    '<tr>'+
-				    	'<td>'+'</td>'+
-				    	'<td align="center">'+
 							'<button type="button" class="btn btn-warning" id="izbrisiProjekciju">Izbrisi</button>' +
 					     '</td>'+
 					'</tr>'
@@ -70,6 +63,7 @@ $(document).ready(function() {
 					$('#prikaziKorisnike').hide();
 					$('#profilKorisnika').hide();
 					$('#izmeniProjekciju').hide();
+					$('#zaAdmina').hide();
 					$('#izbrisiProjekciju').hide();
 					$('#kupiKartu').hide();
 					$('#logout').hide();
@@ -77,12 +71,14 @@ $(document).ready(function() {
 					$('#prikaziKorisnike').show();
 					$('#profilKorisnika').show();
 					$('#logout').show();
+					$('#zaAdmina').show();
 					$('#kupiKartu').hide();
 					$('#izmeniProjekciju').show();
 					$('#izbrisiProjekciju').show();
 				}else if(data.ulogaKorisnika=="KORISNIK"){
 					$('#prikaziKorisnike').hide();
 					$('#profilKorisnika').show();
+					$('#zaAdmina').hide();
 					$('#logout').show();
 					$('#kupiKartu').show();
 					$('#izmeniProjekciju').hide();
@@ -110,6 +106,7 @@ $(document).ready(function() {
 						});
 					});
 				});
+
 			});	
 		};
 	getProjekcija();

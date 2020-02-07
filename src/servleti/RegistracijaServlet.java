@@ -2,6 +2,9 @@ package servleti;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +17,24 @@ import model.Korisnik.Uloga;
 public class RegistracijaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		try {
+			String korisnickoIme = request.getParameter("korisnickoIme");
+			String lozinka = request.getParameter("lozinka");
+			String u = request.getParameter("uloga");
+			Uloga uloga = Uloga.valueOf(u);
+			Korisnik korisnik = KorisnikDAO.get(korisnickoIme);
+			korisnik.setKorisnickoIme(korisnickoIme);
+			korisnik.setLozinka(lozinka);
+			korisnik.setTip(uloga);
+		    KorisnikDAO.update(korisnik);
+			Map<String, Object> data = new LinkedHashMap<>();
+			request.setAttribute("data", data);
+			request.getRequestDispatcher("./SuccessServlet").forward(request, response);
+
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -40,6 +58,10 @@ public class RegistracijaServlet extends HttpServlet {
 		        java.sql.Date date = new java.sql.Date(millis);
 		        Korisnik korisnik = new Korisnik(korisnickoIme, lozinka, date, Uloga.KORISNIK);
 		        KorisnikDAO.add(korisnik);
+				Map<String, Object> data = new LinkedHashMap<>();
+				request.setAttribute("data", data);
+				request.getRequestDispatcher("./SuccessServlet").forward(request, response);
+
 		} catch (Exception e) { 
 			e.printStackTrace();
 		}

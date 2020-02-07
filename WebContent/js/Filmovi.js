@@ -17,20 +17,17 @@ $(document).ready(function() {
 		$.get('SviFilmoviServlet', function(data) {
 			if (data.ulogaKorisnika == "neregistrovan") {
 				$('#prikaziKorisnike').hide();
-				$('#dodajProjekciju').hide();
 				$('#profilKorisnika').hide();
 				$('#dodajFilm').hide();
 				$('#logout').hide();
 			}else if(data.ulogaKorisnika=="ADMIN"){
 				$('#prikaziKorisnike').show();
 				$('#profilKorisnika').show();
-				$('#dodajProjekciju').show();
 				$('#dodajFilm').show();
 				$('#logout').show();
 			}else if(data.ulogaKorisnika=="KORISNIK"){
 				$('#prikaziKorisnike').hide();
 				$('#profilKorisnika').show();
-				$('#dodajProjekciju').hide();
 				$('#dodajFilm').hide();
 				$('#logout').show();
 			}

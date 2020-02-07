@@ -22,10 +22,37 @@ import model.Sala;
 public class DodajFilmServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		try {
+			String id = request.getParameter("id");
+			String naziv = request.getParameter("naziv");
+			String reziser = request.getParameter("reziser"); 
+			String glumci = request.getParameter("glumci"); 
+			String zanr = request.getParameter("zanr"); 
+			int trajanje = Integer.parseInt(request.getParameter("trajanje"));
+			String distributer = request.getParameter("distributer");
+			String zemljaPorekla = request.getParameter("zemljaPorekla");
+			int godinaProizvodnje = Integer.parseInt(request.getParameter("godinaProizvodnje"));
+			String opis = request.getParameter("opis");
+			Film film = FilmDAO.get(id);
+			film.setNaziv(naziv);
+			film.setGlumci(glumci);
+			film.setDistributer(distributer);
+			film.setGodinaProizvodnje(godinaProizvodnje);
+			film.setOpis(opis);
+			film.setReziser(reziser);
+			film.setZemljaPorekla(zemljaPorekla);
+			film.setTrajanje(trajanje);
+			film.setZanr(zanr);
+			FilmDAO.update(film);
+			Map<String, Object> data = new LinkedHashMap<>();
+			request.setAttribute("data", data);
+			request.getRequestDispatcher("./SuccessServlet").forward(request, response);
+
+			} catch (Exception e) { 
+			e.printStackTrace(); }
+
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		try {
 			Korisnik ulogovanKorisnik = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
 			String naziv = request.getParameter("naziv");
@@ -52,6 +79,7 @@ public class DodajFilmServlet extends HttpServlet {
 				FilmDAO.add(film);
 				Map<String, Object> data = new LinkedHashMap<>();
 				request.setAttribute("data", data);
+				request.getRequestDispatcher("./SuccessServlet").forward(request, response);
 				if(!(ulogovanKorisnik==null)) {
 					data.put("ulogaKorisnika", ulogovanKorisnik.getUloga().toString());
 				}else {

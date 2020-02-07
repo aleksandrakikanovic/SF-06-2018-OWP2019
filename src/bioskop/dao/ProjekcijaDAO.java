@@ -78,8 +78,58 @@ public class ProjekcijaDAO {
 	}
 
 
-	public static List<Projekcija> getAll() throws Exception {
+	public static List<Projekcija> getAll(String imeFilma,String tip, String sala1, double cenaMin, double cenaMax ) throws Exception {
 		List<Projekcija> sveProjekcije = new ArrayList<>();
+		Connection conn = ConnectionManager.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			String query = "select * from Projekcija where tipProjekcije = ? and salaId = ? "
+					+ "and cenaKarte > ? and cenaKarte < ? and deleted='no' and filmId in (select id from Film where naziv = ?)";
+			pstmt = conn.prepareStatement(query);
+			int index = 1;
+			int s1 = Integer.parseInt(sala1);
+			pstmt.setString(index++, tip);
+			pstmt.setInt(index++, s1);
+			pstmt.setDouble(index++, cenaMin);
+			pstmt.setDouble(index++, cenaMax);
+			pstmt.setString(index++, imeFilma);
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+			     index = 1;
+			     int id = rset.getInt(index++);
+			     
+			     String f = rset.getString(index++);
+			     String t = rset.getString(index++);
+			     String s = rset.getString(index++);
+			     long millis=rset.getLong(index++);
+			     String vreme = rset.getString(index++);
+			     double cenaKarte = rset.getInt(index++);
+			     String a = rset.getString(index++);
+			     Korisnik admin=KorisnikDAO.get(a);
+				 Film film = FilmDAO.get(f);
+					System.out.println(f);
+					System.out.println(t);
+					System.out.println(s);
+					System.out.println(a);
+
+				 ETipProjekcije tipProjekcije = ETipProjekcije.valueOf(t);
+				 Date datum = new Date(millis);
+				 Sala sala = SalaDAO.get(s);
+				 Projekcija projekcija = new Projekcija(id, film, tipProjekcije, sala, datum, vreme, cenaKarte, admin);
+				 sveProjekcije.add(projekcija);
+			}
+
+		} finally {
+			try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}
+			try {rset.close();} catch (Exception ex1) {ex1.printStackTrace();}
+			try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();} 
+		}
+		
+		return sveProjekcije;
+	}
+	public static List<Projekcija> getProjekcije() throws Exception {
+		List<Projekcija> projekcije = new ArrayList<>();
 		Connection conn = ConnectionManager.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -101,21 +151,22 @@ public class ProjekcijaDAO {
 			String a = rset.getString(7);
 			Korisnik admin = KorisnikDAO.get(a);
 			while (rset.next()) {
-				int index = 1;
-				id = rset.getInt(index++);
-				 f = rset.getString(index++);
-				 t = rset.getString(index++);
-				 s = rset.getString(index++);
-				 millis=rset.getLong(index++);
-				 vreme = rset.getString(index++);
-				 cenaKarte = rset.getInt(index++);
-				 a = rset.getString(index++);
-				 admin=KorisnikDAO.get(a);
-				 film = FilmDAO.get(f);
-				 tipProjekcije = ETipProjekcije.valueOf(t);
-				 datum = new Date(millis);
+			     int index = 1;
+					id = rset.getInt(index++);
+					 f = rset.getString(index++);
+					 t = rset.getString(index++);
+					 s = rset.getString(index++);
+					 millis=rset.getLong(index++);
+					 vreme = rset.getString(index++);
+					 cenaKarte = rset.getInt(index++);
+					 a = rset.getString(index++);
+					 admin=KorisnikDAO.get(a);
+					 film = FilmDAO.get(f);
+					 tipProjekcije = ETipProjekcije.valueOf(t);
+					 datum = new Date(millis);
+					 sala = SalaDAO.get(s);
 				 Projekcija projekcija = new Projekcija(id, film, tipProjekcije, sala, datum, vreme, cenaKarte, admin);
-				 sveProjekcije.add(projekcija);
+				 projekcije.add(projekcija);
 			}
 
 		} finally {
@@ -124,8 +175,9 @@ public class ProjekcijaDAO {
 			try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();} 
 		}
 		
-		return sveProjekcije;
+		return projekcije;
 	}
+	
 	public static List<Projekcija> getAllZaFilm(int filmId) throws Exception {
 		List<Projekcija> projekcijeFilma = new ArrayList<>();
 		Connection conn = ConnectionManager.getConnection();
@@ -163,6 +215,7 @@ public class ProjekcijaDAO {
 				 film = FilmDAO.get(f);
 				 tipProjekcije = ETipProjekcije.valueOf(t);
 				 datum = new Date(millis);
+				 sala = SalaDAO.get(s);
 				 Projekcija projekcija = new Projekcija(id, film, tipProjekcije, sala, datum, vreme, cenaKarte, admin);
 				 projekcijeFilma.add(projekcija);
 			}
@@ -175,7 +228,28 @@ public class ProjekcijaDAO {
 		
 		return projekcijeFilma;
 	}
+	public static boolean update(Projekcija projekcija) throws Exception {
+		Connection conn = ConnectionManager.getConnection();
+		PreparedStatement pstmt = null;
+		try {
+			String query = "update Projekcija set filmId = ?, tipProjekcije ?, salaId = ?, datum = ?, vreme = ?, cenaKarte = ?,admin = ? "
+					+ "where id = ?";
+			pstmt = conn.prepareStatement(query);
+			int index = 1;
+			pstmt.setInt(index++, projekcija.getFilm().getId());
+			pstmt.setString(index++, projekcija.getTipProjekcije().toString());
+			pstmt.setInt(index++, projekcija.getSala().getId());
+			pstmt.setDate(index++, projekcija.getDatum());
+			pstmt.setString(index++, projekcija.getVreme());
+			pstmt.setDouble(index++, projekcija.getCenaKarte());
+			pstmt.setInt(index++, projekcija.getId());
 
+			return pstmt.executeUpdate() == 1;
+		} finally {
+			try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}
+			try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();}
+		}
+	}
 		
 	public static boolean delete(int indexOf) throws Exception {
 		Connection conn = ConnectionManager.getConnection();
