@@ -187,4 +187,14 @@
     <servlet-name>KartaIzmenaServlet</servlet-name>
     <url-pattern>/KartaIzmenaServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>IzmenaKorisnikaServlet</display-name>
+    <servlet-name>IzmenaKorisnikaServlet</servlet-name>
+    <servlet-class>servleti.IzmenaKorisnikaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>IzmenaKorisnikaServlet</servlet-name>
+    <url-pattern>/IzmenaKorisnikaServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

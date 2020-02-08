@@ -22,7 +22,7 @@ public class KorisnikDAO {
 		String query = "select * from Korisnik where korisnickoIme = ? and deleted='no'";
 		pstmt = conn.prepareStatement(query);
 		int index=1;
-		pstmt.setString(index++, korisnickoIme);
+		pstmt.setString(1, korisnickoIme);
 		rset = pstmt.executeQuery();
 
 		if (rset.next()) {
@@ -101,7 +101,7 @@ public class KorisnikDAO {
 	}
 	
 	
-	public static boolean update(Korisnik korisnik) throws Exception {
+	public static boolean update(Korisnik korisnik, String firstUsername) throws Exception {
 		Connection conn = ConnectionManager.getConnection();
 		PreparedStatement pstmt = null;
 		try {
@@ -111,6 +111,7 @@ public class KorisnikDAO {
 			pstmt.setString(index++, korisnik.getKorisnickoIme());
 			pstmt.setString(index++, korisnik.getLozinka());
 			pstmt.setString(index++, korisnik.getUloga().toString());
+			pstmt.setString(index++, firstUsername);
 
 			return pstmt.executeUpdate() == 1;
 		} finally {

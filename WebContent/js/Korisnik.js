@@ -23,13 +23,9 @@ $(document).ready(function() {
 					 '<th scope="col">Datum registracije</th> ' + 	
 					 '<td>' +  new Date(korisnik.datumRegistracije).toLocaleDateString() + '</td>' + 
 				  '</tr>' +
-				  '<tr>'+
-					 '<th scope="col">Uloga</th> ' + 	
-					 '<td>' + korisnik.uloga + '</td>' + 
-				   '</tr>' +
-				   '<tr>'+
-					  '<td align="right">'+'<button type="button" class="btn btn-warning" id="izbrisiKorisnika">Izbrisi</button>' + '</td>'+
-					  '<td align="right">'+'<button type="button" class="btn btn-warning" id="izmeniKorisnika">Izmeni</button>' + '</td>'+
+				   '<tr>'+			
+				   '<td>'+'</td>'+
+					  '<td>'+'<button type="button" class="btn btn-warning" id="izbrisiKorisnika">Izbrisi</button>' + '</td>'+
 				    '</tr>');
 			if (data.ulogaKorisnika == "neregistrovan") {
 				$('#prikaziKorisnike').hide();
@@ -38,14 +34,43 @@ $(document).ready(function() {
 			}else if(data.ulogaKorisnika=="ADMIN"){
 				$('#prikaziKorisnike').show();
 				$('#profilKorisnika').show();
+				$('#izaberiUlogu').show();
 				$('#tabelaKarte').hide();
 				$('#logout').show();
 			}else if(data.ulogaKorisnika=="KORISNIK"){
 				$('#prikaziKorisnike').hide();
 				$('#profilKorisnika').show();
+				$('#izaberiUlogu').hide();
 				$('#logout').show();
 			};	
-			//brisanje korisnika
+			var korisnickoImeInput = $('#korImeInput');
+			var izaberiUloguInput = $('#izaberiUlogu');
+			var lozinkaInput = $('#lozinkaInput');
+			korisnickoImeInput.val(korisnik.korisnickoIme);
+			izaberiUlogu
+			lozinkaInput.val(korisnik.lozinka);
+			$('#izmeniKorisnika').on('click', function(event) {
+				var korisnickoImeIzmena = korisnickoImeInput.val();
+			    var lozinka = lozinkaInput.val();
+			    var uloga = izaberiUloguInput.val();
+			        if(korisnickoImeIzmena=="" || lozinka==""){ 
+			        	alert("Neispravni podaci.Pokusajte opet."); }
+					params = {
+							'korisnickoIme':korisnik.korisnickoIme,
+						'korisnickoImeIzmena': korisnickoImeIzmena, 
+			            'lozinka': lozinka,
+			            'uloga':uloga
+							  }
+					$.get('RegistracijaServlet', params, function(data) {
+						$.get('LogoutServlet', function(data) {
+							if (data.status == 'unauthenticated') {
+								window.location.replace('index.html');
+								return;
+							}
+						});
+
+					});		
+				});
 			});
 		};
 	function getKarte(){
@@ -68,6 +93,7 @@ $(document).ready(function() {
 			};
 		});
 	};
+	
 	getKorisnik();
 	getKarte();
 });				

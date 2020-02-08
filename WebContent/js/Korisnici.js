@@ -15,7 +15,7 @@ $(document).ready(function(){
 			for(korisnik in sviKorisnici){
 				korisniciTable.append(
 				'<tr>' +
-					'<td><a href="Korisnik.html?korIme=' + sviKorisnici[korisnik].korisnickoIme + '">' + sviKorisnici[korisnik].korisnickoIme + '</a></td>' + 
+					'<td><a href="KorisnikZaAdmina.html?korIme=' + sviKorisnici[korisnik].korisnickoIme + '">' + sviKorisnici[korisnik].korisnickoIme + '</a></td>' + 
 					'<td>' + sviKorisnici[korisnik].lozinka + '</td>' + 
 					'<td>' + new Date(sviKorisnici[korisnik].datumRegistracije).toLocaleDateString() + '</td>' + 
 					'<td>' + sviKorisnici[korisnik].uloga + '</td>' + 
