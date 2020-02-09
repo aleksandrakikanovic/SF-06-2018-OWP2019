@@ -77,8 +77,10 @@ public class DodajProjekcijuServlet extends HttpServlet {
 					throw new Exception("Cena karte mora biti veca od 0!");
 				}
 				Projekcija projekcija = new Projekcija(film, tipProjekcije, sala, datum, vreme, cenaKarte, ulogovanKorisnik);
+				boolean postoji = ProjekcijaDAO.proveriSalu(projekcija);
 				ProjekcijaDAO.add(projekcija);
 				Map<String, Object> data = new LinkedHashMap<>();
+				data.put("postoji", postoji);
 				request.setAttribute("data", data);
 				request.getRequestDispatcher("./SuccessServlet").forward(request, response);
 

@@ -18,6 +18,7 @@ $(document).ready(function() {
 	var cenaMinInput = $('#pretragaCenaMin');
 	var cenaMaxInput = $('#pretragaCenaMax');
 
+
 	function getProjekcije(){
 		$.get('SveProjekcijeServlet', function(data) {
 			if (data.ulogaKorisnika == "neregistrovan") {
@@ -90,6 +91,12 @@ $(document).ready(function() {
 		getFiltriraneProjekcije();
 	});
 	
+	nameFilterInput.on('keyup', function(event) {
+		getProducts();
+
+		event.preventDefault();
+		return false;
+	});
 	
 getProjekcije();
 	

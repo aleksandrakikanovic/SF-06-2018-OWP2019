@@ -13,6 +13,15 @@ $(document).ready(function() {
 		return false;
 	});
 	var filmoviTable = $('#filmoviTable');
+	
+	//sort
+	var sortFilmCombobox = $('#sortFilmCombobox');
+	var sortZanrCombobox = $('#sortZanrCombobox');
+	var sortDistributerCombobox = $('#sortDistributerCombobox');
+	var sortZemljaPoreklaCombobox = $('#sortZemljaPoreklaCombobox');
+	var sortZemljaPorekla =sortZemljaPoreklaCombobox;
+
+	
 	function getFilmovi(){
 		$.get('SviFilmoviServlet', function(data) {
 			if (data.ulogaKorisnika == "neregistrovan") {
@@ -42,7 +51,7 @@ $(document).ready(function() {
 						'<td>' + sviFilmovi[film].zemljaPorekla + '</td>' + 
 						'<td>' + sviFilmovi[film].godinaProizvodnje + '</td>' + 	
 					'</tr>')}
-			})};	
+			})
+	};	
 	getFilmovi();
-	
 });

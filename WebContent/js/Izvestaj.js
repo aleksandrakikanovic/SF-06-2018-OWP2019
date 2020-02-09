@@ -11,7 +11,7 @@ $(document).ready(function() {
 	});
 	var izvestajTable = $('#izvestajTable');
 	function getIzvestaj(){
-		$.get('SveProjekcijeServlet', function(data) {
+		$.get('SviFilmoviServlet', function(data) {
 			var izvestaj = data.izvestaj;
 			for (projekcija in izvestaj) {
 				izvestajTable.append(

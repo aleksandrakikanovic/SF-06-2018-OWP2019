@@ -16,8 +16,8 @@ public class IzvestajDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
-			String query = "select count(film.Id), count(Karta.id), sum(cenaKarte)"
-					+ " from Projekcija, Karta, Film where Projekcija.filmId=? and Projekcija.id=Karta.projekcijaId and Projekcija.filmId=Film.id";
+			String query = "select count(Projekcija.Id), count(Karta.id), sum(cenaKarte)"+
+                     " from Projekcija LEFT OUTER JOIN Karta ON Projekcija.id=Karta.projekcijaId where Projekcija.filmId=?";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, idF);
 			rset = pstmt.executeQuery();

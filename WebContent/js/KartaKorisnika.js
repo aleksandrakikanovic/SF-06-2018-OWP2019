@@ -58,9 +58,11 @@ $(document).ready(function() {
 					$('#logout').hide();
 				}else if(data.ulogaKorisnika=="ADMIN"){
 					$('#profilKorisnika').show();
+					$('#izbrisiKartu').show();
 					$('#logout').show();
 				}else if(data.ulogaKorisnika=="KORISNIK"){
 					$('#profilKorisnika').show();
+					$('#izbrisiKartu').hide();
 					$('#logout').show();
 				};	
 			$('#kartaKorisnika').on('click', '#izbrisiKartu', function(){

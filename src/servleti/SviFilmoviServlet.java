@@ -26,6 +26,12 @@ public class SviFilmoviServlet extends HttpServlet {
 			List<Film> sviFilmovi = FilmDAO.getAllZaAdmina();
 			Map<String, Object> data = new LinkedHashMap<>();
 			data.put("sviFilmovi", sviFilmovi);
+			List<Projekcija> izvestaj  = new ArrayList<>();
+			for(Film f : sviFilmovi) {
+				Projekcija projekcijaIz = IzvestajDAO.getIzvestaj(f.getId());
+				izvestaj.add(projekcijaIz);
+			}
+			data.put("izvestaj", izvestaj);
 			request.setAttribute("data", data);
 			if(!(ulogovanKorisnik==null)) {
 				data.put("ulogaKorisnika", ulogovanKorisnik.getUloga().toString());

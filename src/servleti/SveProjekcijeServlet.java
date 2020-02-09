@@ -25,20 +25,11 @@ public class SveProjekcijeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				double minCena = 0.0;
-				double maxCena = Double.MAX_VALUE;
 			try {
 			Korisnik ulogovanKorisnik = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");
 			List<Projekcija> sveProjekcije = ProjekcijaDAO.getProjekcije();
 			Map<String, Object> data = new LinkedHashMap<>();
 			data.put("sveProjekcije", sveProjekcije);
-			List<Projekcija> izvestaj  = new ArrayList<>();
-			for(Projekcija p : sveProjekcije) {
-				Projekcija projekcijaIz = IzvestajDAO.getIzvestaj(p.getFilm().getId());
-				izvestaj.add(projekcijaIz);
-			}
-			data.put("izvestaj", izvestaj);
-
 			request.setAttribute("data", data);
 			if(!(ulogovanKorisnik==null)) {
 				data.put("ulogaKorisnika", ulogovanKorisnik.getUloga().toString());
@@ -61,11 +52,6 @@ public class SveProjekcijeServlet extends HttpServlet {
 			String sala = request.getParameter("pretragaSala");
 			minCena= Double.parseDouble(request.getParameter("pretragaCenaMin"));
 			maxCena= Double.parseDouble(request.getParameter("pretragaCenaMax"));
-			System.out.println(imeFilma);
-			System.out.println(tipProjekcije);
-			System.out.println(sala);
-			System.out.println(maxCena);
-
 			imeFilma = (imeFilma != null? imeFilma: "");			
 			tipProjekcije = (tipProjekcije != null? tipProjekcije:"1");			
 			sala = (sala != null? sala: "1");

@@ -58,6 +58,10 @@ $(document).ready(function() {
 		        'cenaKarte': cenaKarte, 
 		    };
 		    $.post('DodajProjekcijuServlet', params, function(data) {
+		    	var postoji = data.postoji;
+		    	if(postoji==true){
+		    		alert('Sala je zauzeta!')
+		    	}
 		        if (data.status == 'unauthenticated') {
 		            window.location.replace('Login.html');
 		            return;

@@ -51,16 +51,12 @@
                     </li> 
     
                 	</ul>
-                    <form class="form-inline active-cyan-4">
-                        <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Unesi ime filma" aria-label="Search">
-                        <i class="fas fa-search" aria-hidden="true"></i>
-                    </form> 
+                   
             </div>
         </nav>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <a href="Registracija.html" class="register"> 
-                <h4>Postani član naseg Prisma kluba i kupuj karte online</h4> </a>
+                <a href="Registracija.html" class="register"><h4>Postani član naseg Prisma kluba i kupuj karte online</h4></a>
             </div>
         </div>
         <div class="row row-text">
@@ -68,44 +64,55 @@
                 <p>Danasnje projekcije u našem bioskopu</p>
             </div>
         </div>
+
          <div class="form-row justify-content-md-center">
           	<div class="col-md-10 mb-10">
+                <div>
+                    <select name="" id="sortProjekcije" class="combobox2">
+                        <option value="">Sortiraj po kriterijumu:</option>
+                        <option value="dvaD">Film asc</option>
+                        <option value="triD">Film desc</option>
+                        <option value="cetiriD">Cena:od nize ka visoj</option>
+                        <option value="cetiriD">Cena:od vise ka nizoj</option>
+                        <option value="cetiriD">Datum i vreme:najnoviji</option>
+                        <option value="cetiriD">Datum i vreme:najstariji</option>
+                        <option value="cetiriD">Sala asc</option>
+                        <option value="cetiriD">Sala desc</option>
+                        <option value="cetiriD">Tip projekcije asc</option>
+                        <option value="cetiriD">Tip projekcije desc</option>
+                    </select> 
+                </div>
+                <div>
+                    <input class="pretraga" type="text" id="pretragaFilm" placeholder="unesi ime filma">
+                            <select  class="pretraga" name="" id="tipProjekcijeCombobox">
+                                <option value="">Tip projekcije</option>
+                                <option value="dvaD">2D</option>
+                                <option value="triD">3D</option>
+                                <option value="cetiriD">4D</option>
+                            </select> 
+                            <select class="pretraga" name="" id="salaCombobox">
+                                <option value="">Sala</option>
+                                <option value="1">Prva sala</option>
+                                <option value="2">Druga sala</option>
+                                <option value="3">Treca sala</option>
+                                <option value="4">Cetvrta sala</option>
+                                <option value="5">Peta sala</option>
+                            </select> 
+                        <input class="pretraga" type="number"  id="pretragaCenaMin" placeholder="Cena: od">
+                        <input class="pretraga" type="number"  id="pretragaCenaMax" placeholder="Cena: do">
+                    <input class="pretraga" type="date"  id="pretragaDatumOd" placeholder="">
+                    <input class="pretraga" type="date"  id="pretragaDatumDo" placeholder="">
+                     <button id="pretraziProjekcije">Pretrazi</button>
+                </div>
 
 	          <table class="table table-hover table-dark" id="projekcijeTable" style="cursor: pointer;">
-	          <tr>              
-               <td><input type="text"  id="pretragaFilm" placeholder="unesi ime filma"> </td>
-                <td><select name="" id="tipProjekcijeCombobox" class="combobox2">
-                    <option value="">Tip projekcije</option>
-                    <option value="dvaD">2D</option>
-                    <option value="triD">3D</option>
-                    <option value="cetiriD">4D</option>
-                </select> </td>
-         		<td><select name="" id="salaCombobox" class="combobox2">
-                    <option value="">Sala</option>
-                    <option value="1">Prva sala</option>
-                    <option value="2">Druga sala</option>
-                    <option value="3">Treca sala</option>
-                    <option value="4">Cetvrta sala</option>
-                    <option value="5">Peta sala</option>
-                 </select> </td>
-                <td><input type="number"  id="pretragaCenaMin" placeholder="Cena: od"> </td>
-               <td><input type="number"  id="pretragaCenaMax" placeholder="Cena: do"> </td>
-             </tr>
-             <tr>
-               <td><p>Datum:od</p> </td>
-               <td> <input type="date"  id="pretragaDatumOd" placeholder=""> </td>
-               <td> <p>Datum:do</p> </td>
-               <td> <input type="date"  id="pretragaDatumDo" placeholder=""> </td>
-               <td> <button id="pretraziProjekcije">Pretrazi</button></td>
-	           </tr>
-				 	<thead>
-	                     <th scope="col">Film</th>
-	                     <th scope="col">Tip projekcije</th>
-	                     <th scope="col">Sala</th>
-	                     <th scope="col">Datum i vreme</th>
-	                     <th scope="col">Cena</th>
-	                    
-	          		</thead>
+                        <tr>
+                            <th scope="col">Film</th>
+                            <th scope="col">Tip projekcije</th>
+                            <th scope="col">Sala</th>
+                            <th scope="col">Datum i vreme</th>
+                            <th scope="col">Cena</th>
+                        </tr>
 	   			</table>
            </div>
           </div>

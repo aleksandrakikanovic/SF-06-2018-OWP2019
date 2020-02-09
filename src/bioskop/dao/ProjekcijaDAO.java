@@ -98,7 +98,6 @@ public class ProjekcijaDAO {
 			while (rset.next()) {
 			     index = 1;
 			     int id = rset.getInt(index++);
-			     
 			     String f = rset.getString(index++);
 			     String t = rset.getString(index++);
 			     String s = rset.getString(index++);
@@ -108,11 +107,6 @@ public class ProjekcijaDAO {
 			     String a = rset.getString(index++);
 			     Korisnik admin=KorisnikDAO.get(a);
 				 Film film = FilmDAO.get(f);
-					System.out.println(f);
-					System.out.println(t);
-					System.out.println(s);
-					System.out.println(a);
-
 				 ETipProjekcije tipProjekcije = ETipProjekcije.valueOf(t);
 				 Date datum = new Date(millis);
 				 Sala sala = SalaDAO.get(s);
@@ -176,6 +170,33 @@ public class ProjekcijaDAO {
 		}
 		
 		return projekcije;
+	}
+	public static boolean proveriSalu(Projekcija projekcija) throws Exception {
+		Connection conn = ConnectionManager.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		boolean postoji;
+		try {
+			String query = "select * from Projekcija where datum = ? and vreme = ? and salaId = ?";
+			pstmt = conn.prepareStatement(query);
+			int index=1;
+			pstmt.setDate(index++, projekcija.getDatum());
+			pstmt.setString(index++, projekcija.getVreme().toString());
+			pstmt.setInt(index++, projekcija.getSala().getId());
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				postoji = true;
+			}else {
+				postoji=false;
+			}
+
+		} finally {
+			try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}
+			try {rset.close();} catch (Exception ex1) {ex1.printStackTrace();}
+			try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();} 
+		}
+		
+		return postoji;
 	}
 	
 	public static List<Projekcija> getAllZaFilm(int filmId) throws Exception {
