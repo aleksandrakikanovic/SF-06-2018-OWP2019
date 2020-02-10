@@ -17,7 +17,7 @@ public class IzvestajDAO {
 		ResultSet rset = null;
 		try {
 			String query = "select count(Projekcija.Id), count(Karta.id), sum(cenaKarte)"+
-                     " from Projekcija LEFT OUTER JOIN Karta ON Projekcija.id=Karta.projekcijaId where Projekcija.filmId=?";
+                     " from Projekcija LEFT OUTER JOIN Karta ON Projekcija.id=Karta.projekcijaId where Projekcija.filmId=? and Karta.deleted='no'";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, idF);
 			rset = pstmt.executeQuery();
@@ -27,8 +27,10 @@ public class IzvestajDAO {
 				int brojProjekcija = rset.getInt(1);
 				int brojKarata = rset.getInt(2);
 				double ukupnaCenaKarata = rset.getDouble(3);
+				if(brojKarata==0) {
+					ukupnaCenaKarata = 0.0;
+				}
 				return new Projekcija(film, brojProjekcija, brojKarata, ukupnaCenaKarata);
-				
 			}
 
 		} finally {

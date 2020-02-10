@@ -81,7 +81,6 @@ h3{
     height: 40px;
 }
 #izaberiTipProjekcije{ width: 230px; }
-
 #zaAdmina{
     color: black;
     width: 380px;
@@ -96,13 +95,8 @@ h3{
     height: 30px;
     background-color:silver;
 }
-#pretraziFilm{
-    width:90px;
-}
-#pretraziProjekcije{
-    width:75px;
-}
-#pretragaKorIme{
-    width:300px;
-}
+#pretraziFilm {width:70px;}
+#pretraziProjekcije { width:75px;}
+#pretragaKorIme {width:300px;}
+#izaberiUlogu{width:410px; margin-top:20px; margin-bottom:20px;'}
 

@@ -15,7 +15,6 @@ $(document).ready(function() {
 		params = {
 				'id':id
 				};	
-		alert(id);
 		var f = $('#filmProjekcije');
 		$.get('ProjekcijeZaFilmServlet', params, function(data) {
 			var projekcijeFilma = data.projekcijeFilma;

@@ -35,31 +35,26 @@ $(document).ready(function() {
 				$('#prikaziKorisnike').show();
 				$('#profilKorisnika').show();
 				$('#izaberiUlogu').show();
+				$('#izbrisiKorisnika').hide();
 				$('#tabelaKarte').hide();
 				$('#logout').show();
 			}else if(data.ulogaKorisnika=="KORISNIK"){
 				$('#prikaziKorisnike').hide();
 				$('#profilKorisnika').show();
+				$('#izbrisiKorisnika').hide();
 				$('#izaberiUlogu').hide();
 				$('#logout').show();
 			};	
-			var korisnickoImeInput = $('#korImeInput');
-			var izaberiUloguInput = $('#izaberiUlogu');
 			var lozinkaInput = $('#lozinkaInput');
-			korisnickoImeInput.val(korisnik.korisnickoIme);
-			izaberiUlogu
+			lozinkaInput.val(korisnik.korisnickoIme);
 			lozinkaInput.val(korisnik.lozinka);
 			$('#izmeniKorisnika').on('click', function(event) {
-				var korisnickoImeIzmena = korisnickoImeInput.val();
 			    var lozinka = lozinkaInput.val();
-			    var uloga = izaberiUloguInput.val();
-			        if(korisnickoImeIzmena=="" || lozinka==""){ 
+			        if(lozinka==""){ 
 			        	alert("Neispravni podaci.Pokusajte opet."); }
 					params = {
 							'korisnickoIme':korisnik.korisnickoIme,
-						'korisnickoImeIzmena': korisnickoImeIzmena, 
-			            'lozinka': lozinka,
-			            'uloga':uloga
+							'lozinka': lozinka,
 							  }
 					$.get('RegistracijaServlet', params, function(data) {
 						$.get('LogoutServlet', function(data) {
@@ -86,7 +81,7 @@ $(document).ready(function() {
 				for (karta in karteKorisnika){
 					tabelaKarte.append(
 								'<tr>'+
-									'<td>' + karteKorisnika[karta].korisnik.korisnickoIme + '</td>' + 
+									'<td>Datum kupovine: </td>' + 
 									'<td><a href="KartaKorisnika.html?id=' + karteKorisnika[karta].id + '">'+ new Date(karteKorisnika[karta].datum).toLocaleDateString() + '</a></td>' +
 								'</tr>'); 
 			}

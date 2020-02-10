@@ -1,6 +1,7 @@
 package servleti;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -63,8 +64,10 @@ public class DodajProjekcijuServlet extends HttpServlet {
 			ETipProjekcije tipProjekcije = ETipProjekcije.valueOf(tip);
 			String s = request.getParameter("sala");
 			Sala sala = SalaDAO.get(s);
-			long d = System.currentTimeMillis(); 
-	        java.sql.Date datum = new java.sql.Date(d);
+			String d = request.getParameter("datum");
+			SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+			java.util.Date date = sdf1.parse(d);
+			java.sql.Date datum = new java.sql.Date(date.getTime()); 
 			String vreme = request.getParameter("vreme");
 			double cenaKarte = Double.parseDouble(request.getParameter("cenaKarte"));
 				if(film.equals("")) {

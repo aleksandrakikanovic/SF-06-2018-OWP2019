@@ -59,6 +59,11 @@ $(document).ready(function() {
 				if(brojSedista==0){
 					$('#kupovinaKarte').remove();
 				}
+				let today = new Date();
+				var date =  new Date(izabranaProjekcija.datum);
+				if(date< today){
+					$('#kupovinaKarte').remove();
+				}
 				if (data.ulogaKorisnika == "neregistrovan") {
 					$('#prikaziKorisnike').hide();
 					$('#profilKorisnika').hide();

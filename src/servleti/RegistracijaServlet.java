@@ -19,21 +19,16 @@ public class RegistracijaServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			
-			String korisnickoImeIzmena = request.getParameter("korisnickoImeIzmena");
 			String korisnickoIme = request.getParameter("korisnickoIme");
 			String lozinka = request.getParameter("lozinka");
-			//String u = request.getParameter("uloga");
-			if(korisnickoImeIzmena!="" && korisnickoIme!="" && lozinka!="") {
-				Korisnik korisnik = KorisnikDAO.get(korisnickoIme);
-				korisnik.setKorisnickoIme(korisnickoImeIzmena);
-				korisnik.setLozinka(lozinka);
-				//if(u!="") {
-					//Uloga uloga = Uloga.valueOf(u);
-					//korisnik.setTip(uloga);
-			//	}
-			    KorisnikDAO.update(korisnik, korisnickoIme);
+			Korisnik korisnik = KorisnikDAO.get(korisnickoIme);
+			korisnik.setLozinka(lozinka);
+			String uloga = request.getParameter("uloga");
+			if(uloga!=null) {
+				Uloga u = Uloga.valueOf(uloga);
+				korisnik.setTip(u);
 			}
+			KorisnikDAO.update(korisnik);
 			Map<String, Object> data = new LinkedHashMap<>();
 			request.setAttribute("data", data);
 			request.getRequestDispatcher("./SuccessServlet").forward(request, response);

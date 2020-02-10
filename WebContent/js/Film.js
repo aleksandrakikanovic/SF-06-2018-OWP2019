@@ -64,7 +64,7 @@ $(document).ready(function() {
 							  '<tr>'+
 							  	'<td>'+
 								'<td><a href="ProjekcijeFilma.html?id=' + izabraniFilm.id + '" id="kupiKartu">Kupi kartu</a></td>' + 
-								'</td>'+ '<td>' + '</td>'+
+								'</td>'+
 					    	  '</tr>'+
 					    	  '<tr>'+
 							  	'<td>'+
@@ -81,7 +81,6 @@ $(document).ready(function() {
 				zemljaPoreklaInput.val(izabraniFilm.zemljaPorekla);
 				godinaProizvodnjeInput.val(izabraniFilm.godinaProizvodnje);
 				opisInput.val(izabraniFilm.opis);
-
 				if (data.ulogaKorisnika == "neregistrovan") {
 					$('#prikaziKorisnike').hide();
 					$('#profilKorisnika').hide();

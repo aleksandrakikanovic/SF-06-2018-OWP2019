@@ -76,7 +76,7 @@ public class KartaDAO {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, korisnickoIme);
 			rset = pstmt.executeQuery();
-			if (rset.next()) {
+			while (rset.next()) {
 				int kartaId = rset.getInt(1);
 				int projekcijaId = rset.getInt(2);
 				Projekcija p = ProjekcijaDAO.get(Integer.toString(projekcijaId));

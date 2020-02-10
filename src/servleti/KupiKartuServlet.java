@@ -36,7 +36,7 @@ public class KupiKartuServlet extends HttpServlet {
 			Sediste sediste = SedisteDAO.getOne(sedisteId);
 			long millis=System.currentTimeMillis();  
 		    Date datumKupovine = new Date(millis);
-		    Karta karta = new Karta(kartaZaProjekciju, sediste, datumKupovine, ulogovanKorisnik);
+			Karta karta = new Karta(kartaZaProjekciju, sediste, datumKupovine, ulogovanKorisnik);
 			KartaDAO.add(karta);
 			request.setAttribute("data", data);
 			data.put("kartaZaProjekciju", kartaZaProjekciju);
@@ -45,8 +45,6 @@ public class KupiKartuServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 try {
 				Korisnik ulogovanKorisnik = (Korisnik) request.getSession().getAttribute("ulogovanKorisnik");

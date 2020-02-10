@@ -12,6 +12,8 @@ $(document).ready(function() {
 	var korisnickoIme = window.location.search.slice(1).split('&')[0].split('=')[1];
 	params = {'korisnickoIme':korisnickoIme};	
 	var tabela = $('#tabelaKorisnik');
+	var tabelaKarte = $('#tabelaKarte');
+
 	function getKorisnik(){
 		$.post('IzmenaKorisnikaServlet',params, function(data) {
 			var korisnik = data.izabraniKorisnik;
@@ -34,19 +36,18 @@ $(document).ready(function() {
 					  '<td>'+'<button type="button" class="btn btn-warning" id="izbrisiKorisnika">Izbrisi</button>' + '</td>'+
 				    '</tr>');
 			
-			var korisnickoImeInput = $('#korImeInput');
 			var lozinkaInput = $('#lozinkaInput');
-			korisnickoImeInput.val(korisnik.korisnickoIme);
+			var izaberiUlogu = $('#izaberiUlogu');
 			lozinkaInput.val(korisnik.lozinka);
 			$('#izmeniKorisnika').on('click', function(event) {
-				var korisnickoImeIzmena = korisnickoImeInput.val();
 			    var lozinka = lozinkaInput.val();
-			        if(korisnickoImeIzmena=="" || lozinka==""){ 
+			    var uloga = izaberiUlogu.val();
+			        if(lozinka==""){ 
 			        	alert("Neispravni podaci.Pokusajte opet."); }
 					params = {
 							'korisnickoIme':korisnik.korisnickoIme,
-						     'korisnickoImeIzmena': korisnickoImeIzmena, 
 			                  'lozinka': lozinka,
+			                  'uloga':uloga,
 							  };
 					$.get('RegistracijaServlet', params, function(data) {
 				        if (data.status == 'success') {
@@ -64,7 +65,6 @@ $(document).ready(function() {
 				$('#prikaziKorisnike').show();
 				$('#profilKorisnika').show();
 				$('#izaberiUlogu').show();
-				$('#tabelaKarte').hide();
 				$('#logout').show();
 			}else if(data.ulogaKorisnika=="KORISNIK"){
 				$('#prikaziKorisnike').hide();
@@ -93,9 +93,9 @@ $(document).ready(function() {
 				});
 			});
 		}); 
-		
+	};
 		function getKarte(){
-			$.post('IzmenaKorisnikaServlet', function(data) {
+			$.post('IzmenaKorisnikaServlet',{'korisnickoIme':korisnickoIme}, function(data) {
 				var karteKorisnika = data.karteKorisnika;
 				if(karteKorisnika.length==0){
 					tabelaKarte.append(
@@ -114,9 +114,8 @@ $(document).ready(function() {
 				};
 			});
 		};
-	};
-
-getKorisnik();
 getKarte();
+getKorisnik();
+
 
 });				

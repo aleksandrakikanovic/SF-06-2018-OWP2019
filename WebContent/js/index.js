@@ -17,8 +17,7 @@ $(document).ready(function() {
 	var tipInput = $('#tipProjekcijeCombobox');
 	var cenaMinInput = $('#pretragaCenaMin');
 	var cenaMaxInput = $('#pretragaCenaMax');
-
-
+	
 	function getProjekcije(){
 		$.get('SveProjekcijeServlet', function(data) {
 			if (data.ulogaKorisnika == "neregistrovan") {
@@ -47,18 +46,23 @@ $(document).ready(function() {
 				$('#login').hide();
 			}
 			var sveProjekcije = data.sveProjekcije;
+			let today = new Date().toLocaleDateString();
 			for (projekcija in sveProjekcije) {
-				projekcijeTable.append(
-					'<tbody>'+'<tr id="remove">' +
-						'<td><a href="Film.html?id=' + sveProjekcije[projekcija].film.id + '">' + sveProjekcije[projekcija].film.naziv + '</a></td>' + 
-						'<td>' + sveProjekcije[projekcija].tipProjekcije + '</td>' + 
-						'<td>' + sveProjekcije[projekcija].sala.naziv + '</td>' + 
-						'<td><a href="Projekcija.html?id=' + sveProjekcije[projekcija].id + '">' 
-						+ new Date(sveProjekcije[projekcija].datum).toLocaleDateString() + " " +  sveProjekcije[projekcija].vreme + '</a></td>' + 
-						'<td>' + sveProjekcije[projekcija].cenaKarte + '</td>' + 
-					'</tr>' + '</tbody>')}
-			})};
-	function getFiltriraneProjekcije(){
+				var date = new Date(sveProjekcije[projekcija].datum).toLocaleDateString();
+				if(date==today){
+					projekcijeTable.append(
+							'<tr id="remove">' +
+								'<td><a href="Film.html?id=' + sveProjekcije[projekcija].film.id + '">' + sveProjekcije[projekcija].film.naziv + '</a></td>' + 
+								'<td>' + sveProjekcije[projekcija].tipProjekcije + '</td>' + 
+								'<td>' + sveProjekcije[projekcija].sala.naziv + '</td>' + 
+								'<td><a href="Projekcija.html?id=' + sveProjekcije[projekcija].id + '">' 
+								+ date + " " +  sveProjekcije[projekcija].vreme + '</a></td>' + 
+								'<td>' + sveProjekcije[projekcija].cenaKarte + '</td>' + 
+							'</tr>')
+				}
+				}
+			})
+	$('#pretraziProjekcije').on('click', function(event) {
 		var pretragaFilm = filmInput.val();
 		var pretragaSala = salaInput.val();
 		var pretragaTip = tipInput.val();
@@ -73,7 +77,8 @@ $(document).ready(function() {
 		}
 		$.post('SveProjekcijeServlet',params, function(data) {
 			var filtriraneProjekcije = data.filtriraneProjekcije;
-			$("#remove").empty();
+			$("#projekcijeTable > tbody").empty();
+
 			for (projekcija in filtriraneProjekcije) {
 				projekcijeTable.append(
 					'<tr>' +
@@ -84,20 +89,10 @@ $(document).ready(function() {
 						+ new Date(filtriraneProjekcije[projekcija].datum).toLocaleDateString() + " " +  filtriraneProjekcije[projekcija].vreme + '</a></td>' + 
 						'<td>' + filtriraneProjekcije[projekcija].cenaKarte + '</td>' + 
 						'</tr>')}
-			
 		});
+	});
 	};
-	$('#projekcijeTable').on('click', '#pretraziProjekcije', function(){
-		getFiltriraneProjekcije();
-	});
-	
-	nameFilterInput.on('keyup', function(event) {
-		getProducts();
 
-		event.preventDefault();
-		return false;
-	});
-	
 getProjekcije();
 	
 });

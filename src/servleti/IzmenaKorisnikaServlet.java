@@ -53,7 +53,6 @@ public class IzmenaKorisnikaServlet extends HttpServlet {
 				data.put("ulogaKorisnika", "neregistrovan");
 			}
 			data.put("ulogovanKorisnik", ulogovanKorisnik);
-			
 			data.put("izabraniKorisnik", izabraniKorisnik);
 			List<Karta> karteKorisnika = KartaDAO.getAllZaKorisnika(izabraniKorisnik.getKorisnickoIme().toString());
 			data.put("karteKorisnika", karteKorisnika);

@@ -61,31 +61,40 @@ $(document).ready(function() {
 				$('#profilKorisnika').show();
 				$('#logout').show();
 			};	
-		var cmbSediste = $('#cmbSediste');
-		for (sediste in svaSedista) {
-			cmbSediste.append(
-				'<option value="'+svaSedista[sediste].id+ '">' + svaSedista[sediste].redniBroj+ '</option>'
-			)}
+			var cmbSediste = $('#cmbSediste');
+			for (sediste in svaSedista) {
+				cmbSediste.append(
+					'<option value="'+svaSedista[sediste].id+ '">' + svaSedista[sediste].id+ '</option>'
+				)}
 	});
 		$('#kupiKartuFilm').on('click', '#kupiKartu', function(){
 			var cmb = $('#cmbSediste');
 		    var sediste = cmb.val();
 		    params = 
 		    	{'sediste':sediste,
-		    		'id': id};
+		    		'id': id };
+		    
 		    $('#cmb').remove();
 		    $('#btn').remove();
-			tabela.append(
-					'<tr>'+
-				      '<th scope="col">Izabrano sediste</th> ' + 	
-						'<td>'+ sediste + '</td>'+
-				    '</tr>' +
-				    '<tr>'+
-					 	'<td>'+'</td>'+
-						'<td align="center">' + '<button class="btn btn-sm" type="submit" id="potvrdiKupovinuKarte">Potvrdi kupovinu</button>' + '</td>'+
-					'</tr>'+
-				    '<tr>' );
+					tabela.append(
+							'<tr>'+
+						      '<th scope="col">Izabrano sediste</th> ' + 	
+								'<td>'+ sediste + '</td>'+
+						    '</tr>' +
+						    '<tr>'+
+							 	'<td>'+'</td>'+
+								'<td align="center">' + '<button class="btn btn-sm" type="submit" id="potvrdiKupovinuKarte">Potvrdi kupovinu</button>' + '</td>'+
+							'</tr>'+
+						    '<tr>' );
+				});
 			$('#kupiKartuFilm').on('click', '#potvrdiKupovinuKarte', function(){
+				 $.get('ProveraKarteServlet', params, function(data) {
+					 var zauzetoSediste = data.zauzetoSediste;
+					 if(zauzetoSediste==true){
+						 alert('Sediste upravo rezervisano! Izaberite ponovo:');
+				            return;
+					 }
+				 });
 				 $.get('KupiKartuServlet', params, function(data) {
 				        if (data.status == 'unauthenticated') {
 				            window.location.replace('Login.html');
@@ -95,7 +104,6 @@ $(document).ready(function() {
 				            window.location.replace('index.html');
 				        }
 				 });
-			});
 		});
 	};	
 kupiKartu();

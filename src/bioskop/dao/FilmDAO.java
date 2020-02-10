@@ -84,6 +84,48 @@ public class FilmDAO {
 		return sviFilmovi;
 	}
 		
+	public static List<Film> getFiltriraniFilmovi(String film, String zanr1, int Trajanje1, int Trajanje2, String distributer1, String zemljaPorekla1, int godinaProizvodnje1) throws Exception {
+		List<Film> filtriraniFilmovi = new ArrayList<>();
+		Connection conn = ConnectionManager.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			String query = "select * from Film where naziv = ? and zanr = ? and trajanje > ? and trajanje < ? and distributer = ? and zemljaPorekla = ? and godinaProizvodnje = ? and deleted='no'";
+			pstmt = conn.prepareStatement(query);
+			int index = 1;
+			pstmt.setString(index++, film);
+			pstmt.setString(index++, zanr1);
+			pstmt.setInt(index++, Trajanje1);
+			pstmt.setInt(index++, Trajanje2);
+			pstmt.setString(index++, distributer1);
+			pstmt.setString(index++, zemljaPorekla1);
+			pstmt.setInt(index++, godinaProizvodnje1);
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				 index = 1;
+				 int id = rset.getInt(index++);
+				 String naziv = rset.getString(index++);
+				 String reziser = rset.getString(index++);
+				 String glumci = rset.getString(index++);
+				 String zanr = rset.getString(index++);
+				 int trajanje = rset.getInt(index++);
+				 String distributer = rset.getString(index++);
+				 String zemljaPorekla = rset.getString(index++);
+				 int godinaProizvodnje = rset.getInt(index++);
+				 String opis = rset.getString(index++);
+				 Film f = new Film( id, naziv, reziser, glumci, zanr, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis);
+				 filtriraniFilmovi.add(f);
+			}
+
+		} finally {
+			try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}
+			try {rset.close();} catch (Exception ex1) {ex1.printStackTrace();}
+			try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();} 
+		}
+		
+		return filtriraniFilmovi;
+	}
+		
 			
 	public static boolean add(Film film) throws Exception {
 		Connection conn = ConnectionManager.getConnection();

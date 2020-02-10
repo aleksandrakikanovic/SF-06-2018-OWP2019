@@ -128,7 +128,7 @@ public class ProjekcijaDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
-			String query = "select * from Projekcija where deleted='no'";
+			String query = "select * from Projekcija where deleted='no' order by vreme";
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();
 			int id = rset.getInt(1);
@@ -205,7 +205,7 @@ public class ProjekcijaDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
-			String query = "select * from Projekcija where filmId = ?";
+			String query = "select * from Projekcija where filmId = ? order by datum, vreme";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, filmId);
 			rset = pstmt.executeQuery();

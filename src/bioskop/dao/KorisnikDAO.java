@@ -76,6 +76,36 @@ public class KorisnikDAO {
 		
 		return sviKorisnici;
 	}
+	public static List<Korisnik> getFiltriraniKorisnici(String korisnickoIme1, String uloga1) throws Exception {
+		List<Korisnik> filtriraniKorisnici = new ArrayList<>();
+		Connection conn = ConnectionManager.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			String query = "select * from Korisnik where korisnickoIme = ? and uloga = ? and deleted='no'";
+			pstmt = conn.prepareStatement(query);
+			int index = 1;
+			pstmt.setString(index++,korisnickoIme1);
+			pstmt.setString(index++,uloga1);
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				index = 1;
+				 String korisnickoIme = rset.getString(index++);
+				 String lozinka = rset.getString(index++);
+				 long millis=rset.getLong(index++);
+			     Date datumRegistracije = new Date(millis);	
+				 Uloga uloga = Uloga.valueOf(rset.getString(index++));
+				Korisnik k = new Korisnik(korisnickoIme, lozinka, datumRegistracije, uloga);
+				filtriraniKorisnici.add(k);
+			}
+		} finally {
+			try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}
+			try {rset.close();} catch (Exception ex1) {ex1.printStackTrace();}
+			try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();} 
+		}
+		
+		return filtriraniKorisnici;
+	}
 
 	
 	public static boolean add(Korisnik korisnik) throws Exception {
@@ -101,17 +131,16 @@ public class KorisnikDAO {
 	}
 	
 	
-	public static boolean update(Korisnik korisnik, String firstUsername) throws Exception {
+	public static boolean update(Korisnik korisnik) throws Exception {
 		Connection conn = ConnectionManager.getConnection();
 		PreparedStatement pstmt = null;
 		try {
-			String query = "update korisnik set korisnickoIme = ?, lozinka = ?, uloga = ? WHERE korisnickoIme = ?";
+			String query = "update korisnik set lozinka = ?, uloga = ? WHERE korisnickoIme = ?";
 			pstmt = conn.prepareStatement(query);
 			int index = 1;
-			pstmt.setString(index++, korisnik.getKorisnickoIme());
 			pstmt.setString(index++, korisnik.getLozinka());
 			pstmt.setString(index++, korisnik.getUloga().toString());
-			pstmt.setString(index++, firstUsername);
+			pstmt.setString(index++, korisnik.getKorisnickoIme());
 
 			return pstmt.executeUpdate() == 1;
 		} finally {

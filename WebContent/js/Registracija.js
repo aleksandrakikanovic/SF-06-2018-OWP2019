@@ -17,7 +17,8 @@ $(document).ready(function() {
 	    var lozinka = lozinkaInput.val();
 	    var ponovljenaLozinka = ponovljenaLozinkaInput.val();
 	        if(korisnickoIme=="" || lozinka=="" || ponovljenaLozinka=="" || lozinka!=ponovljenaLozinka){ 
-	        	alert("Neispravni podaci.Pokusajte opet."); }
+	        	alert("Neispravni podaci.Pokusajte opet.");
+	        	return;}
 			params = {
 				'korisnickoIme': korisnickoIme, 
 	            'lozinka': lozinka,

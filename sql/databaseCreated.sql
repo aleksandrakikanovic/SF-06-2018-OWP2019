@@ -29,7 +29,31 @@ values('Dzoker', 'Todd Phillips', 'Joaquin Phoenix, Robert De Niro, Zazie Beetz'
 'Warner Bros', 'USA', 1972, 'Americki psihološki triler film iz 2019. godine, baziran prema istoimenom liku iz Di-Si komiksa.', 'no')
 insert into Film (naziv, reziser, glumci, zanr, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis, deleted) 
 values('Vuk sa Vol Strita', 'Martin Scorsese', ' Leonardo DiCaprio, Jonah Hill, Margot Robbie ', 'Krimi, biografija', 
-210, ' Paramount Pictures', 'USA', 2013, 'Americka je crna komedija u reziji Martina Skorsezea snimljena po istoimenoj knjizi memoara Dzordana Belforta.', 'no')
+210, ' Paramount Pictures', 'USA', 2013, 'Americka crna komedija u reziji Martina Skorsezea snimljena po istoimenoj knjizi memoara Dzordana Belforta.', 'no')
+
+insert into Film (naziv, reziser, glumci, zanr, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis, deleted) 
+values('Kad jaganjci utihnu', 'Ted Tally', 'Jodie Foster, Anthony Hopkins, Scott Glenn, Ted Levine', 'Horor', 
+118, ' Orion Pictures', 'USA', 1991, ' FBI je u potrazi za serijskim ubicom koga su prozvali Bafalo Bil, koji otima zene i skida im kozu.
+ FBI salje Kleris Sterling, da ispita Hanibala Lektora, psihijatra koji je postao kanibalisticki serijski ubica.', 'no')
+
+ insert into Film (naziv, reziser, glumci, zanr, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis, deleted) 
+values('Forrest Gump', ' Robert Zemeckis', ' Tom Hanks, Robin Wright, Gary Sinise', 'Drama', 
+168, ' Orion Pictures', 'USA', 1994, ' Film prati zivot Forest Gampa i njegovo upoznavanje s Dzeni, jedinom zenom koju je ikada voleo.','no')
+
+insert into Film (naziv, reziser, glumci, zanr, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis, deleted) 
+values('Matriks', 'Lana Wachowski', ' Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss', 'Naucna fantastika, akcija', 
+142, ' Orion Pictures', 'USA', 1999, 'Tomas je programer, nocu vodi tajni zivot kao haker Neo.
+Zeli da sazna odgovor na pitanje sta je to Matriks? Morfeus je najtrazeniji svetski haker koji stupa u kontakt sa Neom
+ i upoznaje ga sa pravom prirodom sveta u kome se nalazi.', 'no')
+insert into Film (naziv, reziser, glumci, zanr, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis, deleted) 
+values('Ubiti Bila:1', 'Quentin Tarantino', 'Uma Thurman, David Carradine, Daryl Hannah', 'Naucna fantastika, akcija', 
+138, ' Orion Pictures', 'USA', 2003, 'Cetiri godine je proslo otkad je na svom vencanju dobila metak u glavu. Mlada se budi iz kome i 
+odluci da je vreme za osvetu… Ovu borbu „ubij ili budi ubijen“ ona nije zapocela, ali odlucna je da je zavrsi!', 'no')
+insert into Film (naziv, reziser, glumci, zanr, trajanje, distributer, zemljaPorekla, godinaProizvodnje, opis, deleted) 
+values('Hari Poter i relikvije Smrti:2', 'David Yates', 'Daniel Radcliffe, Emma Watson, Rupert Grint', 'Naucna fantastika, drama', 
+127, ' Orion Pictures', 'USA', 2003, 'Nakon deset godina i sedam filmova, dosao je kraj druzenja sa Harry Potterom na filmskom platnu. 
+Osmi film je i poslednji deo sage o decaku carobnjaku.', 'no')
+
 
 
 CREATE TABLE Sala(
@@ -106,13 +130,6 @@ CREATE TABLE Projekcija(
 	    FOREIGN KEY(salaId) REFERENCES Sala(id) ON DELETE RESTRICT,
 	    FOREIGN KEY(admin) REFERENCES Korisnik(korisnickoIme) ON DELETE RESTRICT
 )
-insert into Projekcija(filmId, tipProjekcije, salaId, datumVreme, cenaKarte, admin, deleted) values
-(1, 1, 1, '02-02-2020', 2000, 'aleksandra', 'no')
-insert into Projekcija(filmId, tipProjekcije, salaId, datumVreme, cenaKarte, admin, deleted) values
-(2, 2, 2, '02-03-2020', 2000, 'marijana', 'no')
-insert into Projekcija(filmId, tipProjekcije, salaId, datumVreme, cenaKarte, admin, deleted) values
-(3, 3, 3, '02-04-2020', 2000, 'marijana', 'no')
-
 
 CREATE TABLE Karta(
     id integer  primary key,
@@ -134,10 +151,8 @@ CREATE TABLE Korisnik(
         deleted varchar(3) default 'no'
 )
     
-insert into Korisnik values('aleksandra', 'aleksandra', '2020-01-01', 'KORISNIK', 'no')
-insert into Korisnik values('marijana', 'markovic', '2020-01-08', 'KORISNIK', 'no')
-insert into Korisnik values('nikola', 'andric', '2020-01-03', 'KORISNIK', 'no')
-insert into Korisnik values('nikolina', 'petrovic', '2020-01-15', 'KORISNIK', 'no')
-insert into Korisnik values('stefan', 'lukic', '2020-01-20', 'KORISNIK', 'no')
+insert into Korisnik values('admin', 'admin', '1580938194872', 'ADMIN', 'no')
+insert into Korisnik values('user', 'user', '1580938194872', 'KORISNIK', 'no')
+insert into Korisnik values('user1', 'user1', '1580938194872', 'KORISNIK', 'no')
 
 

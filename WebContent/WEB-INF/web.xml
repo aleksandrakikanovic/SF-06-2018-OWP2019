@@ -197,4 +197,14 @@
     <servlet-name>IzmenaKorisnikaServlet</servlet-name>
     <url-pattern>/IzmenaKorisnikaServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ProveraKarteServlet</display-name>
+    <servlet-name>ProveraKarteServlet</servlet-name>
+    <servlet-class>servleti.ProveraKarteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProveraKarteServlet</servlet-name>
+    <url-pattern>/ProveraKarteServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

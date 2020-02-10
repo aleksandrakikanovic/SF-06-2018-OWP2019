@@ -65,6 +65,31 @@ public class SedisteDAO {
 
 		return null;
 	}
+	public static boolean get1(int id, int idProjekcija) throws Exception {
+		Connection conn = ConnectionManager.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		boolean sedisteZauzeto;
+		try {
+		String query = "select * from Sediste where id = ? and id in(select idSediste from Karta where projekcijaId = ?)";
+		pstmt = conn.prepareStatement(query);
+		int index=1;
+		pstmt.setInt(index++, id);
+		pstmt.setInt(index++, idProjekcija);
+		rset = pstmt.executeQuery();
+		if (rset.next()) {
+			sedisteZauzeto = true;
+			}else {
+				sedisteZauzeto = false;
+			}
+	} finally {
+		try {pstmt.close();} catch (Exception ex) {ex.printStackTrace();}
+		try {rset.close();} catch (Exception ex) {ex.printStackTrace();}
+		try {conn.close();} catch (Exception ex) {ex.printStackTrace();}
+	}
+
+		return sedisteZauzeto;
+	}
 	public static List<Sediste> getAll() throws Exception {
 		List<Sediste> svaSedista = new ArrayList<>();
 		Connection conn = ConnectionManager.getConnection();
